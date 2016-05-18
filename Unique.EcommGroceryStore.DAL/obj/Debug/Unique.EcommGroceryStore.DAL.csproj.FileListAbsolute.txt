@@ -16,3 +16,13 @@ C:\Working\Test\EcommGroceryStore\Unique.EcommGroceryStore.DAL\bin\Debug\EntityF
 \\BRDCHUTNEY\EcommGroceryStore\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.SqlServer.xml
 \\BRDCHUTNEY\EcommGroceryStore\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.dll
 \\BRDCHUTNEY\EcommGroceryStore\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.pdb
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\Unique.EcommGroceryStore.DAL.dll.config
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\Unique.EcommGroceryStore.DAL.dll
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\Unique.EcommGroceryStore.DAL.pdb
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.dll
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.xml
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.csprojResolveAssemblyReference.cache
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.dll
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.pdb
