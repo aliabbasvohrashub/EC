@@ -158,7 +158,7 @@
                                             <ul class="dropdown-link-account">
                                                 <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
                                                 <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
-                                                <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>                                                
+                                                <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -614,10 +614,25 @@
         <!-- END: Header -->
 
         <!-- BEGIN: content -->
-        <div class="yt-content wrap" id="yt_content" >
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+        <div id="yt_content" class="yt-content wrap">
+            <div id="yt_main" class="yt-main col-main">
+                <div class="yt-breadcrumbs">
+                    <div class="container">
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+                <div class="yt-main-inner yt-content-inner">
+                    <div class="container">
+                        <div class="row">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <script type="text/javascript">// <![CDATA[
             jQuery(document).ready(function () {
                 var fkey = "10mZJsjNieAFmLSZ";
