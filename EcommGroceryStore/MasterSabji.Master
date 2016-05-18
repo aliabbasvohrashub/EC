@@ -15,12 +15,12 @@
     <meta name="keywords" content="vegetables online Mumbai, online grocery shopping, online grocery shopping mumbai, online grocery, online grocery shopping india, buy grocery online, online food shopping, online supermarket, buy food online, grocery online, groceries online, buy groceries online, online sabjiwala, onlinesabjiwala.com, online, shopping, cut vegetables, cut vegetables online, free delivery, vegetables, veggies, fruits, buy vegetables online, buy Fruits online, buy fresh fruits online, buy fresh vegetables online, buy fresh vegetables online in Mumbai, buy vegetables online in Mumbai, buy fruits online in Mumbai, best online sabjiwala in Mumbai, buy fresh fruits and vegetables online, buy fresh fruits and vegetables online in Mumbai, buy green vegetables online in Mumbai, price of vegetable in Mumbai, buy fresh vegetables online in india, online vegetable shopping Mumbai, vegetable shopping online Mumbai, Free Delivery, free vegetable delivery, free fruits delivery, vegetables online in Mumbai best prices, online vegetables in navi Mumbai, buy fresh vegetables navi Mumbai, vegetables online navi Mumbai, online vegetables in thane, Exotic Vegetables, Exotic Vegetables Mumbai, Exotic Vegetables india, grocery shopping mumbai, vegetables home delivery Mumbai, order vegetables online Mumbai,veggies and fruits in Mumbai, discount vegetables fruits, vegetable deals, organic vegetables online Mumbai,navi mumbai, pune, ahmedabad, nagpur, nashik, bangalore, noida, delhi, lucknow, varanasi, allahabad, indore, chennai, hyderabad, kolkata, Chandigarh, Jaipur, Coimbatore, India, supermarket, hypermarket, online sabjiwala, sabjiwala, onlinesabjiwala, Free, faster home delivery, vegetable, deals, offers, discount, best, shop, cash on delivery, best quality, website, low price, store" />
     <meta name="robots" content="INDEX,FOLLOW" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <link rel="icon" href="media/favicon/default/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="media/favicon/default/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
     <!--group: nogroup-->
-    <link rel="stylesheet" type="text/css" href="media/css/8b77512cfb98d9d7b6aeac8f174d9131.css" media="all" />
-    <script type="text/javascript" src="media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
-    <link rel="stylesheet" href="skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/../media/css/8b77512cfb98d9d7b6aeac8f174d9131.css" media="all" />
+    <script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
     <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
 
@@ -158,12 +158,7 @@
                                             <ul class="dropdown-link-account">
                                                 <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
                                                 <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
-                                                <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
-                                                <!--
-                                                <li><a title="My Tags" href="http://www.onlinesabjiwala.com/tag/customer/">My Tags</a></li>
-                                                <li><a title="Billing Agreements" href="http://www.onlinesabjiwala.com/sales/billing_agreement/">Billing Agreements</a></li>
-                                                <li><a title="Recurring Profiles" href="http://www.onlinesabjiwala.com/sales/recurring_profile/">Recurring Profiles</a></li> 
-                                                -->
+                                                <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>                                                
                                             </ul>
                                         </li>
                                     </ul>
@@ -260,7 +255,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                                 <h1>
                                     <a title="Onlinesabjiwala.com" href="index.html">
-                                        <img src="skin/frontend/onlinesabjiwala/default/images/red/onlinesabjiwalalogo.png" alt="Onlinesabjiwala.com">
+                                        <img src="/../skin/frontend/onlinesabjiwala/default/images/red/onlinesabjiwalalogo.png" alt="Onlinesabjiwala.com">
                                     </a>
                                 </h1>
                             </div>
@@ -695,7 +690,7 @@
                             <div class="col-lg-3 col-md-3  col-sm-6">
                                 <div class="content-block-footer">
                                     <h2 class="footer-logo">
-                                        <img alt="Onlinesabjiwala.com" src="skin/frontend/onlinesabjiwala/default/images/red/logo-footer.png"><span style="display: none;">Onlinesabjiwala.com</span></h2>
+                                        <img alt="Onlinesabjiwala.com" src="/../skin/frontend/onlinesabjiwala/default/images/red/logo-footer.png"><span style="display: none;">Onlinesabjiwala.com</span></h2>
                                     <p>Onlinesabjiwala.com is&nbsp;prefered destination for buying Fresh Vegetables &amp; Fruits in India, offering fresh and best prices and a completely hassle-free experience with options of paying through Cash on Delivery. Now shop for your Daily vegetable needs with descriptions. Get the best prices and the best online Vegetable shopping experience every time.</p>
                                 </div>
                             </div>
@@ -744,7 +739,7 @@
                                         </ul>
                                         <ul class="payment-method">
                                             <li><a title="Payment Method" href="#">
-                                                <img alt="Payment Cash on Delivery" src="media/wysiwyg/cashondelivery.jpg"></a></li>
+                                                <img alt="Payment Cash on Delivery" src="/../media/wysiwyg/cashondelivery.jpg"></a></li>
                                         </ul>
                                     </div>
                                 </div>
