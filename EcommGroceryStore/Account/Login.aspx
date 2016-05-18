@@ -24,29 +24,16 @@
                                 <li>
                                     <label for="email" class="required"><em>*</em>Email Address</label>
                                     <div class="input-box">
-                                        <input type="text" name="login[username]" value="" id="email" class="input-text required-entry validate-email" title="Email Address" />
+                                        <input type="text" name="username" value="" id="txtUserName" runat="server" class="input-text" title="User Name" />
                                     </div>
                                 </li>
                                 <li>
                                     <label for="pass" class="required"><em>*</em>Password</label>
                                     <div class="input-box">
-                                        <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="Password" />
+                                        <input type="password" name="password" runat="server" class="input-text" id="txtPassword" title="Password" />
                                     </div>
                                 </li>
                             </ul>
-                            <div id="window-overlay" class="window-overlay" style="display: none;"></div>
-                            <div id="remember-me-popup" class="remember-me-popup" style="display: none;">
-                                <div class="remember-me-popup-head">
-                                    <h3>What's this?</h3>
-                                    <a href="#" class="remember-me-popup-close" title="Close">Close</a>
-                                </div>
-                                <div class="remember-me-popup-body">
-                                    <p>Checking &quot;Remember Me&quot; will let you access your shopping cart on this computer when you are logged out</p>
-                                    <div class="remember-me-popup-close-button a-right">
-                                        <a href="#" class="remember-me-popup-close button" title="Close"><span>Close</span></a>
-                                    </div>
-                                </div>
-                            </div>
                             <p class="required">* Required Fields</p>
                         </div>
                     </div>
@@ -60,7 +47,7 @@
                     <div class="col-2 registered-users">
                         <div class="buttons-set">
                             <a href="../forgotpassword/index.html" class="f-left">Forgot Your Password?</a>
-                            <button type="submit" class="button" title="Login" name="send" id="send2"><span><span>Login</span></span></button>
+                            <button type="button" class="button" title="Login" name="LogIn" runat="server" onserverclick="LogIn_ServerClick" id="LogIn"><span><span>Login</span></span></button>
                         </div>
                     </div>
                 </div>
