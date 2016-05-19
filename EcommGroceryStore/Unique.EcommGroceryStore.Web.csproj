@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1109,6 +1110,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.noty.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -1239,6 +1241,8 @@
     <Content Include="skin\frontend\onlinesabjiwala\default\sm\cartpro\images\i_block-cart.html" />
     <Content Include="skin\frontend\onlinesabjiwala\default\sm\cartpro\images\minicart-del.png" />
     <Content Include="skin\frontend\onlinesabjiwala\default\sm\cartpro\images\minicart-edit.png" />
+    <Content Include="skin\jquery.noty.css" />
+    <Content Include="skin\noty_theme_default.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />

@@ -152,9 +152,9 @@ namespace Unique.EcommGroceryStore.Core.Provider
         public override bool ValidateUser(string username, string password)
         {
             bool isFound = false;
-            using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext ())
+            using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
             {
-                var users = dataContext.Users.Where(r=>r.UserName == username && r.Password == password).FirstOrDefault();
+                var users = dataContext.Users.Where(r => r.UserName == username && r.Password == password && r.Status == true).FirstOrDefault();
                 if (users != null)
                 {
                     isFound = true;

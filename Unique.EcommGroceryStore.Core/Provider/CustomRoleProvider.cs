@@ -12,8 +12,8 @@ namespace Unique.EcommGroceryStore.Core.Provider
     public class CustomRoleProvider : RoleProvider
     {
         #region "Const"
-        public static string ADMIN = "Admin";
-        public static string USER = "User";
+        public static string ROLEADMIN = "Admin";
+        public static string ROLEUSER = "User";
         #endregion
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
@@ -59,21 +59,31 @@ namespace Unique.EcommGroceryStore.Core.Provider
         {
             using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
             {
-                var users = dataContext.Users.Where(r => r.UserName == username).FirstOrDefault();
-                if (users != null)
-                {
-                    return dataContext.Roles.Where(r => r.RoleId == users.RoleId).Select(r => r.RoleName).ToArray();
-                }
-                else
-                {
-                    return null;
-                }
+                string[] roles = null;
+                roles = (from c in dataContext.Users
+                         join
+                             r in dataContext.Roles on c.RoleId equals r.RoleId
+                         where c.UserName == username
+                         select r.RoleName).ToArray();
+                return roles;
             }
         }
 
         public override string[] GetUsersInRole(string roleName)
         {
-            throw new NotImplementedException();
+            string[] userId = { "0" };
+            using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
+            {
+                int userRoleId = (from c in dataContext.Roles
+                                  where c.RoleName == roleName
+                                  select c.RoleId).FirstOrDefault();
+                int siteUserId = (from c in dataContext.Users
+                                  where c.RoleId == userRoleId
+                                  select c.UserId).FirstOrDefault();
+                userId[0] = siteUserId.ToString();
+
+            }
+            return userId;
         }
 
         public override bool IsUserInRole(string username, string roleName)

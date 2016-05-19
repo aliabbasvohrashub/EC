@@ -25,12 +25,16 @@
                                     <label for="email" class="required"><em>*</em>Email Address</label>
                                     <div class="input-box">
                                         <input type="text" name="username" value="" id="txtUserName" runat="server" class="input-text" title="User Name" />
+                                        <br />
+                                        <asp:RequiredFieldValidator ValidationGroup="login" ErrorMessage="User name can not be blank." Font-Size="Smaller" Font-Bold="true" ForeColor="Red" Display="Dynamic" ControlToValidate="txtUserName" runat="server" />
                                     </div>
                                 </li>
                                 <li>
                                     <label for="pass" class="required"><em>*</em>Password</label>
                                     <div class="input-box">
                                         <input type="password" name="password" runat="server" class="input-text" id="txtPassword" title="Password" />
+                                        <br />
+                                        <asp:RequiredFieldValidator ValidationGroup="login" ErrorMessage="Password can not be blank." Font-Size="Smaller" Font-Bold="true" ForeColor="Red" Display="Dynamic" ControlToValidate="txtPassword" runat="server" />
                                     </div>
                                 </li>
                             </ul>
@@ -47,7 +51,7 @@
                     <div class="col-2 registered-users">
                         <div class="buttons-set">
                             <a href="../forgotpassword/index.html" class="f-left">Forgot Your Password?</a>
-                            <button type="button" class="button" title="Login" name="LogIn" runat="server" onserverclick="LogIn_ServerClick" id="LogIn"><span><span>Login</span></span></button>
+                            <button type="button" class="button" validationgroup="login" title="Login" name="LogIn" runat="server" onserverclick="LogIn_ServerClick" id="LogIn"><span><span>Login</span></span></button>
                         </div>
                     </div>
                 </div>
