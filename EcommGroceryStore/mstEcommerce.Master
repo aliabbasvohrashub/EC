@@ -1,0 +1,166 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mstEcommerce.master.cs" Inherits="EcommGroceryStore.mstEcommerce" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head runat="server">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Onlinesabjiwala.com - Online Grocery Shopping in India, Buy Fresh Fruits &amp; Vegetables Online in India</title>
+    <meta name="description" content="Online Sabjiwala is prefered destination for buying grocery, fresh fruits &amp; vegetables online in India, offering fresh and best prices and a completely hassle-free experience with options of paying through Cash on Delivery &amp; free home delivery." />
+    <meta name="keywords" content="vegetables online Mumbai, online grocery shopping, online grocery shopping mumbai, online grocery, online grocery shopping india, buy grocery online, online food shopping, online supermarket, buy food online, grocery online, groceries online, buy groceries online, online sabjiwala, onlinesabjiwala.com, online, shopping, cut vegetables, cut vegetables online, free delivery, vegetables, veggies, fruits, buy vegetables online, buy Fruits online, buy fresh fruits online, buy fresh vegetables online, buy fresh vegetables online in Mumbai, buy vegetables online in Mumbai, buy fruits online in Mumbai, best online sabjiwala in Mumbai, buy fresh fruits and vegetables online, buy fresh fruits and vegetables online in Mumbai, buy green vegetables online in Mumbai, price of vegetable in Mumbai, buy fresh vegetables online in india, online vegetable shopping Mumbai, vegetable shopping online Mumbai, Free Delivery, free vegetable delivery, free fruits delivery, vegetables online in Mumbai best prices, online vegetables in navi Mumbai, buy fresh vegetables navi Mumbai, vegetables online navi Mumbai, online vegetables in thane, Exotic Vegetables, Exotic Vegetables Mumbai, Exotic Vegetables india, grocery shopping mumbai, vegetables home delivery Mumbai, order vegetables online Mumbai,veggies and fruits in Mumbai, discount vegetables fruits, vegetable deals, organic vegetables online Mumbai,navi mumbai, pune, ahmedabad, nagpur, nashik, bangalore, noida, delhi, lucknow, varanasi, allahabad, indore, chennai, hyderabad, kolkata, Chandigarh, Jaipur, Coimbatore, India, supermarket, hypermarket, online sabjiwala, sabjiwala, onlinesabjiwala, Free, faster home delivery, vegetable, deals, offers, discount, best, shop, cash on delivery, best quality, website, low price, store" />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link rel="icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
+    <!--group: nogroup-->
+    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>></script>
+    <link rel="stylesheet" type="text/css" href="/../media/css/8b77512cfb98d9d7b6aeac8f174d9131.css" media="all" />
+    <script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
+    
+        <script type="text/javascript"> 
+            function ImageBox(productName, imageURL, description) {
+                var  val = " <div class=\"bs-item cf\"> <div class=\"bs-item-inner\">  <div class=\"bs-image\">"
+                    + " <a href=\"" + productName + ".html\" title=\"" + description + "\">"
+                    + " <img src=\"" + imageURL + "\" title=\"" + description + "\" alt=\"" + description + "\">"
+                    + "</a></div>";
+                return val; 
+            }
+
+            function ContentBox(productName, imageURL, description, quantity , pricePerUnit) {
+
+                var val = "<div class=\"bs-content\">"
+                    + "<a href=\""+ productName +".html\" title=\"" + description + "\">" 
+                    + "" + productName + ""
+                    + "</a>" 
+                    + "</div>" 
+                    + "<div class=\"bs-price\">" 
+                    + "<div class=\"sale-price\">" 
+                    + "<div class=\"price-box\">" 
+                    + "<span class=\"regular-price\">" 
+                    + "<span class=\"price\">" + pricePerUnit + "</span>/1 Pc"
+                    + "</span>" 
+                    + "</div>" 
+                    + "</div>" 
+                    + "</div>" 
+                    + "<div class=\"bs-btn-addtocart\">" 
+                    + "<button type=\"button\" title=\"Add to Cart\" class=\"button btn-cart\" onclick=\"setLocation('http://www.onlinesabjiwala.com/checkout/cart/add/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2ZydWl0cy12ZWdldGFibGVzL2ZpbHRlci9jYXQvMzAuaHRtbD9hbXAlM0JsaW1pdD0xNiZkaXI9ZGVzYyZvcmRlcj1uYW1lJnA9Mg,,/product/68/form_key/10mZJsjNieAFmLSZ/')\">" 
+                    + "<span><span>Add to Cart</span></span>" 
+                    + "</button>" 
+                    + "</div>" 
+                    + "</div>" 
+                    + "</div></div></div>";
+                return val;
+
+            }
+
+            function getProducts() {
+                jQuery.getJSON("api/ProductDetails/getProductList",
+                    function(data) {
+                        jQuery.each(data, function(key, val) {
+                            var val1 = ImageBox(val.ProductName, val.ImageURL, val.Description);
+                            var val2 = ContentBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+                            if (key === 0) {
+                                jQuery();
+                                jQuery("div.slider-left-product.basic-product").append("<div class=\"item-left-products item\">");
+                            }
+                            jQuery("div.slider-left-product.basic-product").append(val1 + val2);
+                        });
+                    });
+                jQuery("div.slider-left-product.basic-product").append("</div>");
+                var owl_left = jQuery(".basic-product");
+                owl_left.owlCarousel({
+                    itemsCustom: [
+                        [0, 1],
+                        [480, 1],
+                        [768, 2],
+                        [992, 1],
+                        [1200, 1]
+                    ],
+
+                    slideSpeed: 300,
+                    stopOnHover: true,
+                    paginationSpeed: 400,
+                    autoPlay: false,
+                    pagination: false,
+                });
+
+
+                jQuery(".nav-left-product .next-bs").click(function() {
+                    owl_left.trigger('owl.next');
+                });
+                jQuery(".nav-left-product .prev-bs").click(function() {
+                    owl_left.trigger('owl.prev');
+                });
+            }
+
+            jQuery(document).ready(function ($) { 
+                getProducts();
+                $('.owl-carousel').owlCarousel();
+            });
+        </script>
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
+    <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
+
+   <%-- <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+
+        body {
+            font-family: Georgia;
+        }
+
+            body.onlinesabjiwala {
+                color: #686868;
+            }
+
+            body.onlinesabjiwala {
+                background-color: #FFFFFF;
+            }
+
+        a,
+        .store-info .list-info .item-info .info-content > h2 {
+            color: #444444;
+        }
+
+            a:hover,
+            .no-rating a:hover {
+                color: #EA3A3C;
+            }
+
+        #yt_wrapper .page-title:before {
+            background-color: #686868;
+        }
+
+        .cloud-zoom-big {
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .item-compare,
+        .product-compare,
+        .add-to-links .compare {
+            display: none;
+        }
+    </style>--%>
+     
+     
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
