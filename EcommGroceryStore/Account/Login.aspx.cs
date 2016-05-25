@@ -17,7 +17,14 @@ namespace EcommGroceryStore.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string st = !string.IsNullOrEmpty(Request.QueryString["st"]) ? Request.QueryString["st"] : "0";
+                if (st.Equals("0"))
+                    this.ShowErrorNotification("Please contact your administrator. Your account is not active.");
+                else
+                    this.ShowSuccessfulNotification("Your account has been activated successfully. Please try to login now.");
+            }
         }
 
         protected void LogIn_ServerClick(object sender, EventArgs e)
@@ -41,7 +48,7 @@ namespace EcommGroceryStore.Account
                             FormsAuthentication.RedirectFromLoginPage(txtUserName.Value.Trim(), true);
                             FormsAuthentication.SetAuthCookie(txtUserName.Value.Trim(), true);
                             string returnUrl = Request.QueryString["ReturnUrl"];
-                            if (returnUrl == null) returnUrl = "~/Apps/indexchild.aspx";
+                            if (returnUrl == null) returnUrl = "~/indexchild.aspx";
                             Response.Redirect(returnUrl, false);
                         }
                         else

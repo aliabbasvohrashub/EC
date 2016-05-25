@@ -22,7 +22,7 @@
                             <p>If you have an account with us, please log in.</p>
                             <ul class="form-list">
                                 <li>
-                                    <label for="email" class="required"><em>*</em>Email Address</label>
+                                    <label for="username" class="required"><em>*</em>User Name</label>
                                     <div class="input-box">
                                         <input type="text" name="username" value="" id="txtUserName" runat="server" class="input-text" title="User Name" />
                                         <br />
@@ -45,12 +45,12 @@
                 <div class="col2-set">
                     <div class="col-1 new-users">
                         <div class="buttons-set">
-                            <button type="button" title="Create an Account" class="button" onclick="window.location='../create/index.html';"><span><span>Create an Account</span></span></button>
+                            <button type="button" title="Create an Account" class="button" onclick="window.location='Register.aspx';"><span><span>Create an Account</span></span></button>
                         </div>
                     </div>
                     <div class="col-2 registered-users">
                         <div class="buttons-set">
-                            <a href="../forgotpassword/index.html" class="f-left">Forgot Your Password?</a>
+                            <a href="Forgot.aspx" class="f-left">Forgot Your Password?</a>
                             <button type="button" class="button" validationgroup="login" title="Login" name="LogIn" runat="server" onserverclick="LogIn_ServerClick" id="LogIn"><span><span>Login</span></span></button>
                         </div>
                     </div>

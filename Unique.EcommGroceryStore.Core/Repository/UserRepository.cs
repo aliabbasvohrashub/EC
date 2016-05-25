@@ -31,6 +31,11 @@ namespace Unique.EcommGroceryStore.Core.Repository
             _User.SetUserProperties(userId);
         }
 
+        public bool CheckUserisExistOrNot(string username)
+        {
+            return dataContext.Users.Where(r => r.UserName.Equals(username)).Any();
+        }
+
         public UserRepository(string userName)
         {
             dataContext = new EcommGroceryDataContext();
@@ -52,7 +57,9 @@ namespace Unique.EcommGroceryStore.Core.Repository
 
         public Users Add(Users model)
         {
-            throw new NotImplementedException();
+            dataContext.Users.Add(model);
+            Update();
+            return model;
         }
 
         public Users Delete(int id)
@@ -81,9 +88,22 @@ namespace Unique.EcommGroceryStore.Core.Repository
             return dataContext.Users.Where(r => r.Status == true).OrderBy(r => r.UserName);
         }
 
+        public Users GetUserByEmailId(string emailid)
+        {
+            var userInfo = (from s in dataContext.Users
+                            where s.EmailId == emailid && s.Status == true
+                            select s).FirstOrDefault();
+            return userInfo;
+        }
+
         public void Update()
         {
             dataContext.SaveChanges();
+        }
+
+        public bool IsEmailIsExists(string emailid)
+        {
+            return dataContext.Users.Where(r => r.EmailId == emailid).Any();
         }
 
         public void Dispose()
@@ -98,7 +118,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
         #endregion
 
         #region Public Static Method(s)
- 
+
         public static int GetUserId()
         {
             int userId = 0;
@@ -165,5 +185,9 @@ namespace Unique.EcommGroceryStore.Core.Repository
         }
 
         #endregion
+
+
+
+
     }
 }

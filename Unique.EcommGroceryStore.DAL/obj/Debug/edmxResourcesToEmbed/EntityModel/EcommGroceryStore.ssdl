@@ -113,6 +113,7 @@
     <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="bit" Nullable="false" />
     <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="ActivationCode" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_AddressDetails_AreaMaster">
     <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />

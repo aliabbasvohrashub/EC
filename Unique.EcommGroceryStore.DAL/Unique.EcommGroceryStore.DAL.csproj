@@ -106,22 +106,20 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EcommGroceryStore.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityModel\EcommGroceryStore.edmx.diagram">
-      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EntityModel\EcommGroceryStore.Context.tt">
+    <None Include="EntityModel\EcommGroceryStore.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
       <LastGenOutput>EcommGroceryStore.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityModel\EcommGroceryStore.tt">
+    </None>
+    <None Include="EntityModel\EcommGroceryStore.edmx.diagram">
+      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
+    </None>
+    <None Include="EntityModel\EcommGroceryStore.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
       <LastGenOutput>EcommGroceryStore.cs</LastGenOutput>
-    </Content>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
