@@ -26,7 +26,7 @@
 
                                     <div id="ajax-errors" style="display: none;">
                                         <ul class="messages">
-                                            <li class="error-msg">
+                                            <li class="error-msg"> 
                                                 <ul>
                                                     <li><span>An error occurred, please try again later.</span></li>
                                                 </ul>
