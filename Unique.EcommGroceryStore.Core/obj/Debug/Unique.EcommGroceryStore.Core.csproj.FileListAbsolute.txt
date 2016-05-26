@@ -46,3 +46,15 @@ E:\Working\EC\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.
 E:\Working\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.csprojResolveAssemblyReference.cache
 E:\Working\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.dll
 E:\Working\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.pdb
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.Core.dll.config
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.Core.dll
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.Core.pdb
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.dll
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.dll
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.pdb
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.xml
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.csprojResolveAssemblyReference.cache
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.dll
+C:\LocalBranchMay23\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.pdb

@@ -180,6 +180,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fruits.aspx" />
+    <Content Include="FruitsMain.aspx" />
     <Content Include="index.aspx" />
     <Content Include="index.html" />
     <Content Include="indexchild.aspx" />
@@ -1111,6 +1113,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom\listfruits.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.noty.js" />
@@ -1246,6 +1249,9 @@
     <Content Include="skin\frontend\onlinesabjiwala\default\sm\cartpro\images\minicart-edit.png" />
     <Content Include="skin\jquery.noty.css" />
     <Content Include="skin\noty_theme_default.css" />
+    <Content Include="TestNormal.html">
+      <BrowseToURL>~/TestNormal.html</BrowseToURL>
+    </Content>
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -1396,6 +1402,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fruits.aspx.cs">
+      <DependentUpon>Fruits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fruits.aspx.designer.cs">
+      <DependentUpon>Fruits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FruitsMain.aspx.cs">
+      <DependentUpon>FruitsMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FruitsMain.aspx.designer.cs">
+      <DependentUpon>FruitsMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
