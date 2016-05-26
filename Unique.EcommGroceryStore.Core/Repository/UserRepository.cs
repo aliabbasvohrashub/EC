@@ -106,6 +106,24 @@ namespace Unique.EcommGroceryStore.Core.Repository
             return dataContext.Users.Where(r => r.EmailId == emailid).Any();
         }
 
+        public IEnumerable<UserModel> GetList()
+        {
+            return (from u in dataContext.Users
+                    join r in dataContext.Roles on u.RoleId equals r.RoleId
+                    select new UserModel
+                    {
+                        UserId = u.UserId,
+                        UserName = u.UserName,
+                        Password = u.Password,
+                        EmailId = u.EmailId,
+                        MobileNumber = u.MobileNumber,
+                        AlternateNumber = u.AlternateNumber,
+                        RegistrationDate = u.RegistrationDate,
+                        FullName = u.FirstName + " " + u.LastName,
+                        RoleName = r.RoleName
+                    });
+        }
+
         public void Dispose()
         {
             if (dataContext != null)
@@ -185,9 +203,6 @@ namespace Unique.EcommGroceryStore.Core.Repository
         }
 
         #endregion
-
-
-
 
     }
 }
