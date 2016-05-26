@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/mstEcommerce.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="EcommGroceryStore.index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="Scripts/custom/listfruits.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="yt_content" class="yt-content wrap">

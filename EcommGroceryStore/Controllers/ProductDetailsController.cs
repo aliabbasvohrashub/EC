@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Unique.EcommGroceryStore.DAL.EntityModel;
@@ -16,31 +15,189 @@ namespace EcommGroceryStore.Controllers
 {
     public class ProductDetailsController : ApiController
     {
+
+        private EcommGroceryDataContext dbContext = new EcommGroceryDataContext();
+
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IQueryable<ProductDetails> GetProductDetails()
         {
-            return new string[] { "value1", "value2" };
+            return dbContext.ProductDetails;
+            //try
+            //{
+            //    using (var dbContext = new EcommGroceryDataContext())
+            //    {
+            //        return dbContext.ProductDetails;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}  
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public IQueryable<vmProductDetails> getProductList()
         {
-            return "value";
+            return dbContext.ProductDetails.Select(x => new vmProductDetails
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
+                SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
+                Quantity = x.Quantity,
+                Description = x.Description,
+                ImageURL = x.ImageURL,
+                PricePerUnit = x.PricePerUnit,
+                Unit = x.Unit,
+                Status = x.Status
+            });
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        public IQueryable<vmPrdListDependency> getProductDetailsList()
         {
+            return dbContext.ProductDetails.Select(x => new vmPrdListDependency
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                MainCategoryId = x.MainCategoryId,
+                SubCategoryId = x.SubCategoryId,
+                MainCategoryNames = dbContext.MainCategoryMaster.Select(a => new MainCategoryMasterSub { MainCategoryId = a.MainCategoryId, MainCategoryName = a.Name }).ToList(),
+                SubCategoryNames = dbContext.SubCategoryMaster.Select(a => new SubCategoryMasterSub { SubCategoryId = a.SubCategoryId, SubCategoryName = a.Name }).ToList(),
+                Quantity = x.Quantity,
+                Description = x.Description,
+                ImageURL = x.ImageURL,
+                PricePerUnit = x.PricePerUnit,
+                Unit = x.Unit,
+                Status = x.Status
+            });
+        }
+
+
+        public vmProductListMainSubCategories getProductDetailsList1()
+        {
+            dbContext.Configuration.ProxyCreationEnabled = false;
+            vmProductListMainSubCategories obj = new vmProductListMainSubCategories();
+
+            // obj.prd = dbContext.ProductDetails.ToList();
+            obj.listMain = dbContext.MainCategoryMaster.ToList();
+            obj.listSub = dbContext.SubCategoryMaster.ToList();
+
+            return obj;
+        }
+
+
+        //public IQueryable<vmProductDetails> getProductList() {
+        //    return dbContext.ProductDetails.Select(x => new vmProductDetails
+        //    {
+        //        ProductId = x.ProductId,
+        //        ProductName = x.ProductName,
+        //        MainCategoryId = x.MainCategoryId,
+        //        SubCategoryId = x.SubCategoryId,
+        //        Quantity = x.Quantity,
+        //        Description = x.Description,
+        //        ImageURL = x.ImageURL,
+        //        PricePerUnit = x.PricePerUnit,
+        //        Unit = x.Unit,
+        //        Status = x.Status
+        //    });
+        //}
+
+        [ResponseType(typeof(ProductDetails))]
+        public IHttpActionResult GetProductDetails(int id)
+        {
+            //using (EcommGroceryDataContext dbContext = new EcommGroceryDataContext())
+            //{
+            ProductDetails prd = dbContext.ProductDetails.Find(id);
+            if (prd == null)
+            {
+                return NotFound();
+            }
+            return Ok(prd);
+            //}
+        }
+
+
+
+        // POST api/ProductDetails
+        [ResponseType(typeof(ProductDetails))]
+        public IHttpActionResult PostProductDetails(ProductDetails productdetails)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //using (EcommGroceryDataContext dbContext = new EcommGroceryDataContext())
+            //{
+            dbContext.ProductDetails.Add(productdetails);
+            dbContext.SaveChanges();
+            //} 
+
+            return CreatedAtRoute("DefaultApi", new { id = productdetails.ProductId }, productdetails);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult PutProductDetails(int id, ProductDetails productdetails)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != productdetails.ProductId)
+            {
+                return BadRequest();
+            }
+
+
+            //using (EcommGroceryDataContext dbContext = new EcommGroceryDataContext())
+            //{
+            dbContext.Entry(productdetails).State = EntityState.Modified;
+
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!(dbContext.ProductDetails.Count(e => e.ProductId == id) > 0))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            //} 
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        // DELETE api/ProductDetails/5
+        [ResponseType(typeof(ProductDetails))]
+        public IHttpActionResult DeleteProductDetails(int id)
         {
+            //using (EcommGroceryDataContext dbContext = new EcommGroceryDataContext())
+            //{
+            ProductDetails productdetails = dbContext.ProductDetails.Find(id);
+            if (productdetails == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.ProductDetails.Remove(productdetails);
+            dbContext.SaveChanges();
+
+            return Ok(productdetails);
+            //}
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                dbContext.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
