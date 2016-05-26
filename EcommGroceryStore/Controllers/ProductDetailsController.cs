@@ -13,7 +13,7 @@ using EcommGroceryStore.ViewModels;
 
 namespace EcommGroceryStore.Controllers
 {
-    public class ProductDetailsController : ApiController
+    public class ProductDetailsController : ApiController 
     {
 
         private EcommGroceryDataContext dbContext = new EcommGroceryDataContext();

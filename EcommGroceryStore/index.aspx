@@ -10,7 +10,7 @@
                 <div class="row">
                 </div>
             </div>
-        </div>
+        </div> 
 
         <div class="yt-content-inner">
             <div class="container">
