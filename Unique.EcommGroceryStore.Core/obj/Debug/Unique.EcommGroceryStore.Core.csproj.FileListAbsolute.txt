@@ -27,10 +27,12 @@ C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGrocerySt
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.Core.pdb
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.dll
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Newtonsoft.Json.dll
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.dll
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.pdb
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.xml
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Working\Test\EC\Unique.EcommGroceryStore.Core\bin\Debug\Newtonsoft.Json.xml
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.csprojResolveAssemblyReference.cache
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.dll
 C:\Working\Test\EC\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.pdb

@@ -122,6 +122,7 @@ C:\Working\Test\EcommGroceryStore\EcommGroceryStore\bin\Unique.EcommGroceryStore
 \\BRDCHUTNEY\EcommGroceryStore\EcommGroceryStore\obj\Debug\Unique.EcommGroceryStore.Web.csprojResolveAssemblyReference.cache
 \\BRDCHUTNEY\EcommGroceryStore\EcommGroceryStore\obj\Debug\EcommGroceryStore.dll
 \\BRDCHUTNEY\EcommGroceryStore\EcommGroceryStore\obj\Debug\EcommGroceryStore.pdb
+C:\Working\Test\EC\EcommGroceryStore\obj\Debug\Unique.EcommGroceryStore.Web.csprojResolveAssemblyReference.cache
 C:\Working\Test\EC\EcommGroceryStore\bin\EcommGroceryStore.dll.config
 C:\Working\Test\EC\EcommGroceryStore\bin\EcommGroceryStore.dll
 C:\Working\Test\EC\EcommGroceryStore\bin\EcommGroceryStore.pdb
@@ -159,9 +160,9 @@ C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.DAL.dll
 C:\Working\Test\EC\EcommGroceryStore\bin\WebGrease.dll
 C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.Core.pdb
 C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.DAL.pdb
+C:\Working\Test\EC\EcommGroceryStore\bin\Newtonsoft.Json.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Web.Optimization.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Antlr3.Runtime.pdb
-C:\Working\Test\EC\EcommGroceryStore\bin\Newtonsoft.Json.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Net.Http.Formatting.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Web.Http.xml
@@ -181,6 +182,5 @@ C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.Owin.Security.Google.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Working\Test\EC\EcommGroceryStore\obj\Debug\Unique.EcommGroceryStore.Web.csprojResolveAssemblyReference.cache
 C:\Working\Test\EC\EcommGroceryStore\obj\Debug\EcommGroceryStore.dll
 C:\Working\Test\EC\EcommGroceryStore\obj\Debug\EcommGroceryStore.pdb
