@@ -5,6 +5,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using EcommGroceryStore.Models;
+using Unique.EcommGroceryStore.Core.Repository;
+using Unique.EcommGroceryStore.DAL.EntityModel;
+using NotificationHelper;
+using Unique.EcommGroceryStore.Core.Notification;
 
 namespace EcommGroceryStore.Account
 {
@@ -12,28 +16,34 @@ namespace EcommGroceryStore.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
         }
 
-        protected void Forgot(object sender, EventArgs e)
+        protected void btnSubmit_ServerClick(object sender, EventArgs e)
         {
-            if (IsValid)
+            using (UserRepository repository = new UserRepository())
             {
-                // Validate the user's email address
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                ApplicationUser user = manager.FindByName(Email.Text);
-                if (user == null || !manager.IsEmailConfirmed(user.Id))
+                if (repository.IsEmailIsExists(txtemailaddress.Value.Trim()))
                 {
-                    FailureText.Text = "The user either does not exist or is not confirmed.";
-                    ErrorMessage.Visible = true;
-                    return;
+                    Users user = repository.GetUserByEmailId(txtemailaddress.Value.Trim());
+                    if (user != null)
+                    {
+                        string sBody = "";
+                        sBody = "Dear " + user.UserName.Trim() + ",";
+                        sBody += "<br /><br />Please find the following your account details.";
+                        sBody += "<br />User Name : " + user.UserName.Trim();
+                        sBody += "<br />Password : " + user.Password.Trim();
+                        sBody += "<br /><br />Please return to the site and log in using above login information.";
+                        sBody += "<br /><br />Thanks";
+
+                        EmailHelper.SendMail("", txtemailaddress.Value.Trim(), "Forgot Password", sBody);
+                        this.ShowSuccessfulNotification("Your login details has been sent to your given email address.");
+                    }
+                    else
+                    { this.ShowErrorNotification("The user is not exists/active in this system."); }
+
                 }
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send email with the code and the redirect to reset password page
-                //string code = manager.GeneratePasswordResetToken(user.Id);
-                //string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                //manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-                loginForm.Visible = false;
-                DisplayEmail.Visible = true;
+                else { this.ShowErrorNotification("The email address is not exists."); }
             }
         }
     }

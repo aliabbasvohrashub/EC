@@ -53,14 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\EnumCommon.cs" />
     <Compile Include="Common\SessionManager.cs" />
     <Compile Include="Interfaces\ICustomInterface.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Notification\EmailHelper.cs" />
     <Compile Include="Notification\NotificationExtensions.cs" />
     <Compile Include="Notification\NotifyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\CustomMembershipProvider.cs" />
     <Compile Include="Provider\CustomRoleProvider.cs" />
+    <Compile Include="Repository\AddressRepository.cs" />
+    <Compile Include="Repository\AreaRepository.cs" />
+    <Compile Include="Repository\CityRepository.cs" />
+    <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utility\Utilities.cs" />
   </ItemGroup>

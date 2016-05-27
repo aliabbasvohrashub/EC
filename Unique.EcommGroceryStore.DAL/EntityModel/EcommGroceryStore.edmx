@@ -118,6 +118,7 @@
           <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="ActivationCode" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_AddressDetails_AreaMaster">
           <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />
@@ -445,6 +446,7 @@
           <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_Users" FromRole="Users" ToRole="AddressDetails" />
           <NavigationProperty Name="FollowUpDetails" Relationship="Self.FK_FollowUpDetails_Users" FromRole="Users" ToRole="FollowUpDetails" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
@@ -766,6 +768,7 @@
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

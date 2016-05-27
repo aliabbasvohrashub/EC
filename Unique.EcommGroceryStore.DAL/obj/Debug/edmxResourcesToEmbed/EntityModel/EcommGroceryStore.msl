@@ -123,6 +123,7 @@
           <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
