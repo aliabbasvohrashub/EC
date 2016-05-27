@@ -52,6 +52,24 @@ namespace EcommGroceryStore.Controllers
             });
         }
 
+
+        public IQueryable<vmProductDetails> getFruitsList()
+        {
+            return dbContext.ProductDetails.Where(o=>o.MainCategoryId ==2).Select(x => new vmProductDetails
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
+                SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
+                Quantity = x.Quantity,
+                Description = x.Description,
+                ImageURL = x.ImageURL,
+                PricePerUnit = x.PricePerUnit,
+                Unit = x.Unit,
+                Status = x.Status
+            });
+        }
+
         public IQueryable<vmPrdListDependency> getProductDetailsList()
         {
             return dbContext.ProductDetails.Select(x => new vmPrdListDependency

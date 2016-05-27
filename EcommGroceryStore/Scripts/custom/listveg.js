@@ -4,7 +4,7 @@
 (function () {
     //alert('this shoudl also work');
 
-    function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
+    function vegBox(productName, imageURL, description, quantity, pricePerUnit) {
 
         var val = "<div class=\"item col-lg-3 col-md-4 col-sm-4 respl-item\">"
                   + "     <div class=\"item-inner\">"
@@ -47,39 +47,12 @@
                   + "   </a> "
                   + "   </div>"
                   + "   </div>"
-        return val;
-
+        return val; 
 
     }
-
-    function ContentBox(productName, imageURL, description, quantity, pricePerUnit) {
-
-        var val = "<div class=\"bs-content\">"
-            + "<a href=\"" + productName + ".html\" title=\"" + description + "\">"
-            + "" + productName + ""
-            + "</a>"
-            + "</div>"
-            + "<div class=\"bs-price\">"
-            + "<div class=\"sale-price\">"
-            + "<div class=\"price-box\">"
-            + "<span class=\"regular-price\">"
-            + "<span class=\"price\">" + pricePerUnit + "</span>/1 Pc"
-            + "</span>"
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "<div class=\"bs-btn-addtocart\">"
-            + "<button type=\"button\" title=\"Add to Cart\" class=\"button btn-cart\" onclick=\"setLocation('http://www.onlinesabjiwala.com/checkout/cart/add/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2ZydWl0cy12ZWdldGFibGVzL2ZpbHRlci9jYXQvMzAuaHRtbD9hbXAlM0JsaW1pdD0xNiZkaXI9ZGVzYyZvcmRlcj1uYW1lJnA9Mg,,/product/68/form_key/10mZJsjNieAFmLSZ/')\">"
-            + "<span><span>Add to Cart</span></span>"
-            + "</button>"
-            + "</div>"
-            + "</div>"
-            + "</div></div></div>";
-        return val;
-    }
-
+     
     function getFruits() {
-        jQuery.getJSON("api/ProductDetails/getFruitsList",
+        jQuery.getJSON("api/ProductDetails/getVegList",
             function (data) {
                 jQuery.each(data, function (key, val) {
                     var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
