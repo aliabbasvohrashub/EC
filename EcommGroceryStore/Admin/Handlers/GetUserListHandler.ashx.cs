@@ -37,12 +37,18 @@ namespace EcommGroceryStore.Admin.Handlers
 
             #region Refined JSON Response Area
             #region Customers
-            if (context.Request.Params["___SenderId___"] != null)
+            if (context.Request.Params["___UserList___"] != null)
             {
-                switch (context.Request.Params["___SenderId___"].ToLower())
+                switch (context.Request.Params["___UserList___"].ToLower())
                 {
                     case "get":
                         GetUserList(context);
+                        break;
+                    case "inactive":
+                        ActiveInActiveUser(false, context);
+                        break;
+                    case "active":
+                        ActiveInActiveUser(true, context);
                         break;
                     //case "savecustomer":
                     //    SaveCustomer(context);
@@ -67,6 +73,70 @@ namespace EcommGroceryStore.Admin.Handlers
                 context.Response.Write(result);
             }
             #endregion
+        }
+
+        private void ActiveInActiveUser(bool userStatus, HttpContext context)
+        {
+            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, context.Request.Params["Id"].ToString());
+            SqlParameter p2 = DataAccessLayer.CreateSqlParameter("UserStatus", DbType.Boolean, userStatus);
+            SqlParameter p3 = DataAccessLayer.CreateSqlParameter("Status", DbType.Int16, 0, 0, ParameterDirection.Output);
+
+            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3 };
+            using (SqlConnection connection = DataAccessLayer.Connection)
+            {
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
+                {
+                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateUserStatus", transaction, ps);
+                    int status;
+                    if (p3.Value != null && int.TryParse(p3.Value.ToString(), out status))
+                    {
+                        if (status == 1)
+                        {
+                            transaction.Commit();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "User status updated successfully!",
+                                type = "success",
+                                layout = "topCenter",
+                                timeout = true
+                            }, jsonSetting));
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "User could not updated!",
+                                type = "warning",
+                                layout = "topCenter"
+                            }, jsonSetting));
+                        }
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        context.Response.Write(JsonConvert.SerializeObject(new
+                        {
+                            text = "Some error occurred while updating!",
+                            type = "error",
+                            layout = "topCenter"
+                        }, jsonSetting));
+                    }
+                }
+                catch (Exception exp)
+                {
+                    transaction.Rollback();
+                    context.Response.Write(JsonConvert.SerializeObject(new
+                    {
+                        text = exp.Message,
+                        type = "error",
+                        layout = "topCenter"
+                    }, jsonSetting));
+                }
+            }
         }
 
         private void GetUserList(HttpContext context)
@@ -129,15 +199,15 @@ namespace EcommGroceryStore.Admin.Handlers
 
             SqlParameter[] ps = new SqlParameter[] { p1, p2, p3, p4, p5 };
 
-            DataSet ds = DataAccessLayer.LoadTabularData("Sp_GetUserDetails", CommandType.StoredProcedure, ps);
+            DataTable dt = DataAccessLayer.LoadTabularDataInDataTable("Sp_GetUserList", CommandType.StoredProcedure, ps);
 
-            if (ds.Tables.Count == 1)
+            if (dt.Rows.Count > 0)
             {
                 Dictionary<String, String> additionalInfo = new Dictionary<string, string>();
                 additionalInfo.Add("sEcho", context.Request.Params["sEcho"]);
                 additionalInfo.Add("iTotalRecords", p3.Value.ToString());
                 additionalInfo.Add("iTotalDisplayRecords", p3.Value.ToString());
-                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(ds.Tables[0], additionalInfo));
+                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(dt, additionalInfo));
                 return;
             }
             else

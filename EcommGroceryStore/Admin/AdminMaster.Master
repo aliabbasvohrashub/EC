@@ -12,6 +12,7 @@
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
