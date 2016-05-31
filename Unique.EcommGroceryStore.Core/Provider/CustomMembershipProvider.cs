@@ -154,7 +154,7 @@ namespace Unique.EcommGroceryStore.Core.Provider
             bool isFound = false;
             using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
             {
-                var users = dataContext.Users.Where(r => r.UserName == username && r.Password == password && r.Status == true).FirstOrDefault();
+                var users = dataContext.Users.Where(r => r.UserName == username && r.Password == password && r.Status == true && r.IsDeleted == false).FirstOrDefault();
                 if (users != null)
                 {
                     isFound = true;

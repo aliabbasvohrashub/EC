@@ -172,8 +172,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyEmailAddress.aspx" />
-    <Content Include="Admin\ManageUser.aspx" />
-    <Content Include="Admin\WebServices\GetUserDetails.asmx" />
+    <Content Include="Apps\Admin\ManageUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1113,8 +1112,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="media\catalog\product\cache\1\image\9df78eab33525d08d6e5fb8d27136e95\0\8\080307081409-large.5f5.delayed" />
-    <Content Include="Admin\AdminMaster.Master" />
-    <Content Include="Admin\Handlers\GetUserListHandler.ashx" />
+    <Content Include="Apps\Admin\AdminMaster.Master" />
+    <Content Include="Apps\Admin\Handlers\GetUserListHandler.ashx" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -1384,26 +1383,22 @@
     <Compile Include="Account\VerifyEmailAddress.aspx.designer.cs">
       <DependentUpon>VerifyEmailAddress.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AdminMaster.Master.cs">
+    <Compile Include="Apps\Admin\AdminMaster.Master.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\AdminMaster.Master.designer.cs">
+    <Compile Include="Apps\Admin\AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Handlers\GetUserListHandler.ashx.cs">
+    <Compile Include="Apps\Admin\Handlers\GetUserListHandler.ashx.cs">
       <DependentUpon>GetUserListHandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ManageUser.aspx.cs">
+    <Compile Include="Apps\Admin\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\ManageUser.aspx.designer.cs">
+    <Compile Include="Apps\Admin\ManageUser.aspx.designer.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\WebServices\GetUserDetails.asmx.cs">
-      <DependentUpon>GetUserDetails.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

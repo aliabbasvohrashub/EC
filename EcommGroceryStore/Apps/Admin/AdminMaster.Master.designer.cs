@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EcommGroceryStore.Admin {
+namespace EcommGroceryStore.Apps.Admin {
     
     
     public partial class AdminMaster {

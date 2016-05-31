@@ -36,6 +36,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public bool Status { get; set; }
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         public string ActivationCode { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddressDetails> AddressDetails { get; set; }

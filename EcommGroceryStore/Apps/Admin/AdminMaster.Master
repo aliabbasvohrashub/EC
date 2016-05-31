@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMaster.master.cs" Inherits="EcommGroceryStore.Admin.AdminMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="~/Apps/Admin/AdminMaster.master.cs" Inherits="EcommGroceryStore.Apps.Admin.AdminMaster" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

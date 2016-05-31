@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminMaster.Master" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="EcommGroceryStore.Admin.ManageUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Apps/Admin/AdminMaster.Master" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="EcommGroceryStore.Apps.Admin.ManageUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="innerContent">
@@ -15,19 +15,19 @@
                     <th>Alt. Number</th>
                     <th>Date of Registration</th>
                     <th>Role</th>
-                    <%--<th>Action</th>--%>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
     </div>
-    <link rel="stylesheet" type="text/css" href="../Content/DataTables/responsive.dataTables.min.css?1=1" />
-    <link href="../Content/DataTables/dataTables.bootstrap.css?1=1" rel="stylesheet" />
-    <script type="text/javascript" src="../Content/DataTables/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="../Content/DataTables/dataTables.bootstrap.min.js"> </script>
-    <script type="text/javascript" src="../Content/DataTables/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="../Content/DataTables/underscore.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../Content/DataTables/responsive.dataTables.min.css?1=1" />
+    <link href="../../Content/DataTables/dataTables.bootstrap.css?1=1" rel="stylesheet" />
+    <script type="text/javascript" src="../../Content/DataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../Content/DataTables/dataTables.bootstrap.min.js"> </script>
+    <script type="text/javascript" src="../../Content/DataTables/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="../../Content/DataTables/underscore.js"></script>
     <script type="text/javascript">
         $(document).ready(function myfunction() {
             BindUserList();
@@ -42,7 +42,7 @@
                 "bScrollCollapse": true,
                 "sPaginationType": "full_numbers",
                 "aaSorting": [[0, 'asc']],
-                sAjaxSource: '<%= ResolveClientUrl("~/Admin/Handlers/GetUserListHandler.ashx")%>',
+                sAjaxSource: '<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetUserListHandler.ashx")%>',
                 sServerMethod: 'POST',
                 fnServerParams: function (aoData) {
                     aoData.push({ name: '___UserList___', value: 'get' });
@@ -53,8 +53,8 @@
                         var oldSrc = $(this).attr('src');
                         var id_ = $(this).attr('data');
                         if (confirm("Do you really want to Inactive this user?")) {
-                            $(this).attr({ src: '/Images/website/progress.gif' });
-                            $.post('<%= ResolveClientUrl("~/Admin/Handlers/GetUserListHandler.ashx")%>', { id: id_, '___UserList___': 'inactive' }, function (data, status) {
+                            //$(this).attr({ src: '/Images/website/progress.gif' });
+                            $.post('<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetUserListHandler.ashx")%>', { id: id_, '___UserList___': 'inactive' }, function (data, status) {
                                 $this.attr({ src: oldSrc });
                                 if (status == 'success') {
                                     alert(data.text);
@@ -69,8 +69,24 @@
                         var oldSrc = $(this).attr('src');
                         var id_ = $(this).attr('data');
                         if (confirm("Do you want to active this user?")) {
-                            $(this).attr({ src: '/Images/website/progress.gif' });
-                            $.post('<%= ResolveClientUrl("~/Admin/Handlers/GetUserListHandler.ashx")%>', { id: id_, '___UserList___': 'active' }, function (data, status) {
+                            //$(this).attr({ src: '/Images/website/progress.gif' });
+                            $.post('<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetUserListHandler.ashx")%>', { id: id_, '___UserList___': 'active' }, function (data, status) {
+                                $this.attr({ src: oldSrc });
+                                if (status == 'success') {
+                                    alert(data.text);
+                                    oTbl.fnDraw();
+                                }
+                            });
+                        }
+                    });
+
+                    $('.delete-customer').bind('click', function () {
+                        var $this = $(this);
+                        var oldSrc = $(this).attr('src');
+                        var id_ = $(this).attr('data');
+                        if (confirm("Do you really want to delete this user?")) {
+                            //$(this).attr({ src: '/Images/website/progress.gif' });
+                            $.post('<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetUserListHandler.ashx")%>', { id: id_, '___UserList___': 'delete' }, function (data, status) {
                                 $this.attr({ src: oldSrc });
                                 if (status == 'success') {
                                     alert(data.text);
@@ -98,32 +114,33 @@
                     { sType: 'string', mData: 'AlternateNumber', bsortable: false, bSearchable: false },
                     { sType: 'string', mData: 'RegistrationDate', bsortable: false, bSearchable: false },
                     { sType: 'string', mData: 'RoleName', bsortable: false, bSearchable: false },
-                   <%--{
-                       mData: "UserId",
-                       bSortable: false,
-                       width: '100px',
-                       mRender: function (data, type, row) {
-                           return compiledTemplate({ data: data, path: '<%= ResolveClientUrl("~/Images/website") %>', row: row });
-                       }
-                   }--%>
+                    {
+                        mData: "UserId",
+                        bSortable: false,
+                        width: '100px',
+                        mRender: function (data, type, row) {
+                            return compiledTemplate({ data: data, path: '<%= ResolveClientUrl("~/Images/website") %>', row: row });
+                        }
+                    }
                 ]
             });
-        }
+                }
 
-        //i usually like mushtache like template syntax so change the interpolate regex 
-        //if you want some other flavour
-        _.templateSettings = {
-            interpolate: /\{\{(.+?)\}\}/g
-        };
+                //i usually like mushtache like template syntax so change the interpolate regex 
+                //if you want some other flavour
+                _.templateSettings = {
+                    interpolate: /\{\{(.+?)\}\}/g
+                };
 
-        ////define custom template to show actions (Edit|Delete Icons)
-        ////you can load this template from external source too
-        var actionsTemplate = "<a style=\"font-size: 18px;\" href=\"javascript:void(0)\" onClick=\"SetSenderIdDetails({{row[\"SenderUserId\"]}},'{{row[\"SenderId\"]}}','{{row[\"Purpose\"]}}',{{row[\"SenderIdType\"]}});\" class=\"site-table-icon edit-customer\" data=\"{{data}}\" title=\"Edit\"><i class=\"fa fa-pencil-square-o\"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;"
-                            + '<a style="font-size: 18px;" href="javascript:void(0)" class="site-table-icon delete-customer" data="{{data}}" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;';
+                ////define custom template to show actions (Edit|Delete Icons)
+                ////you can load this template from external source too
+                //var actionsTemplate = "<a style=\"font-size: 18px;\" href=\"javascript:void(0)\" onClick=\"SetSenderIdDetails({{row[\"SenderUserId\"]}},'{{row[\"SenderId\"]}}','{{row[\"Purpose\"]}}',{{row[\"SenderIdType\"]}});\" class=\"site-table-icon edit-customer\" data=\"{{data}}\" title=\"Edit\"><i class=\"fa fa-pencil-square-o\"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;"
+                //                    + '<a style="font-size: 18px;" href="javascript:void(0)" class="site-table-icon delete-customer" data="{{data}}" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;';
 
-        //underscore template function is used to precompile this template so that we can easily and efficiently
-        //use it wherever we need later
-        var compiledTemplate = _.template(actionsTemplate);
+                var actionsTemplate = '<a style="font-size: 16px;" href="javascript:void(0)" class="site-table-icon delete-customer" data="{{data}}" title="Delete"><i class="fa fa-trash-o"></i></a>';
+                //underscore template function is used to precompile this template so that we can easily and efficiently
+                //use it wherever we need later
+                var compiledTemplate = _.template(actionsTemplate);
 
     </script>
 </asp:Content>

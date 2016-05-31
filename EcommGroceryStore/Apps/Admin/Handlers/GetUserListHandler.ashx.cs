@@ -50,9 +50,9 @@ namespace EcommGroceryStore.Admin.Handlers
                     case "active":
                         ActiveInActiveUser(true, context);
                         break;
-                    //case "savecustomer":
-                    //    SaveCustomer(context);
-                    //    break;
+                    case "delete":
+                        DeleteUser(context);
+                        break;
                 }
 
                 return;
@@ -75,6 +75,70 @@ namespace EcommGroceryStore.Admin.Handlers
             #endregion
         }
 
+        private void DeleteUser(HttpContext context)
+        {
+            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, context.Request.Params["Id"].ToString());
+            SqlParameter p2 = DataAccessLayer.CreateSqlParameter("Status", DbType.Int16, 0, 0, ParameterDirection.Output);
+            SqlParameter p3 = DataAccessLayer.CreateSqlParameter("Op", DbType.Int32, 1);
+
+            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3 };
+            using (SqlConnection connection = DataAccessLayer.Connection)
+            {
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
+                {
+                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteUser", transaction, ps);
+                    int status;
+                    if (p2.Value != null && int.TryParse(p2.Value.ToString(), out status))
+                    {
+                        if (status == 1)
+                        {
+                            transaction.Commit();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "User deleted successfully!",
+                                type = "success",
+                                layout = "topCenter",
+                                timeout = true
+                            }, jsonSetting));
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "User could not deleted!",
+                                type = "warning",
+                                layout = "topCenter"
+                            }, jsonSetting));
+                        }
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        context.Response.Write(JsonConvert.SerializeObject(new
+                        {
+                            text = "Some error occurred while deleting!",
+                            type = "error",
+                            layout = "topCenter"
+                        }, jsonSetting));
+                    }
+                }
+                catch (Exception exp)
+                {
+                    transaction.Rollback();
+                    context.Response.Write(JsonConvert.SerializeObject(new
+                    {
+                        text = exp.Message,
+                        type = "error",
+                        layout = "topCenter"
+                    }, jsonSetting));
+                }
+            }
+        }
+
         private void ActiveInActiveUser(bool userStatus, HttpContext context)
         {
             SqlParameter p1 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, context.Request.Params["Id"].ToString());
@@ -89,7 +153,7 @@ namespace EcommGroceryStore.Admin.Handlers
                 SqlTransaction transaction = connection.BeginTransaction();
                 try
                 {
-                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateUserStatus", transaction, ps);
+                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteUser", transaction, ps);
                     int status;
                     if (p3.Value != null && int.TryParse(p3.Value.ToString(), out status))
                     {

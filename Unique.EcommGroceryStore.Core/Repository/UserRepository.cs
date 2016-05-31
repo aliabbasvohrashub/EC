@@ -33,7 +33,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
 
         public bool CheckUserisExistOrNot(string username)
         {
-            return dataContext.Users.Where(r => r.UserName.Equals(username)).Any();
+            return dataContext.Users.Where(r => r.UserName.Equals(username) && r.IsDeleted == false).Any();
         }
 
         public UserRepository(string userName)
@@ -70,7 +70,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
         public Users Get(string userName)
         {
             var userInfo = (from s in dataContext.Users
-                            where s.UserName == userName && s.Status == true
+                            where s.UserName == userName && s.Status == true && s.IsDeleted == false
                             select s).FirstOrDefault();
             return userInfo;
         }
@@ -78,20 +78,20 @@ namespace Unique.EcommGroceryStore.Core.Repository
         public Users Get(int userId)
         {
             var userInfo = (from s in dataContext.Users
-                            where s.UserId == userId && s.Status == true
+                            where s.UserId == userId && s.Status == true && s.IsDeleted == false
                             select s).FirstOrDefault();
             return userInfo;
         }
 
         public IEnumerable<Users> GetList(int id)
         {
-            return dataContext.Users.Where(r => r.Status == true).OrderBy(r => r.UserName);
+            return dataContext.Users.Where(r => r.Status == true && r.IsDeleted == false).OrderBy(r => r.UserName);
         }
 
         public Users GetUserByEmailId(string emailid)
         {
             var userInfo = (from s in dataContext.Users
-                            where s.EmailId == emailid && s.Status == true
+                            where s.EmailId == emailid && s.Status == true && s.IsDeleted == false
                             select s).FirstOrDefault();
             return userInfo;
         }
@@ -110,6 +110,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
         {
             return (from u in dataContext.Users
                     join r in dataContext.Roles on u.RoleId equals r.RoleId
+                    where u.IsDeleted == false
                     select new UserModel
                     {
                         UserId = u.UserId,
