@@ -23,6 +23,8 @@ namespace Unique.EcommGroceryStore.Core.Model
         public string[] UserRoles { get; set; }
         public int RoleId { get; set; }
         public bool IsAccountLocked { get; set; }
+        public string RoleName { get; set; }
+        public string FullName { get; set; }
         #endregion
 
         #region Public Method(s)
@@ -34,8 +36,8 @@ namespace Unique.EcommGroceryStore.Core.Model
                 using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
                 {
                     var user = (from c in dataContext.Users
-                                    where c.UserId == userId
-                                    select c).FirstOrDefault();
+                                where c.UserId == userId
+                                select c).FirstOrDefault();
                     if (user != null)
                     {
                         UserExist = true;
@@ -62,8 +64,8 @@ namespace Unique.EcommGroceryStore.Core.Model
                 using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
                 {
                     var user = (from c in dataContext.Users
-                                    where c.UserName == userName
-                                    select c).FirstOrDefault();
+                                where c.UserName == userName
+                                select c).FirstOrDefault();
                     if (user != null)
                     {
                         UserExist = true;
