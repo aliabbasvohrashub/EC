@@ -8,7 +8,7 @@ namespace EcommGroceryStore
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
-        { 
+        {
             // Web API configuration and services
 
             // Web API routes
@@ -39,6 +39,11 @@ namespace EcommGroceryStore
                name: "ActionApi",
                routeTemplate: "api/{controller}/{action}/{id}",
                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "ProductDetailsApi",
+                routeTemplate: "api/{controller}/{action}/{startindex}/{stopindex}"
             );
         }
     }

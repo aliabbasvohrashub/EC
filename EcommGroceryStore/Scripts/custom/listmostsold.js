@@ -77,7 +77,7 @@
     }
 
     getProducts();
-    $('.owl-carousel').owlCarousel();
+   /* $('.owl-carousel').owlCarousel();*/
 
 
 })();

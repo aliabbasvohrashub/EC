@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Unique.EcommGroceryStore.DAL.EntityModel;
 using EcommGroceryStore.ViewModels;
+using Unique.EcommGroceryStore.Core.Utility;
 
 namespace EcommGroceryStore.Controllers
 {
@@ -53,9 +54,9 @@ namespace EcommGroceryStore.Controllers
         }
 
 
-        public IQueryable<vmProductDetails> getFruitsList()
+        public IQueryable<vmProductDetails> getFruitsList(int startindex, int stopindex)
         {
-            return dbContext.ProductDetails.Where(o=>o.MainCategoryId ==2).Select(x => new vmProductDetails
+            IQueryable<vmProductDetails> query = dbContext.ProductDetails.Where(o => o.MainCategoryId == 2).Select(x => new vmProductDetails
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
@@ -68,6 +69,24 @@ namespace EcommGroceryStore.Controllers
                 Unit = x.Unit,
                 Status = x.Status
             });
+
+            query = query.OrderByField("ProductName", false,8 , 0);
+
+            return query;
+
+            //return dbContext.ProductDetails.Where(o=>o.MainCategoryId ==2).Select(x => new vmProductDetails
+            //{
+            //    ProductId = x.ProductId,
+            //    ProductName = x.ProductName,
+            //    MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
+            //    SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
+            //    Quantity = x.Quantity,
+            //    Description = x.Description,
+            //    ImageURL = x.ImageURL,
+            //    PricePerUnit = x.PricePerUnit,
+            //    Unit = x.Unit,
+            //    Status = x.Status
+            //}).OrderBy(x=>x.ProductName).Skip(startindex).Take(stopindex);
         }
 
         public IQueryable<vmPrdListDependency> getProductDetailsList()

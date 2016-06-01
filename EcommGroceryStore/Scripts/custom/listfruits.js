@@ -1,7 +1,7 @@
 ﻿//alert('this should work');
 
-
-(function () {
+ 
+//(function () {
     //alert('this shoudl also work');
 
     function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
@@ -78,17 +78,29 @@
         return val;
     }
 
-    function getFruits() {
-        jQuery.getJSON("api/ProductDetails/getFruitsList",
+    function getFruits(num) { 
+        var startindex = 0;
+        var endindex = 0;
+        if (num == undefined) {
+            startindex = 0;
+            endindex = 8;
+        }
+        else {
+            startindex = (num - 1)*8;
+            endindex = (num) * 8;;
+        }
+        jQuery.getJSON("api/ProductDetails/getFruitsList?startindex="+ startindex +"&stopindex="+ endindex + "",
             function (data) {
+                jQuery("div.products-grid.row").empty();
                 jQuery.each(data, function (key, val) {
                     var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
                     //                    alert(val2);
-                   // console.log(val2);
+                    // console.log(val2);
                     //<div class="products-grid row">
+                   
                     jQuery("div.products-grid.row").append(val2);
                 });
             });
     }
     getFruits();
-})();
+//})();

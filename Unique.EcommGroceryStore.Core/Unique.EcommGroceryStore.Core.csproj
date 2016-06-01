@@ -68,6 +68,8 @@
     <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Utility\Class1.cs" />
+    <Compile Include="Utility\extensionmethods.cs" />
     <Compile Include="Utility\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
