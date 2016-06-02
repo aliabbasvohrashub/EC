@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="indexchild.aspx.cs" Inherits="EcommGroceryStore.indexchild" %>
 
-
+ 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
        <script src="Scripts/custom/listfruits.js"></script>
     <div id="yt_main" class="yt-main-right yt-main col-main col-lg-9 col-md-9">
