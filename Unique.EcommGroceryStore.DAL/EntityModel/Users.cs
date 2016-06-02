@@ -57,6 +57,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
 
         public Nullable<System.DateTime> LastLoginDate { get; set; }
         public string ActivationCode { get; set; }
+        public bool IsDeleted { get; set; }
     
 
 

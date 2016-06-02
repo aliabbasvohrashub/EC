@@ -159,9 +159,9 @@ C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.DAL.dll
 C:\Working\Test\EC\EcommGroceryStore\bin\WebGrease.dll
 C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.Core.pdb
 C:\Working\Test\EC\EcommGroceryStore\bin\Unique.EcommGroceryStore.DAL.pdb
+C:\Working\Test\EC\EcommGroceryStore\bin\Newtonsoft.Json.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Web.Optimization.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Antlr3.Runtime.pdb
-C:\Working\Test\EC\EcommGroceryStore\bin\Newtonsoft.Json.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Net.Http.Formatting.xml
 C:\Working\Test\EC\EcommGroceryStore\bin\System.Web.Http.xml

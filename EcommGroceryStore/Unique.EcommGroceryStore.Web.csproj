@@ -1559,7 +1559,6 @@
     </Compile>
     <Compile Include="Admin\WebServices\GetUserDetails.asmx.cs">
       <DependentUpon>GetUserDetails.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

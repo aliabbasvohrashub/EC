@@ -109,6 +109,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />

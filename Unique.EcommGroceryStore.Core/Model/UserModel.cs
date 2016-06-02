@@ -36,7 +36,7 @@ namespace Unique.EcommGroceryStore.Core.Model
                 using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
                 {
                     var user = (from c in dataContext.Users
-                                where c.UserId == userId
+                                where c.UserId == userId && c.IsDeleted == false
                                 select c).FirstOrDefault();
                     if (user != null)
                     {
@@ -64,7 +64,7 @@ namespace Unique.EcommGroceryStore.Core.Model
                 using (EcommGroceryDataContext dataContext = new EcommGroceryDataContext())
                 {
                     var user = (from c in dataContext.Users
-                                where c.UserName == userName
+                                where c.UserName == userName && c.IsDeleted == false
                                 select c).FirstOrDefault();
                     if (user != null)
                     {
