@@ -18,10 +18,13 @@
     <link rel="icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/../media/favicon/default/favicon.ico" type="image/x-icon" />
     <!--group: nogroup-->
+    <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/../media/css/8b77512cfb98d9d7b6aeac8f174d9131.css" media="all" />
+    <script type="text/javascript" src="http://botmonster.com/jquery-bootpag/jquery.bootpag.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/../skin/jquery.noty.css" />
     <link rel="stylesheet" type="text/css" href="/../skin/noty_theme_default.css" />
-    <script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
+    <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>--%>
     <script type="text/javascript" src="/../Scripts/jquery.noty.js"></script>
     <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
     <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
@@ -130,20 +133,7 @@
 
 
                                             </ul>
-                                            <script type="text/javascript">// <![CDATA[
-                                                jQuery(document).ready(function ($) {
 
-                                                    $("#offer-slider").owlCarousel({
-                                                        autoPlay: true,
-                                                        navigation: false,
-                                                        pagination: false,
-                                                        slideSpeed: 300,
-                                                        paginationSpeed: 400,
-                                                        singleItem: true
-                                                    });
-
-                                                });
-                                                // ]]></script>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +166,6 @@
                                                     <div class="modal-dialog block-popup-login">
                                                         <a href="javascript:void(0)" title="Close" class="close close-login" data-dismiss="modal">Close</a>
                                                         <div class="tt_popup_login"><strong>Sign in Or Register</strong></div>
-                                                        <%--<form action="http://www.onlinesabjiwala.com/customer/account/loginPost/" method="post">
                                                         <input name="form_key" type="hidden" value="10mZJsjNieAFmLSZ">
                                                         <div class="block-content">
                                                             <div class="col-reg registered-account">
@@ -208,7 +197,6 @@
                                                             </div>
                                                             <div style="clear: both;"></div>
                                                         </div>
-                                                    </form>--%>
                                                     </div>
                                                 </div>
                                             </li>
@@ -231,10 +219,6 @@
                                                     <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
                                                     <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
                                                     <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
-                                                    <!--
-<li><a title="My Tags" href="http://www.onlinesabjiwala.com/tag/customer/">My Tags</a></li>
-<li><a title="Billing Agreements" href="http://www.onlinesabjiwala.com/sales/billing_agreement/">Billing Agreements</a></li>
-<li><a title="Recurring Profiles" href="http://www.onlinesabjiwala.com/sales/recurring_profile/">Recurring Profiles</a></li> -->
                                                 </ul>
                                             </div>
                                         </div>
@@ -264,11 +248,11 @@
                                     </h1>
                                 </div>
 
-                                <%--  <div class="col-lg-6 col-md-5 col-sm-4 search-pro">
-                                <div id="sm_serachbox_pro15439196551463397099" class="sm-serachbox-pro">
+                                <div class="col-lg-6 col-md-5 col-sm-4 search-pro">
+                                    <div id="sm_serachbox_pro15439196551463397099" class="sm-serachbox-pro">
 
-                                    <div class="sm-searbox-content">
-                                        <form id="search_mini_form" action="http://www.onlinesabjiwala.com/catalogsearch/result/" method="get">
+                                        <div class="sm-searbox-content">
+
                                             <div class="form-search">
                                                 <div class="cat-wrapper">
                                                     <div class="selector" id="uniform-cat" style="width: 134px;">
@@ -294,40 +278,11 @@
                                                 <button type="submit" title="Search" class="icon-search button-search-pro form-button"></button>
                                                 <div id="search_autocomplete" class="search-autocomplete"></div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <script type="text/javascript">
-                                    jQuery(document).ready(function ($) {
-                                        $('.sm-searchbox-more').click(function () {
-                                            $('a.sm-searchbox-more').attr('data_count') == 10;
-                                            var sb_ajaxurl = $('a.sm-searchbox-more').attr('data_sb_ajaxurl');
-                                            var firt_load = 5;
-                                            var count = $('a.sm-searchbox-more').attr('data_count');
-                                            count = parseInt(count);
-                                            if (firt_load >= count) {
-                                                count = count + parseInt(firt_load);
-                                            }
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: sb_ajaxurl,
-                                                data: {
-                                                    is_ajax: 1,
-                                                    count_term: count
-                                                },
-                                                success: function (data) {
-                                                    $('.sm-serachbox-pro').html(data.htm);
-                                                    $('a.sm-searchbox-more').attr({
-                                                        'data_count': count + parseInt(firt_load)
-                                                    });
-                                                },
-                                                dataType: 'json'
-                                            });
-                                        });
-                                    });
-                                </script>
-                            </div>--%>
+
+                                </div>
 
                                 <div class="col-lg-2 col-md-3 col-sm-4 hot-line">
                                     <div class="hot-lilne-wrapper">
@@ -387,42 +342,10 @@
                                                     </div>
                                                     <span class="menuress-toggle" style="height: 17px;"></span></li>
                                             </ul>
-                                            <script type="text/javascript">
-                                                jQuery(document).ready(function ($) {
-                                                    $('#yt_resmenu_collapse .nav-menu > li.parent').each(function () {
-                                                        $(this).find('> ul').wrap('<div class="res-wrapnav">');
-                                                        $(this).append('<span class="menuress-toggle"></span>');
-                                                    });
-                                                });
-                                                jQuery(window).load(function () {
-                                                    jQuery('#yt_resmenu_collapse .parent .menuress-toggle').css('height', jQuery('#yt_resmenu_collapse .parent > a').outerHeight());
 
-                                                    jQuery('#yt_resmenu_collapse .parent > .res-wrapnav').each(function () {
-                                                        if (jQuery(this).parent().hasClass('open')) {
-                                                            jQuery(this).css('height', jQuery(this).children('ul').height());
-                                                        }
-                                                    });
-                                                    jQuery('#yt_resmenu_collapse .parent .menuress-toggle').click(function () {
-                                                        if (jQuery(this).parent().hasClass('open')) {
-                                                            jQuery(this).parent().removeClass('open');
-                                                            jQuery(this).parent().children('.res-wrapnav').css('height', '0px');
-                                                        } else {
-                                                            jQuery(this).parent().addClass('open');
-                                                            jQuery(this).parent().children('.res-wrapnav').css('height', jQuery(this).parent().children('.res-wrapnav').children('ul').height());
-                                                        }
-                                                    });
-                                                });
-                                            </script>
                                         </div>
                                         <a class="btn-search-mobile icon-search" href="javascript:void(0)" title="Search"></a>
-                                        <script>
-                                            jQuery(document).ready(function ($) {
-                                                $(".btn-search-mobile").click(function () {
-                                                    $('.search-pro').toggleClass('show')
-                                                    $(this).toggleClass('active')
-                                                });
-                                            });
-                                        </script>
+
                                     </div>
                                     <div class="yt-menu">
 
@@ -499,31 +422,7 @@
                                         <!--End Module-->
 
 
-                                        <script type="text/javascript">
-                                            // <![CDATA[ 
-                                            jQuery(document).ready(function ($) {
-                                                $(".sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu > li").hover(function () {
-                                                    var dropdown_w = $(this).children('div').width();
-                                                    var ul_width = $('.sm_megamenu_menu').width();
-                                                    var left_li = $(this).position().left;
-                                                    if (dropdown_w >= (ul_width - left_li)) {
-                                                        $(this).children('div').css({ 'right': '0px' });
-                                                    }
-                                                });
-                                            });
-                                            // ]]> 
-                                        </script>
 
-
-                                        <script type="text/javascript">
-                                            // <![CDATA[ 
-                                            jQuery(document).ready(function ($) {
-                                                $(".sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu > li").has("div").addClass('parent-child');
-
-                                                $('.sm_megamenu_wrapper_horizontal_menu .rw-url > a.sm_megamenu_head').attr('href', 'index.html');
-                                            });
-                                            // ]]> 
-                                        </script>
 
 
 
@@ -531,30 +430,12 @@
                                         <div class="search-header mini-cart-header">
 
 
-                                            <script type="text/javascript">
-                                                //<![CDATA[
-                                                mincart = new CartForm('minicart-form_uq5739aaebdfde4', '', 'checkout/cart/updatePost/index.html');
-                                                minicartpro_id = '';
-                                                if (typeof isShow == 'undefined') isShow = false;
-                                                if (typeof isEffect == 'undefined') isEffect = false;
-                                                if (typeof overEffect == 'undefined') overEffect = false;
-                                                if (typeof outEffect == 'undefined') outEffect = false;
-                                                //]]>
-                                            </script>
+
                                             <div class="block mini-cartpro sm-cartpro">
 
                                                 <div class="block-title">
                                                     <div class="btn-toggle">
-                                                        <script type="text/javascript">
-                                                            //<![CDATA[
-                                                            jQuery(document).ready(function ($) {
-                                                                $(".mini-cartpro .block-title .btn-toggle").click(function () {
-                                                                    $('.mini-cartpro .block-content').slideToggle(0.5);
-                                                                });
-                                                            });
 
-                                                            //]]>
-                                                        </script>
                                                         <div class="info-mini-cart">
                                                             <h2 class="cart-title">My Cart</h2>
                                                             <div class="item-cart">
@@ -567,19 +448,7 @@
                                             </div>
 
 
-                                            <script type="text/javascript">
-                                                jQuery(document).ready(function ($) {
-                                                    var n = $('#minicart-sidebar li').length;
-                                                    //alert(n);
-                                                    if (n > 0) {
-                                                        $('.header-cart').addClass('have_item');
-                                                    }
 
-                                                    $("#minicart-sidebar .btn-remove").click(function () {
-                                                        $('body').addClass('delete-overlay');
-                                                    });
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -589,28 +458,7 @@
                 </div>
 
                 <a id="yt-totop" href="#" title="Go to Top" style="display: none;"></a>
-                <script type="text/javascript">
-                    jQuery(document).ready(function ($) {
-                        $("#yt-totop").hide();
-                        $(function () {
-                            var wh = $(window).height();
-                            var whtml = $(document).height();
-                            $(window).scroll(function () {
-                                if ($(this).scrollTop() > whtml / 10) {
-                                    $('#yt-totop').fadeIn();
-                                } else {
-                                    $('#yt-totop').fadeOut();
-                                }
-                            });
-                            $('#yt-totop').click(function () {
-                                $('body,html').animate({
-                                    scrollTop: 0
-                                }, 800);
-                                return false;
-                            });
-                        });
-                    });
-                </script>
+
 
 
 
@@ -629,7 +477,7 @@
                     <div class="yt-main-inner yt-content-inner">
                         <div class="container">
                             <div class="row">
-                                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                                 </asp:ContentPlaceHolder>
                             </div>
                         </div>
@@ -637,20 +485,7 @@
                 </div>
             </div>
 
-            <script type="text/javascript">// <![CDATA[
-                jQuery(document).ready(function () {
-                    var fkey = "10mZJsjNieAFmLSZ";
-                    var onclickold = jQuery(".btn-cart").first().attr("onclick");
-                    var fkeyold = onclickold.replace(/.*\/form_key\/([a-zA-Z0-9]+)\/.*/, '$1');
-                    jQuery(".btn-cart").each(function () {
-                        var onclick = jQuery(this).attr("onclick");
-                        if (typeof onclick !== typeof undefined && onclick !== false && onclickold !== fkeyold) {
-                            var onclick2 = onclick.replace(fkeyold, fkey);
-                            jQuery(this).attr("onclick", onclick2);
-                        }
-                    });
-                });
-                // ]]></script>
+
             <!-- END: content -->
 
             <!-- BEGIN: footer -->
@@ -664,8 +499,13 @@
                                         <ul>
                                             <li><a class="icon-facebook show_facebook" title="Facebook" href="https://www.facebook.com/onlinesabjiwala" target="_blank" data-icon="f"><span>Facebook</span></a></li>
                                             <li><a class="icon-twitter show_twitter" title="Twitter" href="https://twitter.com/onlinesabjiwala" target="_blank" data-icon="l"><span>Twitter</span></a></li>
+
+
+
+
                                         </ul>
                                     </div>
+
                                 </div>
                                 <div class="col-lg-9 col-md-9">
                                     <div class="block block-subscribe-footer">
@@ -675,8 +515,6 @@
                                         </div>
 
                                         <div class="block-content">
-                                            <%--<form action="http://www.onlinesabjiwala.com/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail">--%>
-
                                             <div class="input-box">
                                                 <input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email" value="Enter your email..." onblur="if(this.value=='') this.value='Enter your email...';" onfocus="if(this.value=='Enter your email...') this.value='';">
                                             </div>
@@ -685,12 +523,6 @@
                                                     <span><span>Subscribe </span></span>
                                                 </button>
                                             </div>
-                                            <%--</form>--%>
-                                            <script type="text/javascript">
-                                                //<![CDATA[
-                                                var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
-                                                //]]>
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -782,81 +614,7 @@
 
 
 
-            <script type="text/javascript">
-                //<![CDATA[
-                window.removeItem = function (args) { //for version mage1501 and later
-                    if (enable_ajax_compare && (args.search('catalog/product_compare/remove') != -1)) {
-                        opener.deletePCompare = 1;
-                        if (setfocus) {				// for win parent  , detect by var setfocus
 
-                            opener.isCompare = 1;
-                            opener.deletePCompare = 1;
-
-                            opener.focus();
-                            opener.ajaxUpdate(args, 'url');
-                            exit;
-                        }
-                        else
-                            ajaxUpdate(args, 'url');		//for win-popup
-                    }
-                    else {
-                        window.location.href = args;
-                    }
-                };
-                //]]>
-            </script>
-            <!-- Start of StatCounter Code for Default Guide -->
-            <script async="" type="text/javascript">
-                var sc_project = 9450392;
-                var sc_invisible = 1;
-                var sc_security = "2b4de27e";
-                var scJsHost = (("https:" == document.location.protocol) ?
-                "https://secure." : "http://www.");
-                document.write("<sc" + "ript type='text/javascript' src='" +
-                scJsHost +
-                "statcounter.com/counter/counter.js'></" + "script>");
-            </script>
-            <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
-            <noscript>
-                &lt;div class="statcounter"&gt;&lt;a title="hits counter"
-href="http://statcounter.com/free-hit-counter/"
-target="_blank"&gt;&lt;img class="statcounter"
-src="http://c.statcounter.com/9450392/0/2b4de27e/1/"
-alt="hits counter"&gt;&lt;/a&gt;&lt;/div&gt;
-            </noscript>
-            <!-- End of StatCounter Code for Default Guide -->
-            <script async="">
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', '../www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'UA-53823742-1', 'auto');
-                ga('send', 'pageview');
-
-            </script>
-
-            <!-- Google Code for Onlinesabjiwala coversion Conversion Page -->
-            <script async="" type="text/javascript">
-                /* <![CDATA[ */
-                var google_conversion_id = 976092700;
-                var google_conversion_language = "en";
-                var google_conversion_format = "3";
-                var google_conversion_color = "ffffff";
-                var google_conversion_label = "FMHHCIrC5WAQnPy30QM";
-                var google_remarketing_only = false;
-                /* ]]> */
-            </script>
-            <script type="text/javascript" src="../www.googleadservices.com/pagead/f.txt">
-            </script>
-            <img height="1" width="1" border="0" alt="" src="https://www.googleadservices.com/pagead/conversion/976092700/?random=1463483411834&amp;cv=8&amp;fst=1463483411834&amp;num=1&amp;fmt=3&amp;label=FMHHCIrC5WAQnPy30QM&amp;bg=ffffff&amp;hl=en&amp;guid=ON&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_his=2&amp;u_tz=330&amp;u_java=false&amp;u_nplug=5&amp;u_nmime=7&amp;frm=0&amp;url=file%3A///C%3A/templatemonster_com/templatemonster_com/www.onlinesabjiwala.com/index.html&amp;tiba=Onlinesabjiwala.com%20-%20Online%20Grocery%20Shopping%20in%20India%2C%20Buy%20Fresh%20Fruits%20%26%20Vegetables%20Online%20in%20">
-            <noscript>
-                &lt;div style="display:inline;"&gt;
-&lt;img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/976092700/?label=FMHHCIrC5WAQnPy30QM&amp;amp;guid=ON&amp;amp;script=0"/&gt;
-&lt;/div&gt;
-            </noscript>
         </div>
     </form>
     <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->

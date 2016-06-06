@@ -187,6 +187,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fruits.aspx" />
     <Content Include="indexchild.aspx" />
     <Content Include="media\captcha\base\9f33330d1f8b301b6118eec308d88e67.png" />
     <Content Include="media\catalog\product\cache\1\image\470x470\9df78eab33525d08d6e5fb8d27136e95\0\8\080307081409-large.jpg" />
@@ -1122,6 +1123,9 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom\listfruits.js" />
+    <Content Include="Scripts\custom\listmostsold.js" />
+    <Content Include="Scripts\custom\listveg.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.noty.js" />
@@ -1419,12 +1423,20 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ProductDetailsController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Fruits.aspx.cs">
+      <DependentUpon>Fruits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Fruits.aspx.designer.cs">
+      <DependentUpon>Fruits.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1460,6 +1472,11 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MainCategoryMasterSub.cs" />
+    <Compile Include="ViewModels\SubCategoryMasterSub.cs" />
+    <Compile Include="ViewModels\vmPrdListDependency.cs" />
+    <Compile Include="ViewModels\vmProductDetails.cs" />
+    <Compile Include="ViewModels\vmProductListMainSubCategories.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1470,7 +1487,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unique.EcommGroceryStore.Core\Unique.EcommGroceryStore.Core.csproj">
