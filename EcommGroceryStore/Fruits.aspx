@@ -177,8 +177,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                     
+                                    <div class="show_paginator1" id="show_paginator1"></div> 
                                 </div>
+                                <input type="hidden" name="fruitcount" id="fruitcount" value="" />
                             </div>
                             <script>
                                 $('div#select-new-limiter')
@@ -260,25 +261,49 @@
                                     getFruits(sort, pagesize, index, all);
                                     $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
                                         LoopAndGenerate(data);
-                                        return jQuery("#show_paginator").bootpag({
-                                            total: (data.length / pagesize) + 1//(data.totalResults / CONST_RESULTS_PER_PAGE) + 1
+                                        return jQuery("#show_paginator,.show_paginator1").bootpag({
+                                            total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)                                          
                                         });
                                     });
                                 }
                             </script>
                             <script>
                                 $(document).ready(function ($) {
+
+                                    $(document).ajaxStart(function () { 
+                                        $('body').css('opacity', '0.2');
+                                        $("#pageloaddiv").css('display', 'block');
+                                    });
+
+                                    $(document).ajaxStop(function () {
+                                        $('body').css('opacity', '1');
+                                        $("#pageloaddiv").css('display', 'none');
+                                    });
+
+
                                     console.log('dom loaded');
                                     $(".sort-by-wrap .overwrite-sortby").html($('#sort_by li a.selected').html());
                                     $('.category-products #limiter li:first-child a').removeClass('selected');
                                     $(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());
                                     getFruits('Price', -1, 1, true);
-                                    $.when(getFruits('Price', -1, 1, true)).done(function (data) {
+                                    $.when(getFruits('Price', -1, 1, true)).done(function (data) { 
+                                            $("#fruitcount").val(data.length); 
                                         LoopAndGenerate(data);
-                                        jQuery('#show_paginator').bootpag({
+                                        jQuery('#show_paginator,.show_paginator1').bootpag({
                                             total: 1,
                                             page: 1,
-                                            maxVisible: 5
+                                            maxVisible: 5,
+                                            leaps: true,
+                                            firstLastUse: true,
+                                            first: '←',
+                                            last: '→',
+                                            wrapClass: 'pagination',
+                                            activeClass: 'active',
+                                            disabledClass: 'disabled',
+                                            nextClass: 'next',
+                                            prevClass: 'prev',
+                                            lastClass: 'last',
+                                            firstClass: 'first'
                                         }).on('page', function (event, num) {
                                             //alert('paging function triggered value of num ' + num);
                                             callwebservice();
