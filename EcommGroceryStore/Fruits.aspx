@@ -179,6 +179,7 @@
                                     </div>
                                     <div class="show_paginator1" id="show_paginator1"></div> 
                                 </div>
+                                <input type="hidden" name="fruitcount" id="fruitcount" value="" />
                             </div>
                             <script>
                                 $('div#select-new-limiter')
@@ -261,7 +262,8 @@
                                     $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
                                         LoopAndGenerate(data);
                                         return jQuery("#show_paginator,.show_paginator1").bootpag({
-                                            total: (data.length / pagesize) + 1//(data.totalResults / CONST_RESULTS_PER_PAGE) + 1
+                                            total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)
+                                            ,page: 1,
                                         });
                                     });
                                 }
@@ -273,7 +275,8 @@
                                     $('.category-products #limiter li:first-child a').removeClass('selected');
                                     $(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());
                                     getFruits('Price', -1, 1, true);
-                                    $.when(getFruits('Price', -1, 1, true)).done(function (data) {
+                                    $.when(getFruits('Price', -1, 1, true)).done(function (data) { 
+                                            $("#fruitcount").val(data.length); 
                                         LoopAndGenerate(data);
                                         jQuery('#show_paginator,.show_paginator1').bootpag({
                                             total: 1,
