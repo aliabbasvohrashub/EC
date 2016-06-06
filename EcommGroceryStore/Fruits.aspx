@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="Fruits.aspx.cs" Inherits="EcommGroceryStore.Fruits" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <style type="text/css">
         .pagination {          
@@ -177,7 +177,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                     
+                                    <div class="show_paginator1" id="show_paginator1"></div> 
                                 </div>
                             </div>
                             <script>
@@ -260,7 +260,7 @@
                                     getFruits(sort, pagesize, index, all);
                                     $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
                                         LoopAndGenerate(data);
-                                        return jQuery("#show_paginator").bootpag({
+                                        return jQuery("#show_paginator,.show_paginator1").bootpag({
                                             total: (data.length / pagesize) + 1//(data.totalResults / CONST_RESULTS_PER_PAGE) + 1
                                         });
                                     });
@@ -275,10 +275,21 @@
                                     getFruits('Price', -1, 1, true);
                                     $.when(getFruits('Price', -1, 1, true)).done(function (data) {
                                         LoopAndGenerate(data);
-                                        jQuery('#show_paginator').bootpag({
+                                        jQuery('#show_paginator,.show_paginator1').bootpag({
                                             total: 1,
                                             page: 1,
-                                            maxVisible: 5
+                                            maxVisible: 5,
+                                            leaps: true,
+                                            firstLastUse: true,
+                                            first: '←',
+                                            last: '→',
+                                            wrapClass: 'pagination',
+                                            activeClass: 'active',
+                                            disabledClass: 'disabled',
+                                            nextClass: 'next',
+                                            prevClass: 'prev',
+                                            lastClass: 'last',
+                                            firstClass: 'first'
                                         }).on('page', function (event, num) {
                                             //alert('paging function triggered value of num ' + num);
                                             callwebservice();
