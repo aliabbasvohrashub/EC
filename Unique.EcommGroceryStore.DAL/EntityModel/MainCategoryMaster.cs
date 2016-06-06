@@ -17,15 +17,12 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MainCategoryMaster()
         {
-            this.ProductDetails = new HashSet<ProductDetails>();
             this.SubCategoryMaster = new HashSet<SubCategoryMaster>();
         }
     
         public int MainCategoryId { get; set; }
         public string Name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductDetails> ProductDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubCategoryMaster> SubCategoryMaster { get; set; }
     }

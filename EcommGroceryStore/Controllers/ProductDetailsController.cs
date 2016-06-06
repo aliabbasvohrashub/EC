@@ -14,7 +14,7 @@ using Unique.EcommGroceryStore.Core.Utility;
 
 namespace EcommGroceryStore.Controllers
 {
-    public class ProductDetailsController : ApiController 
+    public class ProductDetailsController : ApiController
     {
 
         private EcommGroceryDataContext dbContext = new EcommGroceryDataContext();
@@ -42,7 +42,7 @@ namespace EcommGroceryStore.Controllers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
+                /// MainCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
                 SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
                 Quantity = x.Quantity,
                 Description = x.Description,
@@ -56,19 +56,21 @@ namespace EcommGroceryStore.Controllers
 
         public IQueryable<vmProductDetails> getFruitsList(string sort, int pagesize, int index, bool all)
         {
-            IQueryable<vmProductDetails> query = dbContext.ProductDetails.Where(o => o.MainCategoryId == 2).Select(x => new vmProductDetails 
-            {
-                ProductId = x.ProductId,
-                ProductName = x.ProductName,
-                MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
-                SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
-                Quantity = x.Quantity,
-                Description = x.Description,
-                ImageURL = x.ImageURL,
-                PricePerUnit = x.PricePerUnit,
-                Unit = x.Unit,
-                Status = x.Status
-            });
+            IQueryable<vmProductDetails> query;
+            query = (from x in dbContext.ProductDetails
+                     where x.SubCategoryId == 2
+                     select new vmProductDetails
+                     {
+                         ProductId = x.ProductId,
+                         ProductName = x.ProductName,
+                         SubCategoryName = x.SubCategoryMaster.Name,
+                         Quantity = x.Quantity,
+                         Description = x.Description,
+                         ImageURL = x.ImageURL,
+                         PricePerUnit = x.PricePerUnit,
+                         Unit = x.Unit,
+                         Status = x.Status
+                     });
 
             query = query.OrderByField(sort, pagesize, index, all, true);
 
@@ -78,12 +80,11 @@ namespace EcommGroceryStore.Controllers
 
         public IQueryable<vmProductDetails> getFruitsListold(int startindex, int stopindex)
         {
-            IQueryable<vmProductDetails> query = dbContext.ProductDetails.Where(o => o.MainCategoryId == 2).Select(x => new vmProductDetails
+            IQueryable<vmProductDetails> query = dbContext.ProductDetails.Where(o => o.SubCategoryId == 2).Select(x => new vmProductDetails
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
-                SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
+                SubCategoryName = x.SubCategoryMaster.Name,
                 Quantity = x.Quantity,
                 Description = x.Description,
                 ImageURL = x.ImageURL,
@@ -91,24 +92,8 @@ namespace EcommGroceryStore.Controllers
                 Unit = x.Unit,
                 Status = x.Status
             });
-
-          //  query = query.OrderByField("ProductName", false, startindex, stopindex);
-
+            //query = query.OrderByField("ProductName", false, startindex, stopindex);
             return query;
-
-            //return dbContext.ProductDetails.Where(o=>o.MainCategoryId ==2).Select(x => new vmProductDetails
-            //{
-            //    ProductId = x.ProductId,
-            //    ProductName = x.ProductName,
-            //    MainCategoryName = dbContext.ProductDetails.Where(xx => xx.MainCategoryId == x.MainCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
-            //    SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
-            //    Quantity = x.Quantity,
-            //    Description = x.Description,
-            //    ImageURL = x.ImageURL,
-            //    PricePerUnit = x.PricePerUnit,
-            //    Unit = x.Unit,
-            //    Status = x.Status
-            //}).OrderBy(x=>x.ProductName).Skip(startindex).Take(stopindex);
         }
 
         public IQueryable<vmPrdListDependency> getProductDetailsList()
@@ -117,9 +102,8 @@ namespace EcommGroceryStore.Controllers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                MainCategoryId = x.MainCategoryId,
                 SubCategoryId = x.SubCategoryId,
-                MainCategoryNames = dbContext.MainCategoryMaster.Select(a => new MainCategoryMasterSub { MainCategoryId = a.MainCategoryId, MainCategoryName = a.Name }).ToList(),
+                //  MainCategoryNames = dbContext.MainCategoryMaster.Select(a => new MainCategoryMasterSub { SubCategoryId = a.SubCategoryId, MainCategoryName = a.Name }).ToList(),
                 SubCategoryNames = dbContext.SubCategoryMaster.Select(a => new SubCategoryMasterSub { SubCategoryId = a.SubCategoryId, SubCategoryName = a.Name }).ToList(),
                 Quantity = x.Quantity,
                 Description = x.Description,
@@ -149,7 +133,7 @@ namespace EcommGroceryStore.Controllers
         //    {
         //        ProductId = x.ProductId,
         //        ProductName = x.ProductName,
-        //        MainCategoryId = x.MainCategoryId,
+        //        SubCategoryId = x.SubCategoryId,
         //        SubCategoryId = x.SubCategoryId,
         //        Quantity = x.Quantity,
         //        Description = x.Description,

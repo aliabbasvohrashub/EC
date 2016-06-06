@@ -71,7 +71,6 @@
     </Key>
     <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="MainCategoryId" Type="int" Nullable="false" />
     <Property Name="SubCategoryId" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
@@ -200,18 +199,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProductDetails_MainCategoryMaster">
-    <End Role="MainCategoryMaster" Type="Self.MainCategoryMaster" Multiplicity="1" />
-    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MainCategoryMaster">
-        <PropertyRef Name="MainCategoryId" />
-      </Principal>
-      <Dependent Role="ProductDetails">
-        <PropertyRef Name="MainCategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ProductDetails_SubCategoryMaster">
     <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="1" />
     <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="*" />
@@ -248,6 +235,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Sp_GetUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="currentIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="orderByClause" Type="varchar" Mode="In" />
+    <Parameter Name="search" Type="varchar" Mode="In" />
+    <Parameter Name="totalRecords" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="Sp_UpdateDeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="UserStatus" Type="bit" Mode="In" />
+    <Parameter Name="Status" Type="int" Mode="InOut" />
+    <Parameter Name="Op" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="EcommGroceryOnlineModelStoreContainer">
     <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AreaMaster" EntityType="Self.AreaMaster" Schema="dbo" store:Type="Tables" />
@@ -287,10 +287,6 @@
     <AssociationSet Name="FK_FollowUpDetails_Users" Association="Self.FK_FollowUpDetails_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="FollowUpDetails" EntitySet="FollowUpDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ProductDetails_MainCategoryMaster" Association="Self.FK_ProductDetails_MainCategoryMaster">
-      <End Role="MainCategoryMaster" EntitySet="MainCategoryMaster" />
-      <End Role="ProductDetails" EntitySet="ProductDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductDetails_SubCategoryMaster" Association="Self.FK_ProductDetails_SubCategoryMaster">
       <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />

@@ -25,3 +25,4 @@ C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.xml
 C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\bin\Debug\EntityFramework.SqlServer.xml
 C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.dll
 C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.pdb
+C:\Working\Test\EC\Unique.EcommGroceryStore.DAL\obj\Debug\Unique.EcommGroceryStore.DAL.csprojResolveAssemblyReference.cache
