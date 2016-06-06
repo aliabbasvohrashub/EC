@@ -262,14 +262,25 @@
                                     $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
                                         LoopAndGenerate(data);
                                         return jQuery("#show_paginator,.show_paginator1").bootpag({
-                                            total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)
-                                            ,page: 1,
+                                            total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)                                          
                                         });
                                     });
                                 }
                             </script>
                             <script>
                                 $(document).ready(function ($) {
+
+                                    $(document).ajaxStart(function () { 
+                                        $('body').css('opacity', '0.2');
+                                        $("#pageloaddiv").css('display', 'block');
+                                    });
+
+                                    $(document).ajaxStop(function () {
+                                        $('body').css('opacity', '1');
+                                        $("#pageloaddiv").css('display', 'none');
+                                    });
+
+
                                     console.log('dom loaded');
                                     $(".sort-by-wrap .overwrite-sortby").html($('#sort_by li a.selected').html());
                                     $('.category-products #limiter li:first-child a').removeClass('selected');
