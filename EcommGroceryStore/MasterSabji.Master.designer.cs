@@ -13,7 +13,7 @@ namespace EcommGroceryStore {
     public partial class MasterSabji {
         
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// MainContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
