@@ -258,8 +258,14 @@
                                     else {
                                         all = false;
                                     }
-                                    getFruits(sort, pagesize, index, all);
-                                    $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
+                                    getFruits(sort, pagesize, 1, all);
+                                    $.when(getFruits(sort, pagesize, 1, all)).done(function (data) {
+                                        if (data.length == 0) {
+                                            console.log('sort ' + sort );
+                                            console.log('pagesize ' + pagesize );
+                                            console.log('index ' + index );
+                                            console.log('all ' + all);
+                                        }
                                         LoopAndGenerate(data);
                                         return jQuery("#show_paginator,.show_paginator1").bootpag({
                                             total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)                                          
@@ -287,7 +293,7 @@
                                     $(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());
                                     getFruits('Price', -1, 1, true);
                                     $.when(getFruits('Price', -1, 1, true)).done(function (data) { 
-                                            $("#fruitcount").val(data.length); 
+                                       $("#fruitcount").val(data.length); 
                                         LoopAndGenerate(data);
                                         jQuery('#show_paginator,.show_paginator1').bootpag({
                                             total: 1,
