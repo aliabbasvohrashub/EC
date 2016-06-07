@@ -1158,7 +1158,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="skin\frontend\base\default\images\AppleAnimated.gif" />
+    <Content Include="skin\frontend\base\default\images\BananaAnimated.gif" />
     <Content Include="skin\frontend\base\default\images\reload.png" />
+    <Content Include="skin\frontend\base\default\images\TomatoAnimated.gif" />
     <Content Include="skin\frontend\default\onlinesabjiwala.html" />
     <Content Include="skin\frontend\onlinesabjiwala\default\css\fonts\glyphicons-halflings-regular-2.html" />
     <Content Include="skin\frontend\onlinesabjiwala\default\css\fonts\glyphicons-halflings-regular-3.html" />
