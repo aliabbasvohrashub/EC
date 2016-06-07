@@ -16,7 +16,6 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int MainCategoryId { get; set; }
         public int SubCategoryId { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }
@@ -25,7 +24,6 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public string Unit { get; set; }
         public bool Status { get; set; }
     
-        public virtual MainCategoryMaster MainCategoryMaster { get; set; }
         public virtual SubCategoryMaster SubCategoryMaster { get; set; }
     }
 }

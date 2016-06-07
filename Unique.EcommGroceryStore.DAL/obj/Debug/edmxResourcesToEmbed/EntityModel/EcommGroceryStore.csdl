@@ -76,7 +76,6 @@
     </Key>
     <Property Name="MainCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_MainCategoryMaster" FromRole="MainCategoryMaster" ToRole="ProductDetails" />
     <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_SubCategoryMaster_MainCategoryMaster" FromRole="MainCategoryMaster" ToRole="SubCategoryMaster" />
   </EntityType>
   <EntityType Name="ProductDetails">
@@ -85,7 +84,6 @@
     </Key>
     <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="MainCategoryId" Type="Int32" Nullable="false" />
     <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -93,7 +91,6 @@
     <Property Name="PricePerUnit" Type="Int32" Nullable="false" />
     <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="MainCategoryMaster" Relationship="Self.FK_ProductDetails_MainCategoryMaster" FromRole="ProductDetails" ToRole="MainCategoryMaster" />
     <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_ProductDetails_SubCategoryMaster" FromRole="ProductDetails" ToRole="SubCategoryMaster" />
   </EntityType>
   <EntityType Name="Roles">
@@ -133,10 +130,10 @@
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
     <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_Users" FromRole="Users" ToRole="AddressDetails" />
     <NavigationProperty Name="FollowUpDetails" Relationship="Self.FK_FollowUpDetails_Users" FromRole="Users" ToRole="FollowUpDetails" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_AddressDetails_AreaMaster">
     <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />
@@ -222,18 +219,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ProductDetails_MainCategoryMaster">
-    <End Role="MainCategoryMaster" Type="Self.MainCategoryMaster" Multiplicity="1" />
-    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MainCategoryMaster">
-        <PropertyRef Name="MainCategoryId" />
-      </Principal>
-      <Dependent Role="ProductDetails">
-        <PropertyRef Name="MainCategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SubCategoryMaster_MainCategoryMaster">
     <End Role="MainCategoryMaster" Type="Self.MainCategoryMaster" Multiplicity="1" />
     <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="*" />
@@ -310,10 +295,6 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="FollowUpDetails" EntitySet="FollowUpDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductDetails_MainCategoryMaster" Association="Self.FK_ProductDetails_MainCategoryMaster">
-      <End Role="MainCategoryMaster" EntitySet="MainCategoryMaster" />
-      <End Role="ProductDetails" EntitySet="ProductDetails" />
-    </AssociationSet>
     <AssociationSet Name="FK_SubCategoryMaster_MainCategoryMaster" Association="Self.FK_SubCategoryMaster_MainCategoryMaster">
       <End Role="MainCategoryMaster" EntitySet="MainCategoryMaster" />
       <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
@@ -326,5 +307,33 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
+      <Parameter Name="currentIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="orderByClause" Mode="In" Type="String" />
+      <Parameter Name="search" Mode="In" Type="String" />
+      <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_UpdateDeleteUser">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="UserStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="Status" Mode="InOut" Type="Int32" />
+      <Parameter Name="Op" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="Sp_GetUserList_Result">
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="true" />
+    <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EmailId" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="MobileNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="AlternateNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="RegistrationDate" Nullable="true" MaxLength="30" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="String" Name="RoleName" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="RowNumber" Nullable="true" />
+  </ComplexType>
 </Schema>

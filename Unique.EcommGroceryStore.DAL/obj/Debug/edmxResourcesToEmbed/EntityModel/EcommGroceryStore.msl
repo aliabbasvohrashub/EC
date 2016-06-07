@@ -78,7 +78,6 @@
         <MappingFragment StoreEntitySet="ProductDetails">
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
           <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -109,7 +108,6 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Users">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -125,8 +123,29 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
           <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Sp_GetUserList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetUserList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetUserList_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="AlternateNumber" ColumnName="AlternateNumber" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteUser" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteUser" />
   </EntityContainerMapping>
 </Mapping>

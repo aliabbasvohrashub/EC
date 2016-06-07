@@ -172,6 +172,8 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyEmailAddress.aspx" />
+    <Content Include="Apps\Admin\ManageMasterCategory.aspx" />
+    <Content Include="Apps\Admin\ManageSubCategory.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -1399,6 +1401,20 @@
     </Compile>
     <Compile Include="Apps\Admin\Handlers\GetUserListHandler.ashx.cs">
       <DependentUpon>GetUserListHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageMasterCategory.aspx.cs">
+      <DependentUpon>ManageMasterCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageMasterCategory.aspx.designer.cs">
+      <DependentUpon>ManageMasterCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageSubCategory.aspx.cs">
+      <DependentUpon>ManageSubCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageSubCategory.aspx.designer.cs">
+      <DependentUpon>ManageSubCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\Admin\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>

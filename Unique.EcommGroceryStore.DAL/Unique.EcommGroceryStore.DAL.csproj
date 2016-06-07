@@ -92,6 +92,9 @@
     <Compile Include="EntityModel\Roles.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\Sp_GetUserList_Result.cs">
+      <DependentUpon>EcommGroceryStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\SubCategoryMaster.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>

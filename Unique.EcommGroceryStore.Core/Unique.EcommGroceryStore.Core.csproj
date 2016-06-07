@@ -61,6 +61,7 @@
     <Compile Include="Common\EnumCommon.cs" />
     <Compile Include="Common\SessionManager.cs" />
     <Compile Include="Interfaces\ICustomInterface.cs" />
+    <Compile Include="Model\SubCategoryMasterModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Notification\EmailHelper.cs" />
     <Compile Include="Notification\NotificationExtensions.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Repository\AreaRepository.cs" />
     <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
+    <Compile Include="Repository\MasterCategoryRepository.cs" />
+    <Compile Include="Repository\SubCategoryMasterRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Utility\DataAccessLayer.cs" />
     <Compile Include="Utility\extensionmethods.cs" />

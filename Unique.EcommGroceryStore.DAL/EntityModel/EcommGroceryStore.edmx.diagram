@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a38e4b8488a544ffbd7c3888f2d12331" Name="Diagram1">
+      <Diagram DiagramId="635d1cf4d9c44bf095b7eb780d1cc9a9" Name="Diagram1">
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.AddressDetails" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.AreaMaster" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.CityMaster" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.CountryMaster" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.CouponDetails" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommGroceryOnlineModel.FollowUpDetails" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommGroceryOnlineModel.MainCategoryMaster" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommGroceryOnlineModel.ProductDetails" Width="1.5" PointX="14.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.FollowUpDetails" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.MainCategoryMaster" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.ProductDetails" Width="1.5" PointX="12.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommGroceryOnlineModel.Roles" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommGroceryOnlineModel.SubCategoryMaster" Width="1.5" PointX="12" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommGroceryOnlineModel.Users" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.SubCategoryMaster" Width="1.5" PointX="10" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.Users" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_AddressDetails_AreaMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_AddressDetails_CityMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_AddressDetails_CountryMaster" ManuallyRouted="false" />
@@ -23,7 +23,6 @@
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_AreaMaster_CityMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_CityMaster_CountryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_FollowUpDetails_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="EcommGroceryOnlineModel.FK_ProductDetails_MainCategoryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_SubCategoryMaster_MainCategoryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_ProductDetails_SubCategoryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_Users_Roles" ManuallyRouted="false" />

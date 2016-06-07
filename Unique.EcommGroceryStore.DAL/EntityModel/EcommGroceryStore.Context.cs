@@ -12,6 +12,8 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EcommGroceryDataContext : DbContext
     {
@@ -36,5 +38,43 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+    
+        public virtual ObjectResult<Sp_GetUserList_Result> Sp_GetUserList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)
+        {
+            var currentIndexParameter = currentIndex.HasValue ?
+                new ObjectParameter("currentIndex", currentIndex) :
+                new ObjectParameter("currentIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var orderByClauseParameter = orderByClause != null ?
+                new ObjectParameter("orderByClause", orderByClause) :
+                new ObjectParameter("orderByClause", typeof(string));
+    
+            var searchParameter = search != null ?
+                new ObjectParameter("search", search) :
+                new ObjectParameter("search", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetUserList_Result>("Sp_GetUserList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, totalRecords);
+        }
+    
+        public virtual int Sp_UpdateDeleteUser(Nullable<int> userId, Nullable<bool> userStatus, ObjectParameter status, Nullable<int> op)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var userStatusParameter = userStatus.HasValue ?
+                new ObjectParameter("UserStatus", userStatus) :
+                new ObjectParameter("UserStatus", typeof(bool));
+    
+            var opParameter = op.HasValue ?
+                new ObjectParameter("Op", op) :
+                new ObjectParameter("Op", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_UpdateDeleteUser", userIdParameter, userStatusParameter, status, opParameter);
+        }
     }
 }
