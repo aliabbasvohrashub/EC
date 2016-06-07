@@ -102,4 +102,4 @@ function getFruits(sort, pagesize, index, all) {
     return jQuery.getJSON("api/ProductDetails/getFruitsList?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "",
        function (data) {
        });
-}
+} 

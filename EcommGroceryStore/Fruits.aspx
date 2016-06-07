@@ -258,7 +258,7 @@
                                     else {
                                         all = false;
                                     }
-                                    getFruits(sort, pagesize, 1, all);
+                                    getFruits(sort, pagesize, 1, all); 
                                     $.when(getFruits(sort, pagesize, 1, all)).done(function (data) {
                                         if (data.length == 0) {
                                             console.log('sort ' + sort );
