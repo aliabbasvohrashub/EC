@@ -99,7 +99,7 @@ function getFruits(sort, pagesize, index, all) {
         startindex = (index - 1) * 8;
         endindex = (index) * 8;;
     }
-    return jQuery.getJSON("api/ProductDetails/getFruitsList?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "",
+    return jQuery.getJSON("api/ProductDetails/getFruitsListWithSummary?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "",
        function (data) {
        });
 } 
