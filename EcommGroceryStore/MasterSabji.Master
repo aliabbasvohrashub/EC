@@ -29,7 +29,9 @@
     <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
     <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
-
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <link href="media/css/style.css" rel="stylesheet" />
     <style type="text/css">
         body {
             font-size: 12px;

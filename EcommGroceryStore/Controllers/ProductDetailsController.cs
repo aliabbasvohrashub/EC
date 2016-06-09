@@ -53,6 +53,37 @@ namespace EcommGroceryStore.Controllers
             });
         }
 
+        public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all)
+        {
+             vmProductDetailsWithSummary mainquery = new vmProductDetailsWithSummary(); 
+             vmProductDetailsSummary  vmsummary = new vmProductDetailsSummary();
+             IQueryable<vmProductDetails> query;
+             query = (from x in dbContext.ProductDetails
+                      where x.SubCategoryId == 2
+                      select new vmProductDetails
+                      {
+                          ProductId = x.ProductId,
+                          ProductName = x.ProductName,
+                          SubCategoryName = x.SubCategoryMaster.Name,
+                          Quantity = x.Quantity,
+                          Description = x.Description,
+                          ImageURL = x.ImageURL,
+                          PricePerUnit = x.PricePerUnit,
+                          Unit = x.Unit,
+                          Status = x.Status
+                      });
+            query = query.OrderByField(sort, pagesize, index, all, true);
+
+
+            vmsummary.TotalRecords = query.Count();
+            vmsummary.MaximumPrice = query.Select(x => x.PricePerUnit).Max();
+            vmsummary.MinimumPrice = query.Select(x => x.PricePerUnit).Min();
+
+            mainquery.vmProductDetailsSummary = vmsummary;
+            mainquery.vmProductDetails = query;
+            return mainquery;
+        }
+
 
         public IQueryable<vmProductDetails> getFruitsList(string sort, int pagesize, int index, bool all)
         {
