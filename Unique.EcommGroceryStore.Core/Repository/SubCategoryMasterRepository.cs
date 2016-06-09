@@ -48,7 +48,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
 
         public IEnumerable<SubCategoryMaster> GetList(int id)
         {
-            throw new NotImplementedException();
+            return dataContext.SubCategoryMaster.Where(r => r.MainCategoryId == id);
         }
 
         public IEnumerable<SubCategoryMasterModel> GetList()

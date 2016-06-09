@@ -151,5 +151,21 @@ namespace Unique.EcommGroceryStore.Core.Utility
             return csvDataTable;
 
         }
+
+        public static DataTable ValidateDataOfProduct(DataSet ds, int subCategoryId, out string errMsg)
+        {
+            errMsg = string.Empty;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ProductName");
+            dt.Columns.Add("SubCategoryId");
+            dt.Columns.Add("Quantity");
+            dt.Columns.Add("Description");
+            dt.Columns.Add("ImageURL");
+            dt.Columns.Add("PricePerUnit");
+            dt.Columns.Add("Unit");
+            dt.Columns.Add("Status");
+
+            return dt;
+        }
     }
 }
