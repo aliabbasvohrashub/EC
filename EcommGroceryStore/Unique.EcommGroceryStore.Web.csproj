@@ -1097,6 +1097,7 @@
     <Content Include="media\catalog\product\resized\200x200\4ae8e06d6f3ccedac702cb6850b24e51\zucchini.png" />
     <Content Include="media\css\40fa22cfb419299fbd8162816f8de9a4.css" />
     <Content Include="media\css\8b77512cfb98d9d7b6aeac8f174d9131.css" />
+    <Content Include="media\css\style.css" />
     <Content Include="media\favicon\default\favicon.ico" />
     <Content Include="media\js\19092366e6b1c4473bcf8f777e85c407.js" />
     <Content Include="media\js\3da1e7ad4d4e3dc631ed7ca8c1000c85.js" />
@@ -1495,6 +1496,8 @@
     <Compile Include="ViewModels\SubCategoryMasterSub.cs" />
     <Compile Include="ViewModels\vmPrdListDependency.cs" />
     <Compile Include="ViewModels\vmProductDetails.cs" />
+    <Compile Include="ViewModels\vmProductDetailsSummary.cs" />
+    <Compile Include="ViewModels\vmProductDetailsWithSummary.cs" />
     <Compile Include="ViewModels\vmProductListMainSubCategories.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
