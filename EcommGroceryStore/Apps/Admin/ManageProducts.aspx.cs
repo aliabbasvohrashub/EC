@@ -20,6 +20,8 @@ namespace EcommGroceryStore.Apps.Admin
             if (!IsPostBack)
             {
                 BindMainCategories();
+                lblMsg.Visible = false;
+                lblMsg.Text = "";
             }
         }
 
@@ -99,26 +101,70 @@ namespace EcommGroceryStore.Apps.Admin
                 var bulkUpload = new BulkUploadRepository(productList);
                 bulkUpload.UploadProduct();
 
+                lblMsg.Text = "Product details has been uploaded.";
+                lblMsg.ForeColor = System.Drawing.Color.Green;
+                lblMsg.Visible = true;
+                ClearFields();
+
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message.ToString());
+                lblMsg.Text = ex.Message.ToString();
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Visible = true;
             }
         }
 
+        private void ClearFields()
+        {
+            ddlMain.SelectedValue = "0";
+            ddlSub.SelectedValue = "0";
+            rbtTypeList.SelectedValue = "0";
+        }
+
         private void UploadFromCSV()
-        { }
+        {
+            try
+            {
+                int subId = Convert.ToInt32(ddlSub.SelectedValue.Trim());
+                List<ProductDetails> productList = GetContactsDetailsFromFlatFile(fupFileProduct, subId);
+                var bulkUpload = new BulkUploadRepository(productList);
+                bulkUpload.UploadProduct();
+
+                lblMsg.Text = "Product details has been uploaded.";
+                lblMsg.ForeColor = System.Drawing.Color.Green;
+                lblMsg.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message.ToString();
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Visible = true;
+            }
+        }
 
         private void UploadFromTEXT()
-        { }
+        {
+
+
+        }
+
+        public List<ProductDetails> GetContactsDetailsFromFlatFile(FileUpload fup, int subCategoryId)
+        {
+            List<ProductDetails> products;
+            string fileName = fup.PostedFile.FileName;
+            DataTable dtExcelData = Utilities.FlatFileToDataTable(fup.FileContent, false);
+            Utilities.GetContactListFromDataTable(dtExcelData, subCategoryId, out products);
+            return products;
+        }
 
         public List<ProductDetails> GetContactsDetailsFromExcelFile(FileUpload fup, int subCategoryId)
         {
-            List<ProductDetails> contacts;
+            List<ProductDetails> products;
             string fileName = fup.PostedFile.FileName;
             DataTable dtExcelData = Utilities.ExcelToDataTable(fup.FileContent, fileName, true);
-            Utilities.GetContactListFromDataTable(dtExcelData, subCategoryId, out contacts);
-            return contacts;
+            Utilities.GetContactListFromDataTable(dtExcelData, subCategoryId, out products);
+            return products;
         }
     }
 }

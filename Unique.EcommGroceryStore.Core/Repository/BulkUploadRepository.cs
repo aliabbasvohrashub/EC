@@ -34,6 +34,14 @@ namespace Unique.EcommGroceryStore.Core.Repository
                     bulkCopy.DestinationTableName = "dbo.ProductDetails";
                     try
                     {
+                        bulkCopy.ColumnMappings.Add("ProductName", "ProductName");
+                        bulkCopy.ColumnMappings.Add("SubCategoryId", "SubCategoryId");
+                        bulkCopy.ColumnMappings.Add("Quantity", "Quantity");
+                        bulkCopy.ColumnMappings.Add("Description", "Description");
+                        bulkCopy.ColumnMappings.Add("ImageURL", "ImageURL");
+                        bulkCopy.ColumnMappings.Add("PricePerUnit", "PricePerUnit");
+                        bulkCopy.ColumnMappings.Add("Unit", "Unit");
+                        bulkCopy.ColumnMappings.Add("Status", "Status");
                         bulkCopy.WriteToServer(_list.AsDataTable());
                     }
                     catch (Exception)
