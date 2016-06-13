@@ -1503,6 +1503,8 @@
     <Compile Include="ViewModels\SubCategoryMasterSub.cs" />
     <Compile Include="ViewModels\vmPrdListDependency.cs" />
     <Compile Include="ViewModels\vmProductDetails.cs" />
+    <Compile Include="ViewModels\vmProductDetailsSummary.cs" />
+    <Compile Include="ViewModels\vmProductDetailsWithSummary.cs" />
     <Compile Include="ViewModels\vmProductListMainSubCategories.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

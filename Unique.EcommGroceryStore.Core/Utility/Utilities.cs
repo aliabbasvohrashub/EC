@@ -200,7 +200,7 @@ namespace Unique.EcommGroceryStore.Core.Utility
             return dtExcel;
         }
         
-        internal static void GetContactListFromDataTable(DataTable dtData, int subCategoryId, out List<ProductDetails> product)
+        public static void GetContactListFromDataTable(DataTable dtData, int subCategoryId, out List<ProductDetails> product)
         {
             product = new List<ProductDetails>();
             if (dtData.Rows.Count > 0)
@@ -253,5 +253,6 @@ namespace Unique.EcommGroceryStore.Core.Utility
                 }
             }
         }
+
     }
 }
