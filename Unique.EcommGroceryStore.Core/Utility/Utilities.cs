@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Excel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Unique.EcommGroceryStore.DAL.EntityModel;
 
 namespace Unique.EcommGroceryStore.Core.Utility
 {
@@ -166,6 +168,90 @@ namespace Unique.EcommGroceryStore.Core.Utility
             dt.Columns.Add("Status");
 
             return dt;
+        }
+
+        public static DataTable ExcelToDataTable(Stream stream, string fileName, bool firstRowAsColumnNames)
+        {
+            DataTable dtExcel = new DataTable();
+            int pos = fileName.ToLower().LastIndexOf(".");
+            string strconn = string.Empty;
+            if (fileName.Substring(pos + 1) == "xls" || fileName.Substring(pos + 1) == "xlsx")
+            {
+                IExcelDataReader excelReader = null;
+                if (fileName.Substring(pos + 1) == "xls")
+                {
+                    //1. Reading from a binary Excel file ('97-2003 format; *.xls)
+                    excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+                }
+                else if (fileName.Substring(pos + 1) == "xlsx")
+                {
+                    //2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
+                    excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                }
+                excelReader.IsFirstRowAsColumnNames = firstRowAsColumnNames;
+                //3. DataSet - The result of each spreadsheet will be created in the result.Tables
+                DataSet result = excelReader.AsDataSet();
+                //4. DataSet - Create column names from first row
+                excelReader.Dispose();
+                dtExcel = result.Tables[0];
+                //Data Reader methods
+            }
+            return dtExcel;
+        }
+        
+        internal static void GetContactListFromDataTable(DataTable dtData, int subCategoryId, out List<ProductDetails> product)
+        {
+            product = new List<ProductDetails>();
+            if (dtData.Rows.Count > 0)
+            {
+                int columnCount = dtData.Columns.Count;
+                foreach (DataRow dr in dtData.Rows)
+                {
+                    string productName = string.Empty;
+                    int quantity = 0;
+                    string description = string.Empty;
+                    string imageURL = string.Empty;
+                    int pricePerUnit = 0;
+                    string unit = string.Empty;
+
+                    if (columnCount >= 6)
+                    {
+                        productName = Convert.ToString(dr[0]);
+                        quantity = Convert.ToInt32(dr[1]);
+                        description = Convert.ToString(dr[2]);
+                        imageURL = Convert.ToString(dr[3]);
+                        pricePerUnit = Convert.ToInt32(dr[4]);
+                        unit = Convert.ToString(dr[5]);
+
+                        if (productName.Length > 400 || description.Length > 250 || imageURL.Length > 4000 || unit.Length > 50)
+                        {
+                            continue;
+                        }
+
+                        if (string.IsNullOrEmpty(productName) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(imageURL) ||
+                            string.IsNullOrEmpty(unit) || quantity == 0 || pricePerUnit == 0)
+                        {
+                            continue;
+                        }
+
+                        product.Add
+                        (
+                            new ProductDetails
+                            {
+                                ProductName = productName,
+                                SubCategoryId = subCategoryId,
+                                Quantity = quantity,
+                                Description = description,
+                                ImageURL = imageURL,
+                                PricePerUnit = pricePerUnit,
+                                Unit = unit,
+                                Status = true
+                            }
+                        );
+                    }
+                }
+            }
         }
     }
 }
