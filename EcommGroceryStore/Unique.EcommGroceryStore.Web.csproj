@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -173,6 +181,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyEmailAddress.aspx" />
     <Content Include="Apps\Admin\ManageMasterCategory.aspx" />
+    <Content Include="Apps\Admin\ManageProducts.aspx" />
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
     <Content Include="Contact.aspx" />
@@ -1410,6 +1419,13 @@
     <Compile Include="Apps\Admin\ManageMasterCategory.aspx.designer.cs">
       <DependentUpon>ManageMasterCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Apps\Admin\ManageProducts.aspx.cs">
+      <DependentUpon>ManageProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageProducts.aspx.designer.cs">
+      <DependentUpon>ManageProducts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Apps\Admin\ManageSubCategory.aspx.cs">
       <DependentUpon>ManageSubCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1509,6 +1525,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProductData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unique.EcommGroceryStore.Core\Unique.EcommGroceryStore.Core.csproj">
