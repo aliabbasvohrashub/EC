@@ -41,11 +41,14 @@ C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryS
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.Core.pdb
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.dll
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Excel.dll
+C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\ICSharpCode.SharpZipLib.dll
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Newtonsoft.Json.dll
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.dll
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Unique.EcommGroceryStore.DAL.pdb
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.xml
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Excel.pdb
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\bin\Debug\Newtonsoft.Json.xml
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.csprojResolveAssemblyReference.cache
 C:\LocalBranchJune6\Unique.EcommGroceryStore.Core\obj\Debug\Unique.EcommGroceryStore.Core.dll
