@@ -74,7 +74,7 @@ namespace EcommGroceryStore.Controllers
                       });
             query = query.OrderByField(sort, pagesize, index, all, true);
 
-
+             
             vmsummary.TotalRecords = query.Count();
             if (query.Count() == 0)
             {

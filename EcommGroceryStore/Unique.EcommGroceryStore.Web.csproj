@@ -173,6 +173,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyEmailAddress.aspx" />
     <Content Include="Apps\Admin\ManageMasterCategory.aspx" />
+    <Content Include="Apps\Admin\ManageProductList.aspx" />
     <Content Include="Apps\Admin\ManageProducts.aspx" />
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
@@ -1124,6 +1125,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Apps\Admin\Handlers\GetProductListHandler.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1401,6 +1403,9 @@
     <Compile Include="Apps\Admin\AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="Apps\Admin\Handlers\GetProductListHandler.ashx.cs">
+      <DependentUpon>GetProductListHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Apps\Admin\Handlers\GetUserListHandler.ashx.cs">
       <DependentUpon>GetUserListHandler.ashx</DependentUpon>
     </Compile>
@@ -1410,6 +1415,13 @@
     </Compile>
     <Compile Include="Apps\Admin\ManageMasterCategory.aspx.designer.cs">
       <DependentUpon>ManageMasterCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageProductList.aspx.cs">
+      <DependentUpon>ManageProductList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageProductList.aspx.designer.cs">
+      <DependentUpon>ManageProductList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\Admin\ManageProducts.aspx.cs">
       <DependentUpon>ManageProducts.aspx</DependentUpon>

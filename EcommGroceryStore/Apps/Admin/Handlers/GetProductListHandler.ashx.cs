@@ -9,15 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.SessionState;
-using Unique.EcommGroceryStore.Core.Repository;
 using Unique.EcommGroceryStore.Core.Utility;
 
-namespace EcommGroceryStore.Admin.Handlers
+namespace EcommGroceryStore.Apps.Admin.Handlers
 {
     /// <summary>
-    /// Summary description for GetUserListHandler
+    /// Summary description for GetProductListHandler
     /// </summary>
-    public class GetUserListHandler : IHttpHandler, IRequiresSessionState
+    public class GetProductListHandler : IHttpHandler, IRequiresSessionState
     {
         private JsonSerializerSettings jsonSetting;
         public void ProcessRequest(HttpContext context)
@@ -37,21 +36,21 @@ namespace EcommGroceryStore.Admin.Handlers
 
             #region Refined JSON Response Area
             #region Customers
-            if (context.Request.Params["___UserList___"] != null)
+            if (context.Request.Params["___ProductList___"] != null)
             {
-                switch (context.Request.Params["___UserList___"].ToLower())
+                switch (context.Request.Params["___ProductList___"].ToLower())
                 {
                     case "get":
-                        GetUserList(context);
+                        GetProductList(context);
                         break;
                     case "inactive":
-                        ActiveInActiveUser(false, context);
+                        ActiveInActiveProduct(false, context);
                         break;
                     case "active":
-                        ActiveInActiveUser(true, context);
+                        ActiveInActiveProduct(true, context);
                         break;
                     case "delete":
-                        DeleteUser(context);
+                        DeleteProduct(context);
                         break;
                 }
 
@@ -75,9 +74,73 @@ namespace EcommGroceryStore.Admin.Handlers
             #endregion
         }
 
-        private void DeleteUser(HttpContext context)
+        private void ActiveInActiveProduct(bool userStatus, HttpContext context)
         {
-            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, context.Request.Params["Id"].ToString());
+            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("ProductId", DbType.Int32, context.Request.Params["Id"].ToString());
+            SqlParameter p2 = DataAccessLayer.CreateSqlParameter("ProductStatus", DbType.Boolean, userStatus);
+            SqlParameter p3 = DataAccessLayer.CreateSqlParameter("Status", DbType.Int16, 0, 0, ParameterDirection.Output);
+
+            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3 };
+            using (SqlConnection connection = DataAccessLayer.Connection)
+            {
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
+                {
+                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteProduct", transaction, ps);
+                    int status;
+                    if (p3.Value != null && int.TryParse(p3.Value.ToString(), out status))
+                    {
+                        if (status == 1)
+                        {
+                            transaction.Commit();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "Product status updated successfully!",
+                                type = "success",
+                                layout = "topCenter",
+                                timeout = true
+                            }, jsonSetting));
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            context.Response.Write(JsonConvert.SerializeObject(new
+                            {
+                                text = "Product could not updated!",
+                                type = "warning",
+                                layout = "topCenter"
+                            }, jsonSetting));
+                        }
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        context.Response.Write(JsonConvert.SerializeObject(new
+                        {
+                            text = "Some error occurred while updating Product status!",
+                            type = "error",
+                            layout = "topCenter"
+                        }, jsonSetting));
+                    }
+                }
+                catch (Exception exp)
+                {
+                    transaction.Rollback();
+                    context.Response.Write(JsonConvert.SerializeObject(new
+                    {
+                        text = exp.Message,
+                        type = "error",
+                        layout = "topCenter"
+                    }, jsonSetting));
+                }
+            }
+        }
+
+        private void DeleteProduct(HttpContext context)
+        {
+            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("ProductId", DbType.Int32, context.Request.Params["Id"].ToString());
             SqlParameter p2 = DataAccessLayer.CreateSqlParameter("Status", DbType.Int16, 0, 0, ParameterDirection.Output);
             SqlParameter p3 = DataAccessLayer.CreateSqlParameter("Op", DbType.Int32, 1);
 
@@ -89,7 +152,7 @@ namespace EcommGroceryStore.Admin.Handlers
                 SqlTransaction transaction = connection.BeginTransaction();
                 try
                 {
-                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteUser", transaction, ps);
+                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteProduct", transaction, ps);
                     int status;
                     if (p2.Value != null && int.TryParse(p2.Value.ToString(), out status))
                     {
@@ -98,7 +161,7 @@ namespace EcommGroceryStore.Admin.Handlers
                             transaction.Commit();
                             context.Response.Write(JsonConvert.SerializeObject(new
                             {
-                                text = "User deleted successfully!",
+                                text = "Product deleted successfully!",
                                 type = "success",
                                 layout = "topCenter",
                                 timeout = true
@@ -109,7 +172,7 @@ namespace EcommGroceryStore.Admin.Handlers
                             transaction.Rollback();
                             context.Response.Write(JsonConvert.SerializeObject(new
                             {
-                                text = "User could not deleted!",
+                                text = "Product could not deleted!",
                                 type = "warning",
                                 layout = "topCenter"
                             }, jsonSetting));
@@ -120,7 +183,7 @@ namespace EcommGroceryStore.Admin.Handlers
                         transaction.Rollback();
                         context.Response.Write(JsonConvert.SerializeObject(new
                         {
-                            text = "Some error occurred while deleting!",
+                            text = "Some error occurred while deleting product!",
                             type = "error",
                             layout = "topCenter"
                         }, jsonSetting));
@@ -139,71 +202,7 @@ namespace EcommGroceryStore.Admin.Handlers
             }
         }
 
-        private void ActiveInActiveUser(bool userStatus, HttpContext context)
-        {
-            SqlParameter p1 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, context.Request.Params["Id"].ToString());
-            SqlParameter p2 = DataAccessLayer.CreateSqlParameter("UserStatus", DbType.Boolean, userStatus);
-            SqlParameter p3 = DataAccessLayer.CreateSqlParameter("Status", DbType.Int16, 0, 0, ParameterDirection.Output);
-
-            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3 };
-            using (SqlConnection connection = DataAccessLayer.Connection)
-            {
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
-                SqlTransaction transaction = connection.BeginTransaction();
-                try
-                {
-                    DataAccessLayer.ExecuteCommandWithTransaction("Sp_UpdateDeleteUser", transaction, ps);
-                    int status;
-                    if (p3.Value != null && int.TryParse(p3.Value.ToString(), out status))
-                    {
-                        if (status == 1)
-                        {
-                            transaction.Commit();
-                            context.Response.Write(JsonConvert.SerializeObject(new
-                            {
-                                text = "User status updated successfully!",
-                                type = "success",
-                                layout = "topCenter",
-                                timeout = true
-                            }, jsonSetting));
-                        }
-                        else
-                        {
-                            transaction.Rollback();
-                            context.Response.Write(JsonConvert.SerializeObject(new
-                            {
-                                text = "User could not updated!",
-                                type = "warning",
-                                layout = "topCenter"
-                            }, jsonSetting));
-                        }
-                    }
-                    else
-                    {
-                        transaction.Rollback();
-                        context.Response.Write(JsonConvert.SerializeObject(new
-                        {
-                            text = "Some error occurred while updating!",
-                            type = "error",
-                            layout = "topCenter"
-                        }, jsonSetting));
-                    }
-                }
-                catch (Exception exp)
-                {
-                    transaction.Rollback();
-                    context.Response.Write(JsonConvert.SerializeObject(new
-                    {
-                        text = exp.Message,
-                        type = "error",
-                        layout = "topCenter"
-                    }, jsonSetting));
-                }
-            }
-        }
-
-        private void GetUserList(HttpContext context)
+        private void GetProductList(HttpContext context)
         {
             NameValueCollection parameters = context.Request.Params;
             int startIndex;
@@ -259,11 +258,12 @@ namespace EcommGroceryStore.Admin.Handlers
             SqlParameter p3 = DataAccessLayer.CreateSqlParameter("totalRecords", DbType.Int32, 0, 0, ParameterDirection.Output);
             SqlParameter p4 = DataAccessLayer.CreateSqlParameter("orderByClause", DbType.String, totalSortingCols > 0 ? orderByQueryClause.ToString() : null);
             SqlParameter p5 = DataAccessLayer.CreateSqlParameter("search", DbType.String, sSearch.Length == 0 ? null : sSearch);
-            //SqlParameter p6 = DataAccessLayer.CreateSqlParameter("UserId", DbType.Int32, UserRepository.GetUserId);
+            SqlParameter p6 = DataAccessLayer.CreateSqlParameter("MainCategoryId", DbType.Int32, 0);
+            SqlParameter p7 = DataAccessLayer.CreateSqlParameter("SubCategoryId", DbType.Int32, 0);
 
-            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3, p4, p5 };
+            SqlParameter[] ps = new SqlParameter[] { p1, p2, p3, p4, p5, p6, p7 };
 
-            DataTable dt = DataAccessLayer.LoadTabularDataInDataTable("Sp_GetUserList", CommandType.StoredProcedure, ps);
+            DataTable dt = DataAccessLayer.LoadTabularDataInDataTable("Sp_GetProductDetailsList", CommandType.StoredProcedure, ps);
 
             if (dt.Rows.Count > 0)
             {

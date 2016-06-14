@@ -103,4 +103,4 @@ function getFruits(sort, pagesize, index, all, min, max, querystring) {
     return jQuery.getJSON("/api/ProductDetails/getFruitsListWithSummary?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "&min=" + min + "&max=" + max  + "&querystring=" + querystring + "",
        function (data) {
        });
-} 
+}  

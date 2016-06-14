@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Apps/Admin/AdminMaster.Master" AutoEventWireup="true" CodeBehind="ManageUser.aspx.cs" Inherits="EcommGroceryStore.Apps.Admin.ManageUser" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
     <div class="innerContent">
         <table id="tblSenderId" class="table table-bordered table-hover" style="width: 100%;">
             <thead>

@@ -33,7 +33,7 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
     <link href="/../media/css/style.css" rel="stylesheet" />
     <style type="text/css">
-        body {
+        body { 
             font-size: 12px;
         }
 
@@ -84,7 +84,8 @@
             width: 100%;
             height: 100%;
             z-index: 1000;
-            background: url('skin/frontend/base/default/images/AppleAnimated.gif') no-repeat center center;
+            background: url('/../skin/frontend/base/default/images/AppleAnimated.gif') no-repeat center center;
+            display:none;
         }
 </style>
 

@@ -199,7 +199,7 @@ namespace Unique.EcommGroceryStore.Core.Utility
             }
             return dtExcel;
         }
-
+        
         public static void GetContactListFromDataTable(DataTable dtData, int subCategoryId, out List<ProductDetails> product)
         {
             product = new List<ProductDetails>();
