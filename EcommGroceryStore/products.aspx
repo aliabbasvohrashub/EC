@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="Fruits.aspx.cs" Inherits="EcommGroceryStore.Fruits" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="products.aspx.cs" Inherits="EcommGroceryStore.products" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
@@ -8,8 +8,43 @@
             margin: 0 0;
             display: inline;
         }
+        
+        .ui-widget {
+            font-family: Verdana,Arial,sans-serif;
+            font-size: 1.0em;
+        }
+        .ui-slider .ui-slider-range {
+            position: absolute;
+            z-index: 1;
+            font-size: .7em;
+            display: block;
+            border: 0;
+            background-position: 0 0;
+        }
+         
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+            border: 1px solid #d3d3d3;   
+            background-color:white;          
+            /* background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x; */
+            border-radius: 50%;
+        }
+
+        .ui-widget-header { 
+            background: #fff url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x; 
+        }
+        .ui-slider .ui-slider-handle { 
+            width: 1.8em;
+            height: 1.8em; 
+        }
+        .ui-slider-horizontal {
+            height: 0.1em;
+        }
+        .ui-slider-horizontal {
+            height: 1.1em;
+        }
+        
     </style>
-    <script src="Scripts/custom/listfruits.js"></script>
+    <script src="/../Scripts/custom/listfruits.js"></script>
 
     <div class="container">
 					<div class="row">
@@ -29,7 +64,7 @@
                                                                           <label for="amount">Price range:</label>
                                                                           <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                                                         </p>
-                                                                        <div id="slider"></div>
+                                                                       
 								                                            <dt class="Price last odd"><span>Price</span></dt>
 									                                        <dd class="scroll-1 last odd">
                                                                                 <div class="wrap-price-shopby">
@@ -39,55 +74,11 @@
 			                                                                                <input class="input-text txt-price-shopby" id="price-filter-max-text" type="text" value="230">
 		                                                                                </div>
 		                                                                                <div class="btn-shopby-wrapper">
-			                                                                                <button id="button-price-slider" title="Search" class="button btn-shopby" onclick="priceEvent(this.value)" value=""><span><span>Search</span></span></button>
+			                                                                                <button id="button-price-slider" type="button" title="Search" class="button btn-shopby" onclick="callwebservice()" value=""><span><span>Search</span></span></button>
 		                                                                                </div>
-	                                                                                </div>
-	                                                                                <div id="price-filter" class="price_filter">
-		                                                                                <span id="price-filter-min" class="price-from selected" title="Minimum value" style="left: 0px;"></span>
-		                                                                                <span id="price-filter-max" class="price-to" title="Maximum value" style="left: 214px;"></span>
-
-	                                                                                </div>
-	                                                                                <ul>
-		                                                                                <li>
-			                                                                                <span class="sp-left"><span>₹</span><span id="price-filter-min-display">20</span></span>
-			                                                                                <span class="sp-right"><span>₹</span><span id="price-filter-max-display">230</span></span>
-		                                                                                </li>
-	                                                                                </ul>
-                                                                                </div>
-                                                                                <script type="text/javascript">
-                                                                                    maxPrice = 230;
-                                                                                    minPrice = 20;
-
-                                                                                    max_price = $('price-filter-max-text').value;
-                                                                                    min_price = $('price-filter-min-text').value;
-                                                                                    $('price-filter-max-text').onchange = function () {
-                                                                                        max_price = $('price-filter-max-text').value;
-                                                                                        if (max_price > maxPrice) {
-                                                                                            $('price-filter-max-text').value = maxPrice;
-                                                                                            max_price = maxPrice;
-                                                                                        }
-                                                                                        if (max_price < minPrice) {
-                                                                                            $('price-filter-max-text').value = minPrice;
-                                                                                            max_price = minPrice;
-                                                                                        }
-                                                                                        min_price = $('price-filter-min-text').value;
-                                                                                        $('button-price-slider').value = min_price + '-' + max_price;
-                                                                                    };
-                                                                                    $('price-filter-min-text').onchange = function () {
-                                                                                        min_price = $('price-filter-min-text').value;
-                                                                                        if (min_price > maxPrice) {
-                                                                                            $('price-filter-min-text').value = maxPrice;
-                                                                                            min_price = maxPrice;
-                                                                                        }
-                                                                                        if (min_price < minPrice) {
-                                                                                            $('price-filter-min-text').value = minPrice;
-                                                                                            min_price = minPrice;
-                                                                                        }
-                                                                                        max_price = $('price-filter-max-text').value;
-                                                                                        $('button-price-slider').value = min_price + '-' + max_price;
-                                                                                    };
-
-                                                                                </script> 
+	                                                                                </div> 
+                                                                                    <div id="slider" style="margin-top:5px;"></div>
+                                                                                </div> 
 									                                        </dd>
 								                                        </div>  
                                                             </dl> 
@@ -114,18 +105,7 @@
 
                                         <div class="page-title category-title title-r title-visible">
                                             <h1>Fruits</h1>
-                                        </div>
-                                       <%-- <ul class="messages">
-                                            <li class="success-msg">
-                                                <ul>
-                                                    <li><span>The product Green Grapes Indian has been added to comparison list.</span></li>
-                                                    <li><span>The product Green Chilli has been added to comparison list.</span></li>
-                                                    <li><span>The product Grapes Red (Imported) has been added to comparison list.</span></li>
-                                                    <li><span>The product Ginger has been added to comparison list.</span></li>
-                                                </ul>
-                                            </li>
-                                        </ul>--%>
-
+                                        </div> 
                                         <div id="ajax-errors" style="display: none;">
                                             <ul class="messages">
                                                 <li class="error-msg">
@@ -347,18 +327,21 @@
                                                                 else {
                                                                     all = false;
                                                                 }
-                                                                getFruits(sort, pagesize, index, all);
-                                                                $.when(getFruits(sort, pagesize, index, all)).done(function (data) {
-                                                                    if (data.vmProductDetailsSummary.TotalRecords == 0) {
-                                                                        console.log('sort ' + sort);
-                                                                        console.log('pagesize ' + pagesize);
-                                                                        console.log('index ' + index);
-                                                                        console.log('all ' + all);
-                                                                    }
-                                                                    //$("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
 
-                                                                    //alert($("#fruitcount").val());
-                                                                    LoopAndGenerate(data.vmProductDetails);
+                                                                var min = $("#price-filter-min-text").val();
+                                                                var max = $("#price-filter-max-text").val();
+
+                                                                //alert('min :' + min);
+                                                                //alert('max :' + max);
+                                                                getFruits(sort, pagesize, index, all, min, max);
+                                                                $.when(getFruits(sort, pagesize, index, all, min, max)).done(function (data) {
+                                                                    //if (data.vmProductDetailsSummary.TotalRecords == 0) {
+                                                                    //    console.log('sort ' + sort);
+                                                                    //    console.log('pagesize ' + pagesize);
+                                                                    //    console.log('index ' + index);
+                                                                    //    console.log('all ' + all);
+                                                                    //}  
+                                                                    LoopAndGenerate(data.vmProductDetails); 
                                                                     return jQuery("#show_paginator,.show_paginator1").bootpag({
                                                                         total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)
                                                                     });
@@ -368,6 +351,10 @@
                                                         <script>
                                                             $(document).ready(function ($) {
 
+                                                                var querystring = (window.location.href).substring((window.location.href).lastIndexOf('/') + 1, (window.location.href).length);
+
+                                                                var min =-1;
+                                                                var max = -1;
                                                                 $(document).ajaxStart(function () {
                                                                     $('body').css('opacity', '0.2');
                                                                     $("#pageloaddiv").css('display', 'block');
@@ -379,12 +366,12 @@
                                                                 });
 
 
-                                                                console.log('dom loaded');
+                                                                //console.log('dom loaded');
                                                                 $(".sort-by-wrap .overwrite-sortby").html($('#sort_by li a.selected').html());
                                                                 $('.category-products #limiter li:first-child a').removeClass('selected');
                                                                 $(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());
-                                                                getFruits('Price', -1, 1, true);
-                                                                $.when(getFruits('Price', -1, 1, true)).done(function (data) {
+                                                                getFruits('Price', -1, 1, true, min, max, querystring);
+                                                                $.when(getFruits('Price', -1, 1, true, min, max, querystring)).done(function (data) {
                                                                     $("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
                                                                     LoopAndGenerate(data.vmProductDetails);
                                                                     jQuery('#show_paginator,.show_paginator1').bootpag({
@@ -407,8 +394,11 @@
                                                                         callwebservice();
                                                                     });
 
-                                                                    var min = data.vmProductDetailsSummary.MinimumPrice;
-                                                                    var max = data.vmProductDetailsSummary.MaximumPrice;
+                                                                    min = data.vmProductDetailsSummary.MinimumPrice;
+                                                                    max = data.vmProductDetailsSummary.MaximumPrice;
+
+                                                                    $("#price-filter-min-text").val(min);
+                                                                    $("#price-filter-max-text").val(max);
 
                                                                     $("#slider").slider({
                                                                         range: true,
@@ -416,6 +406,8 @@
                                                                         max: max,
                                                                         values: [min, max],
                                                                         slide: function (event, ui) {
+                                                                            $("#price-filter-min-text").val(ui.values[0]);
+                                                                            $("#price-filter-max-text").val(ui.values[1]);
                                                                             $("#amount").val("Rs" + ui.values[0] + " - Rs" + ui.values[1]);
                                                                         }
                                                                     });

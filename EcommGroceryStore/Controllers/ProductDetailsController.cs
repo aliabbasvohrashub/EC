@@ -53,13 +53,13 @@ namespace EcommGroceryStore.Controllers
             });
         }
 
-        public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all)
+        public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all , int min, int max, string querystring)
         {
              vmProductDetailsWithSummary mainquery = new vmProductDetailsWithSummary(); 
              vmProductDetailsSummary  vmsummary = new vmProductDetailsSummary();
              IQueryable<vmProductDetails> query;
              query = (from x in dbContext.ProductDetails
-                      where x.SubCategoryId == 2
+                      where x.SubCategoryMaster.MainCategoryMaster.Name == querystring && ((min != -1 && max != -1) ? (x.PricePerUnit >= min && x.PricePerUnit <= max) : x.PricePerUnit >= 0) 
                       select new vmProductDetails
                       {
                           ProductId = x.ProductId,
@@ -76,9 +76,16 @@ namespace EcommGroceryStore.Controllers
 
 
             vmsummary.TotalRecords = query.Count();
-            vmsummary.MaximumPrice = query.Select(x => x.PricePerUnit).Max();
-            vmsummary.MinimumPrice = query.Select(x => x.PricePerUnit).Min();
-
+            if (query.Count() == 0)
+            {
+                vmsummary.MaximumPrice = 0;
+                vmsummary.MinimumPrice = 0;
+            }
+            else
+            {
+                vmsummary.MaximumPrice = query.Select(x => x.PricePerUnit).Max();
+                vmsummary.MinimumPrice = query.Select(x => x.PricePerUnit).Min();
+            }
             mainquery.vmProductDetailsSummary = vmsummary;
             mainquery.vmProductDetails = query;
             return mainquery;

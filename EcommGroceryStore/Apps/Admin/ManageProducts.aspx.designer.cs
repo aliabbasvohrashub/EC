@@ -7,11 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EcommGroceryStore.Apps.Admin {
-    
-    
-    public partial class ManageProducts {
-        
+namespace EcommGroceryStore.Apps.Admin
+{
+
+
+    public partial class ManageProducts
+    {
+
+        /// <summary>
+        /// lblMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
+
         /// <summary>
         /// ddlMain control.
         /// </summary>
@@ -20,7 +31,7 @@ namespace EcommGroceryStore.Apps.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMain;
-        
+
         /// <summary>
         /// ddlSub control.
         /// </summary>
@@ -29,7 +40,7 @@ namespace EcommGroceryStore.Apps.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSub;
-        
+
         /// <summary>
         /// rbtTypeList control.
         /// </summary>
@@ -38,7 +49,7 @@ namespace EcommGroceryStore.Apps.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbtTypeList;
-        
+
         /// <summary>
         /// fupFileProduct control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace EcommGroceryStore.Apps.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fupFileProduct;
-        
+
         /// <summary>
         /// btnUpload control.
         /// </summary>

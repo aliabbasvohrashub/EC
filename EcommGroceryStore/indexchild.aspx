@@ -1869,7 +1869,7 @@
 
                                     <div class="block-title-default">
                                         <h2>
-                                            <a title="Vegetables" href="fruits-vegetables/vegetables.html"><span>Vegetables</span></a>
+                                            <a title="Vegetables" href="products/vegetables"><span>Vegetables</span></a>
                                         </h2>
 
                                         <div class="category-wrap-cat">
@@ -2742,7 +2742,7 @@
 
                                     <div class="block-title-default">
                                         <h2>
-                                            <a title="Fruits" href="fruits-vegetables/fruits.html"><span>Fruits</span></a>
+                                            <a title="Fruits" href="products/fruits"><span>Fruits</span></a>
                                         </h2>
 
                                         <div class="category-wrap-cat">

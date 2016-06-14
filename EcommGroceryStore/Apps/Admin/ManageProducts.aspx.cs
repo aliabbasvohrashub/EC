@@ -1,5 +1,4 @@
-﻿using Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -8,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Unique.EcommGroceryStore.Core.Repository;
+using Unique.EcommGroceryStore.Core.Utility;
 using Unique.EcommGroceryStore.DAL.EntityModel;
 
 namespace EcommGroceryStore.Apps.Admin
@@ -20,6 +20,8 @@ namespace EcommGroceryStore.Apps.Admin
             if (!IsPostBack)
             {
                 BindMainCategories();
+                lblMsg.Visible = false;
+                lblMsg.Text = "";
             }
         }
 
@@ -92,48 +94,77 @@ namespace EcommGroceryStore.Apps.Admin
 
         private void UploadFromExcel()
         {
-            // Save file to folder
-            string filename = Path.GetFileName(fupFileProduct.PostedFile.FileName);
-            string Extension = Path.GetExtension(fupFileProduct.PostedFile.FileName);
-            string filepath = Server.MapPath("~/ProductData/" + filename);
-            fupFileProduct.SaveAs(filepath);
-
-            // Now start to read file which stored in server.
-            FileStream stream = File.Open(filepath, FileMode.Open, FileAccess.Read);
-            IExcelDataReader excelReader = null;
-            switch (Extension)
+            try
             {
-                case ".xls": //Excel 97-03
-                    excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
-                    break;
-                case ".xlsx": //Excel 07
-                    excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                    break;
+                int subId = Convert.ToInt32(ddlSub.SelectedValue.Trim());
+                List<ProductDetails> productList = GetContactsDetailsFromExcelFile(fupFileProduct, subId);
+                var bulkUpload = new BulkUploadRepository(productList);
+                bulkUpload.UploadProduct();
+
+                lblMsg.Text = "Product details has been uploaded.";
+                lblMsg.ForeColor = System.Drawing.Color.Green;
+                lblMsg.Visible = true;
+                ClearFields();
+
             }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message.ToString();
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Visible = true;
+            }
+        }
 
-            // DataSet - Create column names from first row
-            excelReader.IsFirstRowAsColumnNames = true;
-            DataSet result = excelReader.AsDataSet();
-
-
-            DataTable finalData = 
-
-
-
-            // Data Reader methods
-            //while (excelReader.Read())
-            //{
-            //    //excelReader.GetInt32(0);
-            //}
-
-            //6. Free resources (IExcelDataReader is IDisposable)
-            excelReader.Close();
+        private void ClearFields()
+        {
+            ddlMain.SelectedValue = "0";
+            ddlSub.SelectedValue = "0";
+            rbtTypeList.SelectedValue = "0";
         }
 
         private void UploadFromCSV()
-        { }
+        {
+            try
+            {
+                int subId = Convert.ToInt32(ddlSub.SelectedValue.Trim());
+                List<ProductDetails> productList = GetContactsDetailsFromFlatFile(fupFileProduct, subId);
+                var bulkUpload = new BulkUploadRepository(productList);
+                bulkUpload.UploadProduct();
+
+                lblMsg.Text = "Product details has been uploaded.";
+                lblMsg.ForeColor = System.Drawing.Color.Green;
+                lblMsg.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message.ToString();
+                lblMsg.ForeColor = System.Drawing.Color.Red;
+                lblMsg.Visible = true;
+            }
+        }
 
         private void UploadFromTEXT()
-        { }
+        {
+
+
+        }
+
+        public List<ProductDetails> GetContactsDetailsFromFlatFile(FileUpload fup, int subCategoryId)
+        {
+            List<ProductDetails> products;
+            string fileName = fup.PostedFile.FileName;
+            DataTable dtExcelData = Utilities.FlatFileToDataTable(fup.FileContent, false);
+            Utilities.GetContactListFromDataTable(dtExcelData, subCategoryId, out products);
+            return products;
+        }
+
+        public List<ProductDetails> GetContactsDetailsFromExcelFile(FileUpload fup, int subCategoryId)
+        {
+            List<ProductDetails> products;
+            string fileName = fup.PostedFile.FileName;
+            DataTable dtExcelData = Utilities.ExcelToDataTable(fup.FileContent, fileName, true);
+            Utilities.GetContactListFromDataTable(dtExcelData, subCategoryId, out products);
+            return products;
+        }
     }
 }
