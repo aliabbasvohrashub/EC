@@ -33,7 +33,7 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
     <link href="/../media/css/style.css" rel="stylesheet" />
     <style type="text/css">
-        body {
+        body { 
             font-size: 12px;
         }
 

@@ -88,7 +88,8 @@ function LoopAndGenerate(data) {
         jQuery("div.products-grid.row").append(val2);
     });
 }
-function getFruits(sort, pagesize, index, all) {
+function getFruits(sort, pagesize, index, all, min, max, querystring) {
+    console.log('i, getFruits, got called parameters passed are ' + sort + ' ' + pagesize + ' ' + index + ' ' + all + ' ' + min + ' ' + max);
     var startindex = 0;
     var endindex = 0;
     if (index == undefined) {
@@ -99,7 +100,7 @@ function getFruits(sort, pagesize, index, all) {
         startindex = (index - 1) * 8;
         endindex = (index) * 8;;
     }
-    return jQuery.getJSON("api/ProductDetails/getFruitsListWithSummary?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "",
+    return jQuery.getJSON("/api/ProductDetails/getFruitsListWithSummary?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "&min=" + min + "&max=" + max  + "&querystring=" + querystring + "",
        function (data) {
        });
-} 
+}  

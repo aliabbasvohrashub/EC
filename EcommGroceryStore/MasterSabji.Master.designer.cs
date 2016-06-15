@@ -22,3 +22,4 @@ namespace EcommGroceryStore {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }
+ 

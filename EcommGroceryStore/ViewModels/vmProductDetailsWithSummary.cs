@@ -9,5 +9,5 @@ namespace EcommGroceryStore.ViewModels
     {
         public vmProductDetailsSummary vmProductDetailsSummary { get; set; }
         public IEnumerable<vmProductDetails> vmProductDetails { get; set; }
-    }
+    }  
 }
