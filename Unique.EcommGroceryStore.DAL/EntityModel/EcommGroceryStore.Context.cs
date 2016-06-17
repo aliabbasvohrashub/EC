@@ -38,6 +38,8 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<CartDetail> CartDetail { get; set; }
     
         public virtual ObjectResult<Sp_GetUserList_Result> Sp_GetUserList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)
         {

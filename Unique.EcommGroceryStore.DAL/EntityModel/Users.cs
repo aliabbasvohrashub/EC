@@ -19,6 +19,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         {
             this.AddressDetails = new HashSet<AddressDetails>();
             this.FollowUpDetails = new HashSet<FollowUpDetails>();
+            this.Cart = new HashSet<Cart>();
         }
     
         public int UserId { get; set; }
@@ -43,5 +44,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FollowUpDetails> FollowUpDetails { get; set; }
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
     }
 }

@@ -56,6 +56,12 @@
     <Compile Include="EntityModel\AreaMaster.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\Cart.cs">
+      <DependentUpon>EcommGroceryStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\CartDetail.cs">
+      <DependentUpon>EcommGroceryStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\CityMaster.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>

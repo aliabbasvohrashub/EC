@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EcommGroceryOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EcommGroceryOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressDetails">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -28,6 +28,26 @@
           <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AreaName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="CartDetailId" />
+          </Key>
+          <Property Name="CartDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Total" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CityMaster">
           <Key>
@@ -180,6 +200,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CardDetail_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CityMaster_CountryMaster">
           <End Role="CountryMaster" Type="Self.CountryMaster" Multiplicity="1" />
           <End Role="CityMaster" Type="Self.CityMaster" Multiplicity="*" />
@@ -256,6 +300,8 @@
         <EntityContainer Name="EcommGroceryOnlineModelStoreContainer">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AreaMaster" EntityType="Self.AreaMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CityMaster" EntityType="Self.CityMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CouponDetails" EntityType="Self.CouponDetails" Schema="dbo" store:Type="Tables" />
@@ -285,6 +331,14 @@
             <End Role="CityMaster" EntitySet="CityMaster" />
             <End Role="AreaMaster" EntitySet="AreaMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_CardDetail_Cart" Association="Self.FK_CardDetail_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Users" Association="Self.FK_Cart_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
           <AssociationSet Name="FK_CityMaster_CountryMaster" Association="Self.FK_CityMaster_CountryMaster">
             <End Role="CountryMaster" EntitySet="CountryMaster" />
             <End Role="CityMaster" EntitySet="CityMaster" />
@@ -306,8 +360,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EcommGroceryOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -445,6 +498,7 @@
           <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_Users" FromRole="Users" ToRole="AddressDetails" />
           <NavigationProperty Name="FollowUpDetails" Relationship="Self.FK_FollowUpDetails_Users" FromRole="Users" ToRole="FollowUpDetails" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Cart" Relationship="EcommGroceryOnlineModel.FK_Cart_Users" FromRole="Users" ToRole="Cart" />
         </EntityType>
         <Association Name="FK_AddressDetails_AreaMaster">
           <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />
@@ -631,6 +685,16 @@
             <Parameter Name="Status" Mode="InOut" Type="Int32" />
             <Parameter Name="Op" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Cart" EntityType="EcommGroceryOnlineModel.Cart" />
+          <AssociationSet Name="FK_Cart_Users" Association="EcommGroceryOnlineModel.FK_Cart_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <EntitySet Name="CartDetail" EntityType="EcommGroceryOnlineModel.CartDetail" />
+          <AssociationSet Name="FK_CardDetail_Cart1" Association="EcommGroceryOnlineModel.FK_CardDetail_Cart1">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="Sp_GetUserList_Result">
           <Property Type="Int32" Name="UserId" Nullable="true" />
@@ -647,6 +711,53 @@
           <Property Type="String" Name="RoleName" Nullable="true" MaxLength="20" />
           <Property Type="Int32" Name="RowNumber" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartId" />
+          </Key>
+          <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="EcommGroceryOnlineModel.FK_Cart_Users" FromRole="Cart" ToRole="Users" />
+          <NavigationProperty Name="CartDetail" Relationship="EcommGroceryOnlineModel.FK_CardDetail_Cart1" FromRole="Cart" ToRole="CartDetail" />
+        </EntityType>
+        <Association Name="FK_Cart_Users">
+          <End Type="EcommGroceryOnlineModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="EcommGroceryOnlineModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="CartDetailId" />
+          </Key>
+          <Property Name="CartDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="EcommGroceryOnlineModel.FK_CardDetail_Cart1" FromRole="CartDetail" ToRole="Cart" />
+        </EntityType>
+        <Association Name="FK_CardDetail_Cart1">
+          <End Type="EcommGroceryOnlineModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="EcommGroceryOnlineModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartId" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -799,6 +910,28 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteUser" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteUser" />
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetail">
+            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.CartDetail">
+              <MappingFragment StoreEntitySet="CartDetail">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CartDetailId" ColumnName="CartDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

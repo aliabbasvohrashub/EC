@@ -134,6 +134,7 @@
     <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_Users" FromRole="Users" ToRole="AddressDetails" />
     <NavigationProperty Name="FollowUpDetails" Relationship="Self.FK_FollowUpDetails_Users" FromRole="Users" ToRole="FollowUpDetails" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="Cart" Relationship="EcommGroceryOnlineModel.FK_Cart_Users" FromRole="Users" ToRole="Cart" />
   </EntityType>
   <Association Name="FK_AddressDetails_AreaMaster">
     <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />
@@ -320,6 +321,16 @@
       <Parameter Name="Status" Mode="InOut" Type="Int32" />
       <Parameter Name="Op" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Cart" EntityType="EcommGroceryOnlineModel.Cart" />
+    <AssociationSet Name="FK_Cart_Users" Association="EcommGroceryOnlineModel.FK_Cart_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <EntitySet Name="CartDetail" EntityType="EcommGroceryOnlineModel.CartDetail" />
+    <AssociationSet Name="FK_CardDetail_Cart1" Association="EcommGroceryOnlineModel.FK_CardDetail_Cart1">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="Sp_GetUserList_Result">
     <Property Type="Int32" Name="UserId" Nullable="true" />
@@ -336,4 +347,51 @@
     <Property Type="String" Name="RoleName" Nullable="true" MaxLength="20" />
     <Property Type="Int32" Name="RowNumber" Nullable="true" />
   </ComplexType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="EcommGroceryOnlineModel.FK_Cart_Users" FromRole="Cart" ToRole="Users" />
+    <NavigationProperty Name="CartDetail" Relationship="EcommGroceryOnlineModel.FK_CardDetail_Cart1" FromRole="Cart" ToRole="CartDetail" />
+  </EntityType>
+  <Association Name="FK_Cart_Users">
+    <End Type="EcommGroceryOnlineModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="EcommGroceryOnlineModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CartDetail">
+    <Key>
+      <PropertyRef Name="CartDetailId" />
+    </Key>
+    <Property Name="CartDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CardId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="EcommGroceryOnlineModel.FK_CardDetail_Cart1" FromRole="CartDetail" ToRole="Cart" />
+  </EntityType>
+  <Association Name="FK_CardDetail_Cart1">
+    <End Type="EcommGroceryOnlineModel.Cart" Role="Cart" Multiplicity="0..1" />
+    <End Type="EcommGroceryOnlineModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

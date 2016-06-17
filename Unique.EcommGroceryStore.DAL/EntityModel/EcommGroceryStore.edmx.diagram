@@ -26,6 +26,10 @@
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_SubCategoryMaster_MainCategoryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_ProductDetails_SubCategoryMaster" ManuallyRouted="false" />
         <AssociationConnector Association="EcommGroceryOnlineModel.FK_Users_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.Cart" Width="1.5" PointX="7.5" PointY="13.125" />
+        <AssociationConnector Association="EcommGroceryOnlineModel.FK_Cart_Users" />
+        <EntityTypeShape EntityType="EcommGroceryOnlineModel.CartDetail" Width="1.5" PointX="9.75" PointY="16.125" />
+        <AssociationConnector Association="EcommGroceryOnlineModel.FK_CardDetail_Cart1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

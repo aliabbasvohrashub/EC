@@ -30,7 +30,7 @@
         }
 
         .ui-widget-header { 
-            background: #fff url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x; 
+           /* background: #fff url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x; */
         }
         .ui-slider .ui-slider-handle { 
             width: 1.8em;
@@ -74,7 +74,7 @@
 			                                                                                <input class="input-text txt-price-shopby" id="price-filter-max-text" type="text" value="230">
 		                                                                                </div>
 		                                                                                <div class="btn-shopby-wrapper">
-			                                                                                <button id="button-price-slider" type="button" title="Search" class="button btn-shopby" onclick="callwebservice()" value=""><span><span>Search</span></span></button>
+			                                                                                <button id="button-price-slider" type="button" title="Search" class="button btn-shopby" onclick="callwebservice(true, true)" value=""><span><span>Search</span></span></button>
 		                                                                                </div>
 	                                                                                </div> 
                                                                                     <div id="slider" style="margin-top:5px;"></div>
@@ -247,6 +247,7 @@
                                                                 <div class="show_paginator1" id="show_paginator1"></div> 
                                                             </div>
                                                             <input type="hidden" name="fruitcount" id="fruitcount" value="" />
+                                                            <input type="hidden" name="page" id="page" value="1" />
                                                         </div>
                                                         <script>
                                                             $('div#select-new-limiter')
@@ -289,33 +290,42 @@
                                                             $('ul#limiter > li').click(function () {
                                                                 $('div.overwrite-limiter').text($(this.childNodes).text());
                                                                 $('ul#limiter').css('display', 'none');
-                                                                $('ul.pagination.bootpag > li').removeClass("active");
-                                                                $('ul.pagination.bootpag > li:eq(2)').addClass("active");
-                                                                callwebservice();
+                                                                $('ul.pagination.bootpag:eq(0) > li').removeClass("active");
+                                                                $('ul.pagination.bootpag:eq(0) > li:eq(2)').addClass("active");
+                                                                $('ul.pagination.bootpag:eq(1) > li').removeClass("active");
+                                                                $('ul.pagination.bootpag:eq(1) > li:eq(2)').addClass("active");
+                                                                //return jQuery("#show_paginator,.show_paginator1").bootpag({
+                                                                //    page: 2
+                                                                //});
+                                                                callwebservice(false, true);
                                                             });
 
                                                             $('ul#limiter1 > li').click(function () {
                                                                 $('div.overwrite-limiter').text($(this.childNodes).text());
                                                                 $('ul#limiter1').css('display', 'none');
-                                                                $('ul.pagination.bootpag > li').removeClass("active");
-                                                                $('ul.pagination.bootpag > li:eq(2)').addClass("active");
-                                                                callwebservice();
+                                                                $('ul.pagination.bootpag:eq(0) > li').removeClass("active");
+                                                                $('ul.pagination.bootpag:eq(0) > li:eq(2)').addClass("active");
+                                                                $('ul.pagination.bootpag:eq(1) > li').removeClass("active");
+                                                                $('ul.pagination.bootpag:eq(1) > li:eq(2)').addClass("active");
+                                                                 
+                                                                callwebservice(false, true);
                                                             });
 
 
                                                             $('ul#sort_by > li').click(function () {
                                                                 $('div.overwrite-sortby').text($(this.childNodes).text());
                                                                 $('ul#sort_by').css('display', 'none');
-                                                                callwebservice();
+                                                                callwebservice(false, false);
                                                             });
 
                                                             $('ul#sort_by1 > li').click(function () {
                                                                 $('div.overwrite-sortby').text($(this.childNodes).text());
                                                                 $('ul#sort_by1').css('display', 'none');
-                                                                callwebservice();
+                                                                callwebservice(false, false);
                                                             });
 
-                                                            function callwebservice() {
+                                                            function callwebservice(resettotal, setpage) {
+                                                                var querystring = (window.location.href).substring((window.location.href).lastIndexOf('/') + 1, (window.location.href).length);
                                                                 var sort = $('div.overwrite-sortby:first').html();
                                                                 var pagesize = $('div.overwrite-limiter:first').html();
                                                                 var index = $('ul.pagination.bootpag > li.active > a').html();
@@ -333,18 +343,30 @@
 
                                                                 //alert('min :' + min);
                                                                 //alert('max :' + max);
-                                                                getFruits(sort, pagesize, index, all, min, max);
-                                                                $.when(getFruits(sort, pagesize, index, all, min, max)).done(function (data) {
+                                                                console.log('sort ' + sort);
+                                                                console.log('pagesize ' + pagesize);
+                                                                console.log('index ' + index);
+                                                                console.log('all ' + all);
+                                                               
+                                                                getFruits(sort, pagesize, index, all, min, max, querystring);
+                                                                $.when(getFruits(sort, pagesize, index, all, min, max, querystring)).done(function (data) {
+                                                                   // alert(data.vmProductDetailsSummary.TotalRecords);
+                                                                    if (resettotal == true) {
+                                                                        $("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
+                                                                    }
                                                                     //if (data.vmProductDetailsSummary.TotalRecords == 0) {
                                                                     //    console.log('sort ' + sort);
                                                                     //    console.log('pagesize ' + pagesize);
                                                                     //    console.log('index ' + index);
                                                                     //    console.log('all ' + all);
                                                                     //}  
-                                                                    LoopAndGenerate(data.vmProductDetails); 
+                                                                    LoopAndGenerate(data.vmProductDetails, querystring);
+                                                                   
                                                                     return jQuery("#show_paginator,.show_paginator1").bootpag({
-                                                                        total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)
-                                                                    });
+                                                                            page:(setpage) ? 1 : $("#page").val(),
+                                                                            total: (parseInt($("#fruitcount").val()) / pagesize) + ((parseInt($("#fruitcount").val()) % parseInt(pagesize)) != 0 ? 1 : 0)
+                                                                        });
+                                                                    
                                                                 });
                                                             }
                                                         </script>
@@ -356,13 +378,17 @@
                                                                 var min =-1;
                                                                 var max = -1;
                                                                 $(document).ajaxStart(function () {
-                                                                    $('body').css('opacity', '0.2');
+                                                                    //$('body').css('opacity', '0.2');
                                                                     $("#pageloaddiv").css('display', 'block');
                                                                 });
 
                                                                 $(document).ajaxStop(function () {
-                                                                    $('body').css('opacity', '1');
+                                                                    //$('body').css('opacity', '1');
                                                                     $("#pageloaddiv").css('display', 'none');
+                                                                });
+
+                                                                $(document).ajaxError(function (event, xhr, options, exc) {
+                                                                    console.log("An error occurred!");
                                                                 });
 
 
@@ -373,7 +399,7 @@
                                                                 getFruits('Price', -1, 1, true, min, max, querystring);
                                                                 $.when(getFruits('Price', -1, 1, true, min, max, querystring)).done(function (data) {
                                                                     $("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
-                                                                    LoopAndGenerate(data.vmProductDetails);
+                                                                    LoopAndGenerate(data.vmProductDetails, querystring);
                                                                     jQuery('#show_paginator,.show_paginator1').bootpag({
                                                                         total: 1,
                                                                         page: 1,
@@ -391,7 +417,11 @@
                                                                         firstClass: 'first'
                                                                     }).on('page', function (event, num) {
                                                                         //alert('paging function triggered value of num ' + num);
-                                                                        callwebservice();
+                                                                        console.log('paging triggers from here in doc ready num is ' + num);
+                                                                        $("#page").val(num);
+
+
+                                                                        callwebservice(false, false);
                                                                     });
 
                                                                     min = data.vmProductDetailsSummary.MinimumPrice;

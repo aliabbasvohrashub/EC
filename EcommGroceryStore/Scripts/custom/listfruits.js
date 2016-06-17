@@ -10,7 +10,7 @@ function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
               + "     <div class=\"item-inner\">"
               + "         <div class=\"w-image-box\">"
               + "             <div class=\"item-image\">"
-              + " <a href=\"" + imageURL + "\" title=\"" + productName + "\" class=\"product-image\">"
+              + " <a href=\"/Details\\" + productName + "\" title=\"" + productName + "\" class=\"product-image\">"
               + "<img id=\"product-collection-image-77\" src=\"../" + imageURL + "\" alt=\"" + productName + "\" /> "
               + " </a> </div> "
               + "  <div class=\"sale-item\">"
@@ -79,7 +79,7 @@ function ContentBox(productName, imageURL, description, quantity, pricePerUnit) 
 }
 
 
-function LoopAndGenerate(data) {
+function LoopAndGenerate(data, querystring) {
     var totalrecords = 0;
     jQuery("div.products-grid.row").empty();
     jQuery.each(data, function (key, val) {
@@ -89,7 +89,7 @@ function LoopAndGenerate(data) {
     });
 }
 function getFruits(sort, pagesize, index, all, min, max, querystring) {
-    console.log('i, getFruits, got called parameters passed are ' + sort + ' ' + pagesize + ' ' + index + ' ' + all + ' ' + min + ' ' + max);
+  //  console.log('i, getFruits, got called parameters passed are ' + sort + ' ' + pagesize + ' ' + index + ' ' + all + ' ' + min + ' ' + max);
     var startindex = 0;
     var endindex = 0;
     if (index == undefined) {
@@ -103,4 +103,13 @@ function getFruits(sort, pagesize, index, all, min, max, querystring) {
     return jQuery.getJSON("/api/ProductDetails/getFruitsListWithSummary?sort=" + sort + "&pagesize=" + pagesize + "&index=" + index + "&all=" + all + "&min=" + min + "&max=" + max  + "&querystring=" + querystring + "",
        function (data) {
        });
-}  
+}
+
+
+function getProductDetail(querystring) {
+    return jQuery.getJSON("/api/ProductDetails/GetProductDetails?ProductName=" + querystring+ "",
+   function (data) {
+   });
+}
+
+document.getElementById('ip').value = myip;

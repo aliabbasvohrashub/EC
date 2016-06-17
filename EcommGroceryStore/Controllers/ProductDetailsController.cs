@@ -53,6 +53,27 @@ namespace EcommGroceryStore.Controllers
             });
         }
 
+        public IQueryable<vmProductDetails> GetProductDetails(string ProductName)
+        {
+
+            return dbContext.ProductDetails.Where(y=>y.ProductName == ProductName).Select(x => new vmProductDetails
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName, 
+                MainCategoryName = x.SubCategoryMaster.MainCategoryMaster.Name,
+                SubCategoryName = x.SubCategoryMaster.Name,
+                Quantity = x.Quantity,
+                Description = x.Description,
+                ImageURL = x.ImageURL,
+                PricePerUnit = x.PricePerUnit,
+                Unit = x.Unit,
+                Status = x.Status
+            });  
+        }
+
+
+         
+
         public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all , int min, int max, string querystring)
         {
              vmProductDetailsWithSummary mainquery = new vmProductDetailsWithSummary(); 
@@ -270,6 +291,36 @@ namespace EcommGroceryStore.Controllers
 
             return Ok(productdetails);
             //}
+        }
+
+
+         
+        [ResponseType(typeof(Cart))]
+        public IHttpActionResult PostCart(Cart cart)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+             
+            dbContext.Cart.Add(cart);
+            dbContext.SaveChanges();  
+            return CreatedAtRoute("DefaultApi", new { id = cart.CartId}, cart);
+        }
+
+
+        [ResponseType(typeof(CartDetail))]
+        public IHttpActionResult PostCartDetail(CartDetail cartDetail)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            dbContext.CartDetail.Add(cartDetail);
+            dbContext.SaveChanges(); 
+
+            return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartDetailId }, cartDetail);
         }
 
         protected override void Dispose(bool disposing)
