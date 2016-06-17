@@ -4,6 +4,28 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="innerContent">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlMain" AutoPostBack="true" OnSelectedIndexChanged="ddlMain_SelectedIndexChanged" onChange="MainCall('m')">
+                                </asp:DropDownList>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlSub" onChange="MainCall('s')">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <br />
         <table id="tblSenderId" class="table table-bordered table-hover" style="width: 100%;">
             <thead>
                 <tr>
@@ -30,6 +52,27 @@
     <script type="text/javascript" src="../../Content/DataTables/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="../../Content/DataTables/underscore.js"></script>
     <script type="text/javascript">
+
+        var mCatId = 0;
+        var sCatId = 0;
+        function MainCall(dropdowncall) {
+            var me = document.getElementById("<%= ddlMain.ClientID %>");
+            mCatId = me.options[me.selectedIndex].value;
+
+            var se = document.getElementById("<%= ddlSub.ClientID %>");
+            sCatId = se.options[se.selectedIndex].value;
+
+            if (dropdowncall == 'm') {
+                sCatId = 0;
+            }
+
+            var table = $("#tblSenderId").dataTable();
+            table.fnClearTable(this);
+            $.post('<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetProductListHandler.ashx")%>', { name: '___ProductList___', value: 'get' }, { name: 'mCatId', value: mCatId }, { name: 'sCatId', value: sCatId }, function (data, status) {
+                table.fnDraw();
+            });
+        }
+
         $(document).ready(function myfunction() {
             BindProductList();
         });
@@ -47,7 +90,7 @@
                 sAjaxSource: '<%= ResolveClientUrl("~/Apps/Admin/Handlers/GetProductListHandler.ashx")%>',
                 sServerMethod: 'POST',
                 fnServerParams: function (aoData) {
-                    aoData.push({ name: '___ProductList___', value: 'get', maincat: 0, subcate: 0 });
+                    aoData.push({ name: '___ProductList___', value: 'get' }, { name: 'mCatId', value: mCatId }, { name: 'sCatId', value: sCatId });
                 },
                 fnDrawCallback: function (oSettings) {
                     $('.inactive-product').bind('click', function () {

@@ -263,15 +263,15 @@ namespace EcommGroceryStore.Admin.Handlers
 
             SqlParameter[] ps = new SqlParameter[] { p1, p2, p3, p4, p5 };
 
-            DataTable dt = DataAccessLayer.LoadTabularDataInDataTable("Sp_GetUserList", CommandType.StoredProcedure, ps);
+            DataSet ds = DataAccessLayer.LoadTabularData("Sp_GetUserList", CommandType.StoredProcedure, ps);
 
-            if (dt.Rows.Count > 0)
+            if (ds.Tables.Count == 1)
             {
                 Dictionary<String, String> additionalInfo = new Dictionary<string, string>();
                 additionalInfo.Add("sEcho", context.Request.Params["sEcho"]);
                 additionalInfo.Add("iTotalRecords", p3.Value.ToString());
                 additionalInfo.Add("iTotalDisplayRecords", p3.Value.ToString());
-                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(dt, additionalInfo));
+                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(ds.Tables[0], additionalInfo));
                 return;
             }
             else

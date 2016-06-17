@@ -258,20 +258,20 @@ namespace EcommGroceryStore.Apps.Admin.Handlers
             SqlParameter p3 = DataAccessLayer.CreateSqlParameter("totalRecords", DbType.Int32, 0, 0, ParameterDirection.Output);
             SqlParameter p4 = DataAccessLayer.CreateSqlParameter("orderByClause", DbType.String, totalSortingCols > 0 ? orderByQueryClause.ToString() : null);
             SqlParameter p5 = DataAccessLayer.CreateSqlParameter("search", DbType.String, sSearch.Length == 0 ? null : sSearch);
-            SqlParameter p6 = DataAccessLayer.CreateSqlParameter("MainCategoryId", DbType.Int32, 0);
-            SqlParameter p7 = DataAccessLayer.CreateSqlParameter("SubCategoryId", DbType.Int32, 0);
+            SqlParameter p6 = DataAccessLayer.CreateSqlParameter("MainCategoryId", DbType.Int32, Convert.ToInt32(context.Request.Params["mCatId"]));
+            SqlParameter p7 = DataAccessLayer.CreateSqlParameter("SubCategoryId", DbType.Int32, Convert.ToInt32(context.Request.Params["sCatId"]));
 
             SqlParameter[] ps = new SqlParameter[] { p1, p2, p3, p4, p5, p6, p7 };
 
-            DataTable dt = DataAccessLayer.LoadTabularDataInDataTable("Sp_GetProductDetailsList", CommandType.StoredProcedure, ps);
+            DataSet ds = DataAccessLayer.LoadTabularData("Sp_GetProductDetailsList", CommandType.StoredProcedure, ps);
 
-            if (dt.Rows.Count > 0)
+            if (ds.Tables.Count == 1)
             {
                 Dictionary<String, String> additionalInfo = new Dictionary<string, string>();
                 additionalInfo.Add("sEcho", context.Request.Params["sEcho"]);
                 additionalInfo.Add("iTotalRecords", p3.Value.ToString());
                 additionalInfo.Add("iTotalDisplayRecords", p3.Value.ToString());
-                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(dt, additionalInfo));
+                context.Response.Write(Utilities.ConvertDataTableToJSONWithCustomInfo(ds.Tables[0], additionalInfo));
                 return;
             }
             else
