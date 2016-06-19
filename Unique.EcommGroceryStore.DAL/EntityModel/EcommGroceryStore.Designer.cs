@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\LocalBranchJune6\Unique.EcommGroceryStore.DAL\EntityModel\EcommGroceryStore.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Working\OGS\Unique.EcommGroceryStore.DAL\EntityModel\EcommGroceryStore.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

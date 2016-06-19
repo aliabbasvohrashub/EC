@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Unique.EcommGroceryStore.DAL.EntityModel;
+using System.Drawing;
 
 namespace Unique.EcommGroceryStore.Core.Utility
 {
@@ -199,7 +200,7 @@ namespace Unique.EcommGroceryStore.Core.Utility
             }
             return dtExcel;
         }
-        
+
         public static void GetContactListFromDataTable(DataTable dtData, int subCategoryId, out List<ProductDetails> product)
         {
             product = new List<ProductDetails>();
@@ -252,6 +253,35 @@ namespace Unique.EcommGroceryStore.Core.Utility
                     }
                 }
             }
+        }
+
+        public static string FormateFileName(string fileName)
+        {
+            return fileName + "-" + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss").Replace(" ", "").Replace("/", "").Replace(":", "");
+        }
+
+        public static Size GetThumbnailSize(Image original)
+        {
+            // Maximum size of any dimension.
+            const int maxPixels = 40;
+
+            // Width and height.
+            int originalWidth = original.Width;
+            int originalHeight = original.Height;
+
+            // Compute best factor to scale entire image based on larger dimension.
+            double factor;
+            if (originalWidth > originalHeight)
+            {
+                factor = (double)maxPixels / originalWidth;
+            }
+            else
+            {
+                factor = (double)maxPixels / originalHeight;
+            }
+
+            // Return thumbnail size.
+            return new Size((int)(originalWidth * factor), (int)(originalHeight * factor));
         }
 
     }

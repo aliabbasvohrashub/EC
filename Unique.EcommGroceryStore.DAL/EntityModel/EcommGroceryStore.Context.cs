@@ -38,8 +38,35 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Cart> Cart { get; set; }
-        public virtual DbSet<CartDetail> CartDetail { get; set; }
+    
+        public virtual ObjectResult<Sp_GetProductDetailsList_Result> Sp_GetProductDetailsList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, Nullable<int> mainCategoryId, Nullable<int> subCategoryId, ObjectParameter totalRecords)
+        {
+            var currentIndexParameter = currentIndex.HasValue ?
+                new ObjectParameter("currentIndex", currentIndex) :
+                new ObjectParameter("currentIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var orderByClauseParameter = orderByClause != null ?
+                new ObjectParameter("orderByClause", orderByClause) :
+                new ObjectParameter("orderByClause", typeof(string));
+    
+            var searchParameter = search != null ?
+                new ObjectParameter("search", search) :
+                new ObjectParameter("search", typeof(string));
+    
+            var mainCategoryIdParameter = mainCategoryId.HasValue ?
+                new ObjectParameter("MainCategoryId", mainCategoryId) :
+                new ObjectParameter("MainCategoryId", typeof(int));
+    
+            var subCategoryIdParameter = subCategoryId.HasValue ?
+                new ObjectParameter("SubCategoryId", subCategoryId) :
+                new ObjectParameter("SubCategoryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetProductDetailsList_Result>("Sp_GetProductDetailsList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, mainCategoryIdParameter, subCategoryIdParameter, totalRecords);
+        }
     
         public virtual ObjectResult<Sp_GetUserList_Result> Sp_GetUserList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)
         {
@@ -60,6 +87,23 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
                 new ObjectParameter("search", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetUserList_Result>("Sp_GetUserList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, totalRecords);
+        }
+    
+        public virtual int Sp_UpdateDeleteProduct(Nullable<int> productId, Nullable<bool> productStatus, ObjectParameter status, Nullable<int> op)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var productStatusParameter = productStatus.HasValue ?
+                new ObjectParameter("ProductStatus", productStatus) :
+                new ObjectParameter("ProductStatus", typeof(bool));
+    
+            var opParameter = op.HasValue ?
+                new ObjectParameter("Op", op) :
+                new ObjectParameter("Op", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_UpdateDeleteProduct", productIdParameter, productStatusParameter, status, opParameter);
         }
     
         public virtual int Sp_UpdateDeleteUser(Nullable<int> userId, Nullable<bool> userStatus, ObjectParameter status, Nullable<int> op)

@@ -295,33 +295,33 @@ namespace EcommGroceryStore.Controllers
 
 
          
-        [ResponseType(typeof(Cart))]
-        public IHttpActionResult PostCart(Cart cart)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(Cart))]
+        //public IHttpActionResult PostCart(Cart cart)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
              
-            dbContext.Cart.Add(cart);
-            dbContext.SaveChanges();  
-            return CreatedAtRoute("DefaultApi", new { id = cart.CartId}, cart);
-        }
+        //    dbContext.Cart.Add(cart);
+        //    dbContext.SaveChanges();  
+        //    return CreatedAtRoute("DefaultApi", new { id = cart.CartId}, cart);
+        //}
 
 
-        [ResponseType(typeof(CartDetail))]
-        public IHttpActionResult PostCartDetail(CartDetail cartDetail)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(CartDetail))]
+        //public IHttpActionResult PostCartDetail(CartDetail cartDetail)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            dbContext.CartDetail.Add(cartDetail);
-            dbContext.SaveChanges(); 
+        //    dbContext.CartDetail.Add(cartDetail);
+        //    dbContext.SaveChanges(); 
 
-            return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartDetailId }, cartDetail);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartDetailId }, cartDetail);
+        //}
 
         protected override void Dispose(bool disposing)
         {
