@@ -83,6 +83,10 @@
           <Property Name="PricePerUnit" Type="int" Nullable="false" />
           <Property Name="Unit" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsOutOfStock" Type="bit" Nullable="false" />
+          <Property Name="IsLimitedStock" Type="bit" Nullable="false" />
+          <Property Name="IsSeasonalStock" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -240,12 +244,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Sp_GetProductDetailsList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="currentIndex" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="orderByClause" Type="varchar" Mode="In" />
+          <Parameter Name="search" Type="varchar" Mode="In" />
+          <Parameter Name="MainCategoryId" Type="int" Mode="In" />
+          <Parameter Name="SubCategoryId" Type="int" Mode="In" />
+          <Parameter Name="totalRecords" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="Sp_GetUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="currentIndex" Type="int" Mode="In" />
           <Parameter Name="pageSize" Type="int" Mode="In" />
           <Parameter Name="orderByClause" Type="varchar" Mode="In" />
           <Parameter Name="search" Type="varchar" Mode="In" />
           <Parameter Name="totalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="Sp_UpdateDeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductId" Type="int" Mode="In" />
+          <Parameter Name="ProductStatus" Type="bit" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="InOut" />
+          <Parameter Name="Op" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_UpdateDeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
@@ -402,6 +421,10 @@
           <Property Name="PricePerUnit" Type="Int32" Nullable="false" />
           <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsOutOfStock" Type="Boolean" Nullable="false" />
+          <Property Name="IsLimitedStock" Type="Boolean" Nullable="false" />
+          <Property Name="IsSeasonalStock" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_ProductDetails_SubCategoryMaster" FromRole="ProductDetails" ToRole="SubCategoryMaster" />
         </EntityType>
         <EntityType Name="Roles">
@@ -618,12 +641,27 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="Sp_GetProductDetailsList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetProductDetailsList_Result)">
+            <Parameter Name="currentIndex" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="orderByClause" Mode="In" Type="String" />
+            <Parameter Name="search" Mode="In" Type="String" />
+            <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="SubCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
             <Parameter Name="currentIndex" Mode="In" Type="Int32" />
             <Parameter Name="pageSize" Mode="In" Type="Int32" />
             <Parameter Name="orderByClause" Mode="In" Type="String" />
             <Parameter Name="search" Mode="In" Type="String" />
             <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_UpdateDeleteProduct">
+            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+            <Parameter Name="ProductStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="Status" Mode="InOut" Type="Int32" />
+            <Parameter Name="Op" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_UpdateDeleteUser">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -632,6 +670,21 @@
             <Parameter Name="Op" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Sp_GetProductDetailsList_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="400" />
+          <Property Type="Int32" Name="SubCategoryId" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ImageURL" Nullable="true" />
+          <Property Type="Int32" Name="PricePerUnit" Nullable="true" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="Int32" Name="MainCategoryId" Nullable="true" />
+          <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SubCategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="RowNumber" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="Sp_GetUserList_Result">
           <Property Type="Int32" Name="UserId" Nullable="true" />
           <Property Type="Int32" Name="RoleId" Nullable="true" />
@@ -737,6 +790,10 @@
                 <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsOutOfStock" ColumnName="IsOutOfStock" />
+                <ScalarProperty Name="IsLimitedStock" ColumnName="IsLimitedStock" />
+                <ScalarProperty Name="IsSeasonalStock" ColumnName="IsSeasonalStock" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -779,6 +836,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_GetProductDetailsList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetProductDetailsList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetProductDetailsList_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
+                <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+                <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_GetUserList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetUserList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetUserList_Result">
@@ -798,6 +874,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteProduct" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteProduct" />
           <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteUser" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteUser" />
         </EntityContainerMapping>
       </Mapping>

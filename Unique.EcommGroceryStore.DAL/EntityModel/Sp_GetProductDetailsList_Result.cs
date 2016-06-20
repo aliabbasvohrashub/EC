@@ -10,24 +10,21 @@
 namespace Unique.EcommGroceryStore.DAL.EntityModel
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ProductDetails
+    public partial class Sp_GetProductDetailsList_Result
     {
-        public int ProductId { get; set; }
+        public Nullable<int> ProductId { get; set; }
         public string ProductName { get; set; }
-        public int SubCategoryId { get; set; }
-        public int Quantity { get; set; }
+        public Nullable<int> SubCategoryId { get; set; }
+        public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
         public string ImageURL { get; set; }
-        public int PricePerUnit { get; set; }
+        public Nullable<int> PricePerUnit { get; set; }
         public string Unit { get; set; }
-        public bool Status { get; set; }
-        public bool IsDeleted { get; set; }
-        public bool IsOutOfStock { get; set; }
-        public bool IsLimitedStock { get; set; }
-        public bool IsSeasonalStock { get; set; }
-    
-        public virtual SubCategoryMaster SubCategoryMaster { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public Nullable<int> MainCategoryId { get; set; }
+        public string MainCategoryName { get; set; }
+        public string SubCategoryName { get; set; }
+        public Nullable<int> RowNumber { get; set; }
     }
 }
