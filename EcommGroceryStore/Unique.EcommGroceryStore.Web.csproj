@@ -184,6 +184,7 @@
     <Content Include="Apps\Admin\ManageProductList.aspx" />
     <Content Include="Apps\Admin\ManageProducts.aspx" />
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
+    <Content Include="Apps\Admin\ManageTransaction.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -1456,6 +1457,13 @@
     </Compile>
     <Compile Include="Apps\Admin\ManageSubCategory.aspx.designer.cs">
       <DependentUpon>ManageSubCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageTransaction.aspx.cs">
+      <DependentUpon>ManageTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageTransaction.aspx.designer.cs">
+      <DependentUpon>ManageTransaction.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\Admin\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>

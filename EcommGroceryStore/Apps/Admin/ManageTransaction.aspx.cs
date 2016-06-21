@@ -18,7 +18,7 @@ namespace EcommGroceryStore.Apps.Admin
             {
                 BindTransacionList(0, 0, gvTransactionDetails);
             }
-        }        
+        }
 
         protected void gvTransactionDetails_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -41,5 +41,6 @@ namespace EcommGroceryStore.Apps.Admin
                 gv.DataSource = dt;
             gv.DataBind();
         }
+
     }
 }

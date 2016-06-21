@@ -82,7 +82,7 @@ namespace EcommGroceryStore.Controllers
             cart.DateCreated = System.DateTime.Now;
             db.Cart.Add(cart);
             db.SaveChanges();
-            return CreatedAtRoute("CartApi", new { id =cart.CartId }, cart); 
+            return CreatedAtRoute("CartApi", new { id = cart.CartId }, cart);
         }
 
 
@@ -98,9 +98,10 @@ namespace EcommGroceryStore.Controllers
             bool count = db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Any();
             if (count)
             {
-                var aa = db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Select(x => x.Quantity).FirstOrDefault().HasValue ? db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Select(x => x.Quantity).FirstOrDefault() : 0;
+                cartdetail.Timestamp = System.DateTime.Now;
+                var quantitysupplied = db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Select(x => x.Quantity).FirstOrDefault().HasValue ? db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Select(x => x.Quantity).FirstOrDefault() : 0;
                 cartdetail.CartDetailId = db.CartDetail.Where(x => x.ProductId == cartdetail.ProductId && x.CartId == cartdetail.CartId).Select(x => x.CartDetailId).Single();
-                cartdetail.Quantity = cartdetail.Quantity.HasValue ? cartdetail.Quantity : 0 + Convert.ToInt16(aa);
+                cartdetail.Quantity = cartdetail.Quantity.HasValue ? cartdetail.Quantity : 0 + Convert.ToInt16(quantitysupplied);
                 db.Entry(cartdetail).State = EntityState.Modified;
 
                 try
@@ -108,12 +109,14 @@ namespace EcommGroceryStore.Controllers
                     db.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
-                { 
-                        throw; 
-                } 
+                {
+                    throw;
+                }
             }
             else
             {
+
+                cartdetail.Timestamp = System.DateTime.Now;
                 db.CartDetail.Add(cartdetail);
                 db.SaveChanges();
             }
@@ -129,7 +132,7 @@ namespace EcommGroceryStore.Controllers
         [ResponseType(typeof(string))]
         [HttpPost]
         public IHttpActionResult GetNewPostMethod(string cart)
-        { 
+        {
             //db.Cart.Add(cart);
             //db.SaveChanges();
             //  return cart.CartId.ToString();
