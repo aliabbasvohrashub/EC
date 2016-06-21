@@ -1,4 +1,5 @@
-﻿//alert('this should work');
+﻿ 
+//alert('this should work');
 
 
 //(function () {
@@ -112,4 +113,3 @@ function getProductDetail(querystring) {
    });
 }
 
-document.getElementById('ip').value = myip;

@@ -30,6 +30,37 @@
     <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_AreaMaster" FromRole="AreaMaster" ToRole="AddressDetails" />
     <NavigationProperty Name="CityMaster" Relationship="Self.FK_AreaMaster_CityMaster" FromRole="AreaMaster" ToRole="CityMaster" />
   </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IpAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CartDetail" Relationship="Self.FK_CardDetail_Cart" FromRole="Cart" ToRole="CartDetail" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Cart_Users" FromRole="Cart" ToRole="Users" />
+    <NavigationProperty Name="TransactionDetails" Relationship="Self.FK_TransactionDetails_Cart" FromRole="Cart" ToRole="TransactionDetails" />
+  </EntityType>
+  <EntityType Name="CartDetail">
+    <Key>
+      <PropertyRef Name="CartDetailId" />
+    </Key>
+    <Property Name="CartDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NetAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="PricePerUnit" Type="Int32" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_CardDetail_Cart" FromRole="CartDetail" ToRole="Cart" />
+    <NavigationProperty Name="ProductDetails" Relationship="Self.FK_CartDetail_ProductDetails" FromRole="CartDetail" ToRole="ProductDetails" />
+  </EntityType>
   <EntityType Name="CityMaster">
     <Key>
       <PropertyRef Name="CityId" />
@@ -91,6 +122,11 @@
     <Property Name="PricePerUnit" Type="Int32" Nullable="false" />
     <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsOutOfStock" Type="Boolean" Nullable="false" />
+    <Property Name="IsLimitedStock" Type="Boolean" Nullable="false" />
+    <Property Name="IsSeasonalStock" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CartDetail" Relationship="Self.FK_CartDetail_ProductDetails" FromRole="ProductDetails" ToRole="CartDetail" />
     <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_ProductDetails_SubCategoryMaster" FromRole="ProductDetails" ToRole="SubCategoryMaster" />
   </EntityType>
   <EntityType Name="Roles">
@@ -110,6 +146,23 @@
     <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="MainCategoryMaster" Relationship="Self.FK_SubCategoryMaster_MainCategoryMaster" FromRole="SubCategoryMaster" ToRole="MainCategoryMaster" />
     <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_SubCategoryMaster" FromRole="SubCategoryMaster" ToRole="ProductDetails" />
+  </EntityType>
+  <EntityType Name="TransactionDetails">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsConfirm" Type="Boolean" Nullable="false" />
+    <Property Name="PGTransactionId" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Custom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Custom1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CartId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_TransactionDetails_Cart" FromRole="TransactionDetails" ToRole="Cart" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_TransactionDetails_Users" FromRole="TransactionDetails" ToRole="Users" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -132,8 +185,10 @@
     <Property Name="ActivationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="AddressDetails" Relationship="Self.FK_AddressDetails_Users" FromRole="Users" ToRole="AddressDetails" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Users" FromRole="Users" ToRole="Cart" />
     <NavigationProperty Name="FollowUpDetails" Relationship="Self.FK_FollowUpDetails_Users" FromRole="Users" ToRole="FollowUpDetails" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+    <NavigationProperty Name="TransactionDetails" Relationship="Self.FK_TransactionDetails_Users" FromRole="Users" ToRole="TransactionDetails" />
   </EntityType>
   <Association Name="FK_AddressDetails_AreaMaster">
     <End Role="AreaMaster" Type="Self.AreaMaster" Multiplicity="1" />
@@ -192,6 +247,54 @@
       </Principal>
       <Dependent Role="AreaMaster">
         <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CardDetail_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionDetails_Cart">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+    <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="TransactionDetails">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartDetail_ProductDetails">
+    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="0..1" />
+    <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetails">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -255,9 +358,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TransactionDetails_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TransactionDetails">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="EcommGroceryDataContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" />
     <EntitySet Name="AreaMaster" EntityType="Self.AreaMaster" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" />
+    <EntitySet Name="CartDetail" EntityType="Self.CartDetail" />
     <EntitySet Name="CityMaster" EntityType="Self.CityMaster" />
     <EntitySet Name="CountryMaster" EntityType="Self.CountryMaster" />
     <EntitySet Name="CouponDetails" EntityType="Self.CouponDetails" />
@@ -266,6 +383,7 @@
     <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" />
     <EntitySet Name="Roles" EntityType="Self.Roles" />
     <EntitySet Name="SubCategoryMaster" EntityType="Self.SubCategoryMaster" />
+    <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" />
     <EntitySet Name="Users" EntityType="Self.Users" />
     <AssociationSet Name="FK_AddressDetails_AreaMaster" Association="Self.FK_AddressDetails_AreaMaster">
       <End Role="AreaMaster" EntitySet="AreaMaster" />
@@ -287,6 +405,22 @@
       <End Role="CityMaster" EntitySet="CityMaster" />
       <End Role="AreaMaster" EntitySet="AreaMaster" />
     </AssociationSet>
+    <AssociationSet Name="FK_CardDetail_Cart" Association="Self.FK_CardDetail_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_Users" Association="Self.FK_Cart_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionDetails_Cart" Association="Self.FK_TransactionDetails_Cart">
+      <End Role="Cart" EntitySet="Cart" />
+      <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartDetail_ProductDetails" Association="Self.FK_CartDetail_ProductDetails">
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+      <End Role="CartDetail" EntitySet="CartDetail" />
+    </AssociationSet>
     <AssociationSet Name="FK_CityMaster_CountryMaster" Association="Self.FK_CityMaster_CountryMaster">
       <End Role="CountryMaster" EntitySet="CountryMaster" />
       <End Role="CityMaster" EntitySet="CityMaster" />
@@ -307,12 +441,42 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_TransactionDetails_Users" Association="Self.FK_TransactionDetails_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+    </AssociationSet>
+    <FunctionImport Name="Sp_GetProductDetailsList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetProductDetailsList_Result)">
+      <Parameter Name="currentIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="orderByClause" Mode="In" Type="String" />
+      <Parameter Name="search" Mode="In" Type="String" />
+      <Parameter Name="MainCategoryId" Mode="In" Type="Int32" />
+      <Parameter Name="SubCategoryId" Mode="In" Type="Int32" />
+      <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_GetTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetTransactionList_Result)">
+      <Parameter Name="CartId" Mode="In" Type="Int32" />
+      <Parameter Name="Op" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
       <Parameter Name="currentIndex" Mode="In" Type="Int32" />
       <Parameter Name="pageSize" Mode="In" Type="Int32" />
       <Parameter Name="orderByClause" Mode="In" Type="String" />
       <Parameter Name="search" Mode="In" Type="String" />
       <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_GetUserTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserTransactionList_Result)">
+      <Parameter Name="currentIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="orderByClause" Mode="In" Type="String" />
+      <Parameter Name="search" Mode="In" Type="String" />
+      <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_UpdateDeleteProduct">
+      <Parameter Name="ProductId" Mode="In" Type="Int32" />
+      <Parameter Name="ProductStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="Status" Mode="InOut" Type="Int32" />
+      <Parameter Name="Op" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Sp_UpdateDeleteUser">
       <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -321,6 +485,37 @@
       <Parameter Name="Op" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="Sp_GetProductDetailsList_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="true" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="SubCategoryId" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="ImageURL" Nullable="true" />
+    <Property Type="Int32" Name="PricePerUnit" Nullable="true" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="true" />
+    <Property Type="Int32" Name="MainCategoryId" Nullable="true" />
+    <Property Type="String" Name="MainCategoryName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SubCategoryName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="RowNumber" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_GetTransactionList_Result">
+    <Property Type="Int32" Name="TransactionId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="TransactionDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="ConfirmationDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsConfirm" Nullable="false" />
+    <Property Type="String" Name="PGTransactionId" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="InvoiceId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Custom" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Custom1" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="CartId" Nullable="false" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="101" />
+    <Property Type="String" Name="EmailId" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="MobileNumber" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="AlternateNumber" Nullable="true" MaxLength="20" />
+  </ComplexType>
   <ComplexType Name="Sp_GetUserList_Result">
     <Property Type="Int32" Name="UserId" Nullable="true" />
     <Property Type="Int32" Name="RoleId" Nullable="true" />
@@ -335,5 +530,30 @@
     <Property Type="Boolean" Name="Status" Nullable="true" />
     <Property Type="String" Name="RoleName" Nullable="true" MaxLength="20" />
     <Property Type="Int32" Name="RowNumber" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_GetUserTransactionList_Result">
+    <Property Type="Int32" Name="RowNumber" Nullable="true" />
+    <Property Type="String" Name="UserFullName" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="EmailId" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="MobileNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="AlternateNumber" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+    <Property Type="Int32" Name="TransactionId" Nullable="true" />
+    <Property Type="Int32" Name="UserId" Nullable="true" />
+    <Property Type="Int32" Name="ProductId" Nullable="true" />
+    <Property Type="DateTime" Name="TransactionDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ConfirmationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Int32" Name="PricePerUnit" Nullable="true" />
+    <Property Type="Boolean" Name="IsConfirm" Nullable="true" />
+    <Property Type="String" Name="PGTransactionId" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="InvoiceId" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Discount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="NetAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Custom" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Custom1" Nullable="true" MaxLength="50" />
   </ComplexType>
 </Schema>

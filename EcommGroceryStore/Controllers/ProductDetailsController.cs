@@ -233,7 +233,7 @@ namespace EcommGroceryStore.Controllers
             dbContext.SaveChanges();
             //} 
 
-            return CreatedAtRoute("DefaultApi", new { id = productdetails.ProductId }, productdetails);
+            return CreatedAtRoute("ActionApi", new { id = productdetails.ProductId }, productdetails);
         }
 
         // PUT api/<controller>/5
@@ -320,7 +320,7 @@ namespace EcommGroceryStore.Controllers
         //    dbContext.CartDetail.Add(cartDetail);
         //    dbContext.SaveChanges(); 
 
-        //    return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartDetailId }, cartDetail);
+        //    return CreatedAtRoute("ProductDetailsApi", new { id = cartDetail.CartDetailId }, cartDetail);
         //}
 
         protected override void Dispose(bool disposing)

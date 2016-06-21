@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <script src="/../Scripts/custom/listfruits.js"></script>    
+    <script src="/../Scripts/custom/cart.js"></script>    
 
 
     <script>
@@ -22,16 +23,28 @@
                 $(".price").text(data[0].PricePerUnit);
                 $(".short-description").text(data[0].ProductName);
                 $("#yt_cloudzoom").attr('href', data[0].ImageURL);
-                $("#image").attr('src', '../'+ data[0].ImageURL);
+                $("#image").attr('src', '../' + data[0].ImageURL);
                 //data.ProductId
             });
             $("#AddToCart").click(function () {
 
-                var product = { 
-                    ProductId: $("#ProductId").text(),
-                    Qty: $("#qty").text()
+                if (document.getElementById('cartid').value == '') {
+                    var cart = new Object();
+                    cart.IpAddress = $("#ip").val();
+                    cart.IsActive = true;
+                    alert('generate cart called ');
+                    generateCart(cart);
                 }
-            });             
+                else {
+                    var product = {
+                        CartId: $("#cartid").val(),
+                        ProductId: $("#ProductId").text(),                        
+                        Quantity: $("#qty").val()
+                    }
+                    alert('AddProductToCart called ');
+                    AddProductToCart(product);
+                }
+            });
         });
       
         function DecreaseByOne() {
@@ -132,7 +145,7 @@
 
                                                             jQuery(document).ready(function ($) {
 
-                                                                $('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();
+                                                              //  $('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();
 
                                                                 $('.fancybox-image-hidden').each(function () {
                                                                     attr = $(this).attr('href');
@@ -263,7 +276,7 @@
                                                                     <div class="input-box">
                                                                         <div class="selector" id="uniform-select_54" style="width: 166px;">
                                                                             <span style="width: 111px; -webkit-user-select: none;">-- Please Select --</span>
-                                                                            <select name="options[54]" id="select_54" class="required-entry product-custom-option jqtransformdone" title="" onchange="opConfig.reloadPrice()">
+                                                                            <select name="options[54]" id="select_54" class="required-entry product-custom-option jqtransformdone" title="">
                                                                                 <option value="">-- Please Select --</option>
                                                                                 <option value="0">500gm </option>
                                                                                 <option value="1">1kg </option>

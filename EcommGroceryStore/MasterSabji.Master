@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
-    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>    
     <link href="/../media/css/style.css" rel="stylesheet" />
     <style type="text/css">
         body { 
@@ -95,6 +95,7 @@
 <body id="bd" class="cmspage1 onlinesabjiwala    cms-index-index cms-home">
     <div id="pageloaddiv"></div>  
     <input type="hidden" id="ip" value="" />
+    <input type="hidden" id="cartid" value="" />
     <form runat="server">
         <div id="options">
             <div id="options-tab" style="top: 0px;">
@@ -598,5 +599,6 @@
     </form>
     <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
 </body>
+    <script src="/../Scripts/custom/basic.js"></script>
 <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
 </html>

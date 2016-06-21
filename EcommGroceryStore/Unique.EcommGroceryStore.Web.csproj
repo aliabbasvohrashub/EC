@@ -184,7 +184,6 @@
     <Content Include="Apps\Admin\ManageProductList.aspx" />
     <Content Include="Apps\Admin\ManageProducts.aspx" />
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
-    <Content Include="Apps\Admin\ManageTransaction.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -1141,6 +1140,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom\basic.js" />
+    <Content Include="Scripts\custom\cart.js" />
     <Content Include="Scripts\custom\listfruits.js" />
     <Content Include="Scripts\custom\listmostsold.js" />
     <Content Include="Scripts\custom\listveg.js" />
@@ -1456,13 +1457,6 @@
     <Compile Include="Apps\Admin\ManageSubCategory.aspx.designer.cs">
       <DependentUpon>ManageSubCategory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Apps\Admin\ManageTransaction.aspx.cs">
-      <DependentUpon>ManageTransaction.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Apps\Admin\ManageTransaction.aspx.designer.cs">
-      <DependentUpon>ManageTransaction.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Apps\Admin\ManageUser.aspx.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1489,6 +1483,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ProductDetailsController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
