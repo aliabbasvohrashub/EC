@@ -44,7 +44,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Ionic.Zip.Reduced">
-      <HintPath>C:\Users\DELL-PC\Downloads\zip-v1.9-Reduced\Ionic.Zip.Reduced.dll</HintPath>
+      <HintPath>..\..\..\..\Users\zt\Downloads\OGS\EcommGroceryStore\bin\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -180,6 +180,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyEmailAddress.aspx" />
     <Content Include="Apps\Admin\ManageMasterCategory.aspx" />
+    <Content Include="Apps\Admin\ManageProductImages.aspx" />
     <Content Include="Apps\Admin\ManageProductList.aspx" />
     <Content Include="Apps\Admin\ManageProducts.aspx" />
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
@@ -1426,6 +1427,13 @@
     </Compile>
     <Compile Include="Apps\Admin\ManageMasterCategory.aspx.designer.cs">
       <DependentUpon>ManageMasterCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageProductImages.aspx.cs">
+      <DependentUpon>ManageProductImages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\Admin\ManageProductImages.aspx.designer.cs">
+      <DependentUpon>ManageProductImages.aspx</DependentUpon>
     </Compile>
     <Compile Include="Apps\Admin\ManageProductList.aspx.cs">
       <DependentUpon>ManageProductList.aspx</DependentUpon>

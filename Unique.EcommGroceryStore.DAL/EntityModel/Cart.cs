@@ -18,15 +18,19 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public Cart()
         {
             this.CartDetail = new HashSet<CartDetail>();
+            this.TransactionDetails = new HashSet<TransactionDetails>();
         }
     
         public int CartId { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public bool IsActive { get; set; }
+        public string IpAddress { get; set; }
     
-        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartDetail> CartDetail { get; set; }
+        public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionDetails> TransactionDetails { get; set; }
     }
 }

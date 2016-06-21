@@ -14,6 +14,12 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
     
     public partial class ProductDetails
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ProductDetails()
+        {
+            this.CartDetail = new HashSet<CartDetail>();
+        }
+    
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public int SubCategoryId { get; set; }
@@ -28,6 +34,8 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public bool IsLimitedStock { get; set; }
         public bool IsSeasonalStock { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartDetail> CartDetail { get; set; }
         public virtual SubCategoryMaster SubCategoryMaster { get; set; }
     }
 }

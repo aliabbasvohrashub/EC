@@ -29,6 +29,8 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
     
         public virtual DbSet<AddressDetails> AddressDetails { get; set; }
         public virtual DbSet<AreaMaster> AreaMaster { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<CartDetail> CartDetail { get; set; }
         public virtual DbSet<CityMaster> CityMaster { get; set; }
         public virtual DbSet<CountryMaster> CountryMaster { get; set; }
         public virtual DbSet<CouponDetails> CouponDetails { get; set; }
@@ -37,6 +39,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public virtual DbSet<ProductDetails> ProductDetails { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
+        public virtual DbSet<TransactionDetails> TransactionDetails { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     
         public virtual ObjectResult<Sp_GetProductDetailsList_Result> Sp_GetProductDetailsList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, Nullable<int> mainCategoryId, Nullable<int> subCategoryId, ObjectParameter totalRecords)
@@ -68,6 +71,19 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetProductDetailsList_Result>("Sp_GetProductDetailsList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, mainCategoryIdParameter, subCategoryIdParameter, totalRecords);
         }
     
+        public virtual ObjectResult<Sp_GetTransactionList_Result> Sp_GetTransactionList(Nullable<int> cartId, Nullable<int> op)
+        {
+            var cartIdParameter = cartId.HasValue ?
+                new ObjectParameter("CartId", cartId) :
+                new ObjectParameter("CartId", typeof(int));
+    
+            var opParameter = op.HasValue ?
+                new ObjectParameter("Op", op) :
+                new ObjectParameter("Op", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetTransactionList_Result>("Sp_GetTransactionList", cartIdParameter, opParameter);
+        }
+    
         public virtual ObjectResult<Sp_GetUserList_Result> Sp_GetUserList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)
         {
             var currentIndexParameter = currentIndex.HasValue ?
@@ -87,6 +103,27 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
                 new ObjectParameter("search", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetUserList_Result>("Sp_GetUserList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, totalRecords);
+        }
+    
+        public virtual ObjectResult<Sp_GetUserTransactionList_Result> Sp_GetUserTransactionList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)
+        {
+            var currentIndexParameter = currentIndex.HasValue ?
+                new ObjectParameter("currentIndex", currentIndex) :
+                new ObjectParameter("currentIndex", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("pageSize", pageSize) :
+                new ObjectParameter("pageSize", typeof(int));
+    
+            var orderByClauseParameter = orderByClause != null ?
+                new ObjectParameter("orderByClause", orderByClause) :
+                new ObjectParameter("orderByClause", typeof(string));
+    
+            var searchParameter = search != null ?
+                new ObjectParameter("search", search) :
+                new ObjectParameter("search", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetUserTransactionList_Result>("Sp_GetUserTransactionList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, totalRecords);
         }
     
         public virtual int Sp_UpdateDeleteProduct(Nullable<int> productId, Nullable<bool> productStatus, ObjectParameter status, Nullable<int> op)
