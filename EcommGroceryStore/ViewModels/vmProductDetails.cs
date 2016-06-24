@@ -20,3 +20,18 @@ namespace EcommGroceryStore.ViewModels
         public bool Status { get; set; } 
     }
 }
+
+
+/*
+        ProductId  
+        ProductName  
+        MainCategoryName  
+        SubCategoryName 
+        Quantity  
+        Description  
+        ImageURL  
+        PricePerUnit  
+        Unit  
+        Status  
+
+*/

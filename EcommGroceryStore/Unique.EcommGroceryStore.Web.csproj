@@ -1550,6 +1550,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MainCategoryMasterSub.cs" />
     <Compile Include="ViewModels\SubCategoryMasterSub.cs" />
+    <Compile Include="ViewModels\vmCartDetail.cs" />
     <Compile Include="ViewModels\vmPrdListDependency.cs" />
     <Compile Include="ViewModels\vmProductDetails.cs" />
     <Compile Include="ViewModels\vmProductDetailsSummary.cs" />

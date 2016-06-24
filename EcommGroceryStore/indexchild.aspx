@@ -739,32 +739,32 @@
                                     <!-- End Sm-basic-products -->
 
                                     <script>
-                                        jQuery(document).ready(function ($) {
-                                            var owl_left = $(".basic-product");
-                                            owl_left.owlCarousel({
-                                                itemsCustom: [
-                                                [0, 1],
-                                                [480, 1],
-                                                [768, 2],
-                                                [992, 1],
-                                                [1200, 1]
-                                                ],
+                                        //jQuery(document).ready(function ($) {
+                                        //    var owl_left = $(".basic-product");
+                                        //    owl_left.owlCarousel({
+                                        //        itemsCustom: [
+                                        //        [0, 1],
+                                        //        [480, 1],
+                                        //        [768, 2],
+                                        //        [992, 1],
+                                        //        [1200, 1]
+                                        //        ],
 
-                                                slideSpeed: 300,
-                                                stopOnHover: true,
-                                                paginationSpeed: 400,
-                                                autoPlay: false,
-                                                pagination: false,
-                                            });
+                                        //        slideSpeed: 300,
+                                        //        stopOnHover: true,
+                                        //        paginationSpeed: 400,
+                                        //        autoPlay: false,
+                                        //        pagination: false,
+                                        //    });
 
 
-                                            $(".nav-left-product .next-bs").click(function () {
-                                                owl_left.trigger('owl.next');
-                                            })
-                                            $(".nav-left-product .prev-bs").click(function () {
-                                                owl_left.trigger('owl.prev');
-                                            })
-                                        });
+                                        //    $(".nav-left-product .next-bs").click(function () {
+                                        //        owl_left.trigger('owl.next');
+                                        //    })
+                                        //    $(".nav-left-product .prev-bs").click(function () {
+                                        //        owl_left.trigger('owl.prev');
+                                        //    })
+                                        //});
                                     </script>
 
                                 </div>
@@ -802,22 +802,22 @@
                                         </div>
                                     </div>
                                     <script type="text/javascript">// <![CDATA[
-                                        jQuery(document).ready(function ($) {
-                                            $('.accordion').accordion_snyderplace({
-                                                defaultOpen: 'section2',
-                                                speed: 'fast',
-                                                animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
-                                                    elem.next().slideFadeToggle(opts.speed);
-                                                },
-                                                animateClose: function (elem, opts) { //replace the standard slideDown with custom function
-                                                    elem.next().slideFadeToggle(opts.speed);
-                                                }
-                                            });
-                                            //custom animation for open/close
-                                            $.fn.slideFadeToggle = function (speed, easing, callback) {
-                                                return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback);
-                                            };
-                                        });
+                                        //jQuery(document).ready(function ($) {
+                                        //    $('.accordion').accordion_snyderplace({
+                                        //        defaultOpen: 'section2',
+                                        //        speed: 'fast',
+                                        //        animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+                                        //            elem.next().slideFadeToggle(opts.speed);
+                                        //        },
+                                        //        animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+                                        //            elem.next().slideFadeToggle(opts.speed);
+                                        //        }
+                                        //    });
+                                        //    //custom animation for open/close
+                                        //    $.fn.slideFadeToggle = function (speed, easing, callback) {
+                                        //        return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback);
+                                        //    };
+                                        //});
                                         // ]]></script>
                                 </div>
                             </div>
@@ -884,55 +884,55 @@
 
                                 <script type="text/javascript">
                                     //<![CDATA[
-                                    jQuery(document).ready(function ($) {
-                                        $('.sm_imageslider').owlCarousel({
-                                            navigation: true,
+                                    //jQuery(document).ready(function ($) {
+                                    //    $('.sm_imageslider').owlCarousel({
+                                    //        navigation: true,
 
-                                            slideSpeed: 800,
-                                            stopOnHover: true,
-                                            paginationSpeed: 800,
-                                            autoPlay: true,
+                                    //        slideSpeed: 800,
+                                    //        stopOnHover: true,
+                                    //        paginationSpeed: 800,
+                                    //        autoPlay: true,
 
-                                            pagination: true,
+                                    //        pagination: true,
 
-                                            singleItem: true,
-                                            transitionStyle: "goDown"
+                                    //        singleItem: true,
+                                    //        transitionStyle: "goDown"
 
-                                        });
-                                    });
+                                    //    });
+                                    //});
                                     //]]>
                                 </script>
 
 
                                 <script type="text/javascript">
                                     //<![CDATA[
-                                    data = new Date(2013, 10, 26, 12, 00, 00);
-                                    var listdeal = [];
-                                    function CountDown(date, id) {
-                                        dateNow = new Date();
-                                        amount = date.getTime() - dateNow.getTime();
-                                        delete dateNow;
-                                        if (amount < 0) {
-                                            document.getElementById(id).innerHTML = "Now!";
-                                        } else {
-                                            days = 0; hours = 0; mins = 0; secs = 0; out = "";
-                                            amount = Math.floor(amount / 1000);
-                                            days = Math.floor(amount / 86400);
-                                            amount = amount % 86400;
-                                            hours = Math.floor(amount / 3600);
-                                            amount = amount % 3600;
-                                            mins = Math.floor(amount / 60);
-                                            amount = amount % 60;
-                                            secs = Math.floor(amount);
-                                            if (days != 0) { out += "<div class='time-item time-day'>" + "<div class='num-time'>" + days + "</div>" + " <div class='name-time'>" + ((days == 1) ? "Day" : "Days") + "</div>" + "</div> "; }
-                                            if (hours != 0) { out += "<div class='time-item time-hour'>" + "<div class='num-time'>" + hours + "</div>" + " <div class='name-time'>" + ((hours == 1) ? "Hour" : "Hours") + "</div>" + "</div> "; }
-                                            out += "<div class='time-item time-min'>" + "<div class='num-time'>" + mins + "</div>" + " <div class='name-time'>" + ((mins == 1) ? "Min" : "Mins") + "</div>" + "</div> ";
-                                            out += "<div class='time-item time-sec'>" + "<div class='num-time'>" + secs + "</div>" + " <div class='name-time'>" + ((secs == 1) ? "Sec" : "Secs") + "</div>" + "</div> ";
-                                            out = out.substr(0, out.length - 2);
-                                            document.getElementById(id).innerHTML = out;
-                                            setTimeout(function () { CountDown(date, id) }, 1000);
-                                        }
-                                    }
+                                    //data = new Date(2013, 10, 26, 12, 00, 00);
+                                    //var listdeal = [];
+                                    //function CountDown(date, id) {
+                                    //    dateNow = new Date();
+                                    //    amount = date.getTime() - dateNow.getTime();
+                                    //    delete dateNow;
+                                    //    if (amount < 0) {
+                                    //        document.getElementById(id).innerHTML = "Now!";
+                                    //    } else {
+                                    //        days = 0; hours = 0; mins = 0; secs = 0; out = "";
+                                    //        amount = Math.floor(amount / 1000);
+                                    //        days = Math.floor(amount / 86400);
+                                    //        amount = amount % 86400;
+                                    //        hours = Math.floor(amount / 3600);
+                                    //        amount = amount % 3600;
+                                    //        mins = Math.floor(amount / 60);
+                                    //        amount = amount % 60;
+                                    //        secs = Math.floor(amount);
+                                    //        if (days != 0) { out += "<div class='time-item time-day'>" + "<div class='num-time'>" + days + "</div>" + " <div class='name-time'>" + ((days == 1) ? "Day" : "Days") + "</div>" + "</div> "; }
+                                    //        if (hours != 0) { out += "<div class='time-item time-hour'>" + "<div class='num-time'>" + hours + "</div>" + " <div class='name-time'>" + ((hours == 1) ? "Hour" : "Hours") + "</div>" + "</div> "; }
+                                    //        out += "<div class='time-item time-min'>" + "<div class='num-time'>" + mins + "</div>" + " <div class='name-time'>" + ((mins == 1) ? "Min" : "Mins") + "</div>" + "</div> ";
+                                    //        out += "<div class='time-item time-sec'>" + "<div class='num-time'>" + secs + "</div>" + " <div class='name-time'>" + ((secs == 1) ? "Sec" : "Secs") + "</div>" + "</div> ";
+                                    //        out = out.substr(0, out.length - 2);
+                                    //        document.getElementById(id).innerHTML = out;
+                                    //        setTimeout(function () { CountDown(date, id) }, 1000);
+                                    //    }
+                                    //}
                                     //]]>
                                 </script>
 
@@ -960,44 +960,44 @@
                                     </div>
                                 </div>
                                 <script>
-                                    jQuery(document).ready(function ($) {
-                                        var owl_deal = $(".slider-deal");
-                                        owl_deal.owlCarousel({
-                                            itemsCustom: [
-                                            [0, 1],
-                                            [480, 2],
-                                            [768, 3],
-                                            [992, 3],
-                                            [1200, 4]
-                                            ],
-                                            navigation: false, // Show next and prev buttons
-                                            slideSpeed: 300,
-                                            stopOnHover: true,
-                                            paginationSpeed: 400,
-                                            autoPlay: false,
-                                            pagination: false,
-                                        });
+                                    //jQuery(document).ready(function ($) {
+                                    //    var owl_deal = $(".slider-deal");
+                                    //    owl_deal.owlCarousel({
+                                    //        itemsCustom: [
+                                    //        [0, 1],
+                                    //        [480, 2],
+                                    //        [768, 3],
+                                    //        [992, 3],
+                                    //        [1200, 4]
+                                    //        ],
+                                    //        navigation: false, // Show next and prev buttons
+                                    //        slideSpeed: 300,
+                                    //        stopOnHover: true,
+                                    //        paginationSpeed: 400,
+                                    //        autoPlay: false,
+                                    //        pagination: false,
+                                    //    });
 
-                                        $(".next-deal").click(function () {
-                                            owl_deal.trigger('owl.next');
-                                        })
-                                        $(".prev-deal").click(function () {
-                                            owl_deal.trigger('owl.prev');
-                                        })
-                                    });
+                                    //    $(".next-deal").click(function () {
+                                    //        owl_deal.trigger('owl.next');
+                                    //    })
+                                    //    $(".prev-deal").click(function () {
+                                    //        owl_deal.trigger('owl.prev');
+                                    //    })
+                                    //});
                                 </script>
 
                                 <script type="text/javascript">
                                     //<![CDATA[
-                                    window.onload = function () {
-                                        if (listdeal.length > 0) {
-                                            for (i = 0; i < listdeal.length; i++) {
-                                                var arr = listdeal[i].split("&&||&&");
-                                                var data = new Date(arr[1]);
-                                                CountDown(data, arr[0]);
-                                            }
-                                        }
-                                    };
+                                    //window.onload = function () {
+                                    //    if (listdeal.length > 0) {
+                                    //        for (i = 0; i < listdeal.length; i++) {
+                                    //            var arr = listdeal[i].split("&&||&&");
+                                    //            var data = new Date(arr[1]);
+                                    //            CountDown(data, arr[0]);
+                                    //        }
+                                    //    }
+                                    //};
                                     //]]>
                                 </script>
 
@@ -1830,31 +1830,31 @@
                                                 </div>
 
                                                 <script>
-                                                    jQuery(document).ready(function ($) {
-                                                        var owl_cat_29 = $(".slider-cat-29");
-                                                        owl_cat_29.owlCarousel({
-                                                            itemsCustom: [
-                                                            [0, 1],
-                                                            [480, 2],
-                                                            [768, 3],
-                                                            [992, 3],
-                                                            [1200, 4]
-                                                            ],
-                                                            navigation: false, // Show next and prev buttons
-                                                            slideSpeed: 800,
-                                                            stopOnHover: true,
-                                                            paginationSpeed: 400,
-                                                            autoPlay: true,
-                                                            pagination: false,
-                                                        });
+                                                    //jQuery(document).ready(function ($) {
+                                                    //    var owl_cat_29 = $(".slider-cat-29");
+                                                    //    owl_cat_29.owlCarousel({
+                                                    //        itemsCustom: [
+                                                    //        [0, 1],
+                                                    //        [480, 2],
+                                                    //        [768, 3],
+                                                    //        [992, 3],
+                                                    //        [1200, 4]
+                                                    //        ],
+                                                    //        navigation: false, // Show next and prev buttons
+                                                    //        slideSpeed: 800,
+                                                    //        stopOnHover: true,
+                                                    //        paginationSpeed: 400,
+                                                    //        autoPlay: true,
+                                                    //        pagination: false,
+                                                    //    });
 
-                                                        $(".next-super-cat-29").click(function () {
-                                                            owl_cat_29.trigger('owl.next');
-                                                        })
-                                                        $(".prev-super-cat-29").click(function () {
-                                                            owl_cat_29.trigger('owl.prev');
-                                                        })
-                                                    });
+                                                    //    $(".next-super-cat-29").click(function () {
+                                                    //        owl_cat_29.trigger('owl.next');
+                                                    //    })
+                                                    //    $(".prev-super-cat-29").click(function () {
+                                                    //        owl_cat_29.trigger('owl.prev');
+                                                    //    })
+                                                    //});
                                                 </script>
                                             </div>
                                         </div>
@@ -2703,31 +2703,31 @@
                                                 </div>
 
                                                 <script>
-                                                    jQuery(document).ready(function ($) {
-                                                        var owl_cat_30 = $(".slider-cat-30");
-                                                        owl_cat_30.owlCarousel({
-                                                            itemsCustom: [
-                                                            [0, 1],
-                                                            [480, 2],
-                                                            [768, 3],
-                                                            [992, 3],
-                                                            [1200, 4]
-                                                            ],
-                                                            navigation: false, // Show next and prev buttons
-                                                            slideSpeed: 800,
-                                                            stopOnHover: true,
-                                                            paginationSpeed: 400,
-                                                            autoPlay: true,
-                                                            pagination: false,
-                                                        });
+                                                    //jQuery(document).ready(function ($) {
+                                                    //    var owl_cat_30 = $(".slider-cat-30");
+                                                    //    owl_cat_30.owlCarousel({
+                                                    //        itemsCustom: [
+                                                    //        [0, 1],
+                                                    //        [480, 2],
+                                                    //        [768, 3],
+                                                    //        [992, 3],
+                                                    //        [1200, 4]
+                                                    //        ],
+                                                    //        navigation: false, // Show next and prev buttons
+                                                    //        slideSpeed: 800,
+                                                    //        stopOnHover: true,
+                                                    //        paginationSpeed: 400,
+                                                    //        autoPlay: true,
+                                                    //        pagination: false,
+                                                    //    });
 
-                                                        $(".next-super-cat-30").click(function () {
-                                                            owl_cat_30.trigger('owl.next');
-                                                        })
-                                                        $(".prev-super-cat-30").click(function () {
-                                                            owl_cat_30.trigger('owl.prev');
-                                                        })
-                                                    });
+                                                    //    $(".next-super-cat-30").click(function () {
+                                                    //        owl_cat_30.trigger('owl.next');
+                                                    //    })
+                                                    //    $(".prev-super-cat-30").click(function () {
+                                                    //        owl_cat_30.trigger('owl.prev');
+                                                    //    })
+                                                    //});
                                                 </script>
                                             </div>
                                         </div>
@@ -3564,31 +3564,31 @@
                                                 </div>
 
                                                 <script>
-                                                    jQuery(document).ready(function ($) {
-                                                        var owl_cat_8 = $(".slider-cat-8");
-                                                        owl_cat_8.owlCarousel({
-                                                            itemsCustom: [
-                                                            [0, 1],
-                                                            [480, 2],
-                                                            [768, 3],
-                                                            [992, 3],
-                                                            [1200, 4]
-                                                            ],
-                                                            navigation: false, // Show next and prev buttons
-                                                            slideSpeed: 800,
-                                                            stopOnHover: true,
-                                                            paginationSpeed: 400,
-                                                            autoPlay: true,
-                                                            pagination: false,
-                                                        });
+                                                    //jQuery(document).ready(function ($) {
+                                                    //    var owl_cat_8 = $(".slider-cat-8");
+                                                    //    owl_cat_8.owlCarousel({
+                                                    //        itemsCustom: [
+                                                    //        [0, 1],
+                                                    //        [480, 2],
+                                                    //        [768, 3],
+                                                    //        [992, 3],
+                                                    //        [1200, 4]
+                                                    //        ],
+                                                    //        navigation: false, // Show next and prev buttons
+                                                    //        slideSpeed: 800,
+                                                    //        stopOnHover: true,
+                                                    //        paginationSpeed: 400,
+                                                    //        autoPlay: true,
+                                                    //        pagination: false,
+                                                    //    });
 
-                                                        $(".next-super-cat-8").click(function () {
-                                                            owl_cat_8.trigger('owl.next');
-                                                        })
-                                                        $(".prev-super-cat-8").click(function () {
-                                                            owl_cat_8.trigger('owl.prev');
-                                                        })
-                                                    });
+                                                    //    $(".next-super-cat-8").click(function () {
+                                                    //        owl_cat_8.trigger('owl.next');
+                                                    //    })
+                                                    //    $(".prev-super-cat-8").click(function () {
+                                                    //        owl_cat_8.trigger('owl.prev');
+                                                    //    })
+                                                    //});
                                                 </script>
                                             </div>
                                         </div>

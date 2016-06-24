@@ -60,3 +60,35 @@ function checkCookie() {
     setCookie("cartid", document.getElementById('cartid').value, 30);
     } 
 }
+
+
+if (document.getElementById('cartid').value == '') {
+    var cartid = getCookie("cartid");
+    if (cartid != "") { 
+         
+        $.ajax({
+            url: APIRoute,
+            type: 'GET',
+            contentType: "application/json", 
+            data: JSON.stringify(cartid),
+            success: function (data, textStatus, xhr) {
+                //document.getElementById('cartid').value = data.CartId;  
+               // $('#item-cart').text(data.CartId);
+                $.each(data, function(key, value) {
+                    //alert(data[key].PageName);
+                    console.log(key + '  ' + value);
+                })
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                //console.log('Cart could not be generated');
+            }
+        });
+    } 
+}
+$(".search-header.mini-cart-header").click(function () {
+    if ($(".block-content").css('display') == 'none') {
+        $(".block-content").css('display', '');
+    } else {
+        $(".block-content").css('display', 'none');
+    }
+});

@@ -39,9 +39,9 @@
                     var product = {
                         CartId: $("#cartid").val(),
                         ProductId: $("#ProductId").text(),                        
-                        Quantity: $("#qty").val()
+                        Quantity: $("#qty").val() 
                     }
-                    alert('AddProductToCart called ');
+                    alert('AddProductToCart called ' + product);
                     AddProductToCart(product);
                 }
             });
