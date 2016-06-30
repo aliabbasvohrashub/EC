@@ -16,14 +16,17 @@
                 console.log("An error occurred!");
             });
             getProductDetail(querystring);
-            $.when(getProductDetail(querystring)).done(function (data) {
+            $.when(getProductDetail(querystring)).done(function (newdata) {
+
+                console.log('from details page' + newdata[0].PricePerUnit + '  ' + newdata[0].ProductName);
+
                 //console.log(data);
-                $("#ProductId").text(data[0].ProductId);
-                $(".product-name").text(data[0].ProductName);
-                $(".price").text(data[0].PricePerUnit);
-                $(".short-description").text(data[0].ProductName);
-                $("#yt_cloudzoom").attr('href', data[0].ImageURL);
-                $("#image").attr('src', '../' + data[0].ImageURL);
+                $("#ProductId").text(newdata[0].ProductId);
+                $("#product_name_details").text(newdata[0].ProductName);
+                $("#price_details").text('₹ ' + newdata[0].PricePerUnit);
+                $(".short-description").text(newdata[0].ProductName);
+                $("#yt_cloudzoom").attr('href', newdata[0].ImageURL);
+                $("#image").attr('src', '../' + newdata[0].ImageURL);
                 //data.ProductId
             });
             $("#AddToCart").click(function () {
@@ -62,44 +65,14 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="col-1-wrapper">
-                     <%--   <script type="text/javascript">
-                            var optionsPrice = new Product.OptionsPrice({ "productId": "29", "priceFormat": { "pattern": "\u20b9%s", "precision": 2, "requiredPrecision": 2, "decimalSymbol": ".", "groupSymbol": ",", "groupLength": 3, "integerRequired": 1 }, "includeTax": "false", "showIncludeTax": false, "showBothPrices": false, "productPrice": 120, "productOldPrice": 120, "priceInclTax": 120, "priceExclTax": 120, "skipCalculate": 1, "defaultTax": 0, "currentTax": 0, "idSuffix": "_clone", "oldPlusDisposition": 0, "plusDisposition": 0, "plusDispositionTax": 0, "oldMinusDisposition": 0, "minusDisposition": 0, "tierPrices": [], "tierPricesInclTax": [] });
-                        </script>--%>  
                                 <div id="messages_product_view"> </div>
                                 <div class="yt-product-detail" itemscope="" itemtype="http://schema.org/Product">
 	                                <div class="yt-product-detail-inner">
 		                                <div class="row product-essential">
 			                                <div class="box-1">
 				                                <div class="image-box-detail col-lg-6 col-md-6 col-sm-9 col-xs-12">
-					                                <div class="product-img-box">
-						
-
-   
-                                                        <div class="more-views slide-gallery">
-                                                            <div class="wrap-jCarouselLite">
-
-                                                                <div class="jCarouselLite" style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; height: 436px;">
-                                                                    <ul style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; height: 327px; top: -436px;">
-                                                                        <li style="overflow: hidden; float: none; width: 98px; height: 98px;" class="selected">
-                                                                            <a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')" class="cloud-zoom-gallery actived" rel="useZoom: 'yt_cloudzoom', smallImage: 'http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/470x470/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg'" href="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" title="">
-                                                                                <img src="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/120x120/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" alt="" title="" width="98" height="98">
-                                                                            </a>
-                                                                        </li>
-                                                                        <li style="overflow: hidden; float: none; width: 98px; height: 98px;" class="selected">
-                                                                            <a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')" class="cloud-zoom-gallery actived" rel="useZoom: 'yt_cloudzoom', smallImage: 'http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/470x470/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg'" href="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" title="">
-                                                                                <img src="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/120x120/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" alt="" title="" width="98" height="98">
-                                                                            </a>
-                                                                        </li>
-                                                                        <li style="overflow: hidden; float: none; width: 98px; height: 98px;" class="selected">
-                                                                            <a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')" class="cloud-zoom-gallery actived" rel="useZoom: 'yt_cloudzoom', smallImage: 'http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/470x470/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg'" href="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" title="">
-                                                                                <img src="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/120x120/9df78eab33525d08d6e5fb8d27136e95/r/e/red_apples-551.jpg" alt="" title="" width="98" height="98">
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
+					                                <div class="product-img-box"> 
+    
  
                                                         <div class="yt-detail-image zoom-wrapper-detail">
                                                             <div class="product-image product-image-zoom">
@@ -167,21 +140,21 @@
                                                                     });
                                                                 });
 
-                                                                $(".fancybox-button").fancybox({
-                                                                    prevEffect: 'none',
-                                                                    nextEffect: 'none',
-                                                                    closeBtn: true,
-                                                                    closeClick: true,
-                                                                    nextClick: true,
-                                                                    mouseWheel: false,
-                                                                    helpers: {
-                                                                        title: true,
-                                                                        buttons: {}
-                                                                    },
-                                                                    afterLoad: function () {
-                                                                        this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
-                                                                    }
-                                                                });
+                                                                //$(".fancybox-button").fancybox({
+                                                                //    prevEffect: 'none',
+                                                                //    nextEffect: 'none',
+                                                                //    closeBtn: true,
+                                                                //    closeClick: true,
+                                                                //    nextClick: true,
+                                                                //    mouseWheel: false,
+                                                                //    helpers: {
+                                                                //        title: true,
+                                                                //        buttons: {}
+                                                                //    },
+                                                                //    afterLoad: function () {
+                                                                //        this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+                                                                //    }
+                                                                //});
 
 
 
@@ -232,42 +205,27 @@
 
                                                     </div>
 				                                </div>	
-				                                <div class="yt-detail-right col-lg-6 col-md-6 col-sm-12 col-xs-12">			
-					                                <form action="http://www.onlinesabjiwala.com/checkout/cart/add/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2FwcGxlLWluZGlhbi5odG1sP1NJRD01ZWFiNzA0ZjIzOThjNjllNDhjMDgwYjAyYWYyMmVkNyZfX19TSUQ9VQ,,/product/29/form_key/dVq8b97n8WRfZrE2/" method="post" id="product_addtocart_form" enctype="multipart/form-data">				 
-												
-						                                <div class="product-shop simple-product">
-							                                <h2 class="product-name" >  </h2>
+				                                <div class="yt-detail-right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <script type="text/javascript">/*decorateGeneric($$('#product-options-wrapper dl'), ['last']);*/</script>
+                                                    <input type="hidden" name="ProductId" id="ProductId" value="">
 
-							                                <div class="product-review">
-								                                    <p class="no-rating"><a title="Write Your Review" href="http://www.onlinesabjiwala.com/review/product/list/id/29/#review-form">Write Your Review</a></p>
-							                                </div> 
-
-                                                            <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                                                <p class="availability in-stock">
-                                                                    Availability: <span>
-                                                                        <link itemprop="availability" href="http://schema.org/InStock">
-                                                                        In stock</span>
-                                                                </p>
-                                                                <div class="price-box">
-                                                                    <span class="regular-price">
-                                                                        <span itemprop="price" class="price"> </span>/  </span>
-                                                                </div>
-                                                            </div>
-
-                                                            <input name="form_key" type="hidden" value="dVq8b97n8WRfZrE2">
-							                                <fieldset class="no-display">
-								                                <input type="hidden" name="product" value="29"> 
-								                                <input type="hidden" name="related_product" id="related-products-field" value="">
-							                                </fieldset>
-                                                            <div class="short-description">
-								                                <h2 class="quick-overview">QUICK OVERVIEW</h2>
-                                                                
-                                                            </div>  
-							
-							                                <span id="cod"></span> <div class="clearer"></div>
-							 
-						                                </div></form>
-                                                    <div class="product-options clearfix" id="product-options-wrapper">  
+                                                    <div class="product-shop simple-product">
+                                                        <h2 class="product-name" id="product_name_details" itemprop="name"> 	</h2> 
+                                                        <div class="product-review">
+                                                            <p class="no-rating"><a title="Write Your Review" href="/review/product/list/id/72/#review-form">Write Your Review</a></p>
+                                                        </div> 
+                                                        <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer"> 
+                                                            <p class="availability in-stock">
+                                                                Availability: <span>
+                                                                    <link itemprop="availability" href="http://schema.org/InStock">
+                                                                    In stock</span>
+                                                            </p> 
+                                                            <div class="price-box">
+                                                                <span class="regular-price"> 
+                                                                    <span  id="price_details" class="price"> </span>  </span> 
+                                                            </div> 
+                                                        </div> 
+                                                        <div class="product-options clearfix" id="product-options-wrapper">  
                                                         <dl class="last">
                                                             <div class="w-option">
                                                                 <dt>
@@ -294,77 +252,13 @@
                                                                     </div>
                                                                 </dd>
                                                             </div>
-                                                        </dl>
-
-                                                        <script type="text/javascript">
-                                                          /*  //<![CDATA[
-                                                            enUS = { "m": { "wide": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "abbr": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] } }; // en_US locale reference
-                                                            Calendar._DN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; // full day names
-                                                            Calendar._SDN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; // short day names
-                                                            Calendar._FD = 0; // First day of the week. "0" means display Sunday first, "1" means display Monday first, etc.
-                                                            Calendar._MN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; // full month names
-                                                            Calendar._SMN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; // short month names
-                                                            Calendar._am = "AM"; // am/pm
-                                                            Calendar._pm = "PM";
-
-                                                            // tooltips
-                                                            Calendar._TT = {};
-                                                            Calendar._TT["INFO"] = 'About the calendar';
-
-                                                            Calendar._TT["ABOUT"] =
-                                                            'DHTML Date/Time Selector\n' +
-                                                            "(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
-                                                            'For latest version visit: http://www.dynarch.com/projects/calendar/\n' +
-                                                            'Distributed under GNU LGPL. See http://gnu.org/licenses/lgpl.html for details.' +
-                                                            '\n\n' +
-                                                            'Date selection:\n' +
-                                                            '- Use the \xab, \xbb buttons to select year\n' +
-                                                            '- Use the \u2039 buttons to select month\n' +
-                                                            '- Hold mouse button on any of the above buttons for faster selection.';
-                                                            Calendar._TT["ABOUT_TIME"] = '\n\n' +
-                                                            'Time selection:\n' +
-                                                            '- Click on any of the time parts to increase it\n' +
-                                                            '- or Shift-click to decrease it\n' +
-                                                            '- or click and drag for faster selection.';
-
-                                                            Calendar._TT["PREV_YEAR"] = 'Prev. year (hold for menu)';
-                                                            Calendar._TT["PREV_MONTH"] = 'Prev. month (hold for menu)';
-                                                            Calendar._TT["GO_TODAY"] = 'Go Today';
-                                                            Calendar._TT["NEXT_MONTH"] = 'Next month (hold for menu)';
-                                                            Calendar._TT["NEXT_YEAR"] = 'Next year (hold for menu)';
-                                                            Calendar._TT["SEL_DATE"] = 'Select date';
-                                                            Calendar._TT["DRAG_TO_MOVE"] = 'Drag to move';
-                                                            Calendar._TT["PART_TODAY"] = ' (' + "today" + ')';
-
-                                                            // the following is to inform that "%s" is to be the first day of week
-                                                            Calendar._TT["DAY_FIRST"] = 'Display %s first';
-
-                                                            // This may be locale-dependent. It specifies the week-end days, as an array
-                                                            // of comma-separated numbers. The numbers are from 0 to 6: 0 means Sunday, 1
-                                                            // means Monday, etc.
-                                                            Calendar._TT["WEEKEND"] = "0";
-
-                                                            Calendar._TT["CLOSE"] = 'Close';
-                                                            Calendar._TT["TODAY"] = "today";
-                                                            Calendar._TT["TIME_PART"] = '(Shift-)Click or drag to change value';
-
-                                                            // date formats
-                                    Calendar._TT["DEF_DATE_FORMAT"] = "%b %e, %Y";
-                                    Calendar._TT["TT_DATE_FORMAT"] = "%B %e, %Y";
-
-                                    Calendar._TT["WK"] = "Week";
-                                    Calendar._TT["TIME"] = 'Time:';
-                                    //]]>*/
-                                                        </script>
-                                                        <!-- <p class="required">* Required Fields</p> -->
+                                                        </dl> 
                                                     </div>
-                                <script type="text/javascript">/*decorateGeneric($$('#product-options-wrapper dl'), ['last']);*/</script>
-                                                    <input type="hidden" name="ProductId" id="ProductId" value="">
+
                                                     <div class="add-to-holder have-price"> 
                                                         <div class="price-box">
-                                                            <span class="regular-price"><span class="price"></span></span>
-                                                        </div>
-
+                                                            <span class="regular-price"><span class="price_details"></span></span>
+                                                        </div> 
                                                         <div class="wrap-qty">
                                                             <div class="qty-title"><span>Qty:</span></div>
                                                             <div class="qty-set">
@@ -643,8 +537,9 @@
                                                                 <li class="compare"><a href="http://www.onlinesabjiwala.com/catalog/product_compare/add/product/29/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2FwcGxlLWluZGlhbi5odG1sP1NJRD01ZWFiNzA0ZjIzOThjNjllNDhjMDgwYjAyYWYyMmVkNw,,/form_key/dVq8b97n8WRfZrE2/" class="link-compare" title="Add to Compare">Add to Compare</a></li>
                                                             </ul>
                                                         </div>
-                                                    </div> 
+                                                    </div>   
 				                                </div>
+                                              </div>
 				                                <div style="clear:both;"></div> 
 			                                </div> 
 		                                </div>

@@ -91,7 +91,7 @@ namespace EcommGroceryStore.Controllers
 
             return Ok(objvmCartDetailsAll);
         }
-
+          
         // PUT api/Cart/5
         public IHttpActionResult PutCart(int id, Cart cart)
         {
@@ -197,6 +197,65 @@ namespace EcommGroceryStore.Controllers
             return CreatedAtRoute("CartApi", new { id = cartdetail.CartDetailId + "_" + totalamount }, cartdetail);
         }
 
+
+        [ResponseType(typeof(List<CartDetail>))]
+        [HttpPost]
+        public IHttpActionResult PostListCartDetail(List<CartDetail> cartdetail)
+        {
+            for (int i = 0; i < cartdetail.Count(); i++)
+            {
+
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);//"error";//
+                }
+                ProductDetails pd = db.ProductDetails.Where(x => x.ProductId == cartdetail[i].ProductId).Single();
+
+                CartDetail cd = db.CartDetail.Where(x => x.ProductId == cartdetail[i].ProductId && x.CartId == cartdetail[i].CartId).FirstOrDefault();
+                if (cd != null)
+                {
+                    cartdetail[i].Amount = (cd.Amount.HasValue ? cd.Amount : 0) + Convert.ToDecimal(pd.PricePerUnit) * cartdetail[i].Quantity;
+                    cartdetail[i].NetAmount = (cd.NetAmount.HasValue ? cd.NetAmount : 0) + (Convert.ToDecimal(pd.PricePerUnit) * cartdetail[i].Quantity) - (cartdetail[i].Discount.HasValue ? cartdetail[i].Discount : 0);
+                }
+                else
+                {
+                    cartdetail[i].Amount = Convert.ToDecimal(pd.PricePerUnit) * cartdetail[i].Quantity;
+                    cartdetail[i].NetAmount = (Convert.ToDecimal(pd.PricePerUnit) * cartdetail[i].Quantity) - (cartdetail[i].Discount.HasValue ? cartdetail[i].Discount : 0);
+                }
+                cartdetail[i].Timestamp = System.DateTime.Now;
+
+                bool count = db.CartDetail.Where(x => x.ProductId == cartdetail[i].ProductId && x.CartId == cartdetail[i].CartId).Any();
+                if (count)
+                {
+                    var quantitysupplied = cd.Quantity.HasValue ? cd.Quantity : 0;
+                    cartdetail[i].CartDetailId = cd.CartDetailId;
+                    cartdetail[i].Quantity = (cartdetail[i].Quantity.HasValue ? cartdetail[i].Quantity : 0) + Convert.ToInt16(quantitysupplied);
+
+
+                    db.Entry(cd).State = EntityState.Detached;
+                    db.Entry(cartdetail).State = EntityState.Modified;
+
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        throw;
+                    }
+                    // cartdetail.CartDetailId 
+                }
+                else
+                {
+
+                    db.CartDetail.Add(cartdetail[i]);
+                    db.SaveChanges();
+                }
+                var totalamount = db.CartDetail.Where(x => x.CartDetailId == cartdetail[i].CartDetailId).Sum(x => x.NetAmount);
+            }
+            return CreatedAtRoute("CartApi", new { id =  0 }, cartdetail);
+        }
 
         public void Posting([FromBody]string name)
         {

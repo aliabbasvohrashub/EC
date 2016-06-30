@@ -77,6 +77,26 @@ function AddProductToCart(cartdetail) {
  
 
 
+function AddProductListToCart(cartdetail) {
+    if (document.getElementById('cartid').value != '') {
+        cartdetail.CartId = document.getElementById('cartid').value;
+        var APIRoute = "/api/Cart/PostListCartDetail";
+        $.ajax({
+            url: APIRoute,
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(cartdetail),
+            success: function (data, textStatus, xhr) {  
+                AddUpdateCartLabel(); 
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('product could not be added to cart');
+            }
+        });
+    }
+}
+
+
 function AddUpdateCartLabel() {
     if (document.getElementById('cartid').value != '') {
         var CartId = document.getElementById('cartid').value;
@@ -89,7 +109,7 @@ function AddUpdateCartLabel() {
             success: function (data, textStatus, xhr) {
                 //console.log(data);
                 $('.item-cart').text(data.objvmCartDetailSummary.TotalAmount + '(' + data.objvmCartDetailSummary.TotalItems + ')');
-                $(".block-inner > ol").remove()
+                $("#block-inner > ol").remove();
                 generateHiddenCart(data.objvmCartDetails); 
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -100,7 +120,27 @@ function AddUpdateCartLabel() {
 }
 
 function generateHiddenCart(data) {
+    for (var i = 0; i < data.length; i++) {
+        var res = "<ol id=\"minicart-sidebar\" class=\"mini-products-list\">" +
+    "<li class=\"item last odd\">" +
+            "<a href=\"" + data[i].productDetail.ProductName + "\" title=\"" + data[i].productDetail.ProductName + "\" class=\"product-image\">" +
+                  "<img src=\"/" + data[i].productDetail.ImageURL + "\" alt=\"" + data[i].productDetail.ProductName + "\">" +
+            "</a> " +
+    "<div class=\"detail-item\">" +
+     "<div class=\"product-details\">" +
+    	"<a href=\"" + data[i].productDetail.ProductName + "\"  title=\"Remove This Item\" onclick=\"return confirm('Are you sure you would like to remove this item from the shopping cart?');\" class=\"btn-remove\"><span></span> </a>     " +
 
+        "<a href=\"Edit/" + data[i].productDetail.ProductName + "\"  title=\"Edit item\" class=\"btn-edit\"><span></span></a> " +
+				"<div class=\"rating-container\">" +
+			    "<p class=\"no-rating\"><a title=\"Write Your Review\" href=\"Review/" + data[i].productDetail.ProductName + "\" >Write Your Review</a></p></div>  " +
+       " <p class=\"product-name\">" +
+			 "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"ProductDetail/" + data[i].productDetail.ProductName + "\"> "+ data[i].productDetail.ProductName +" </a> <span class=\"qty-number\">" + data[i].Quantity + "</span></p>  </div> " +
+
+	"<div class=\"product-details-bottom\"> <span class=\"price\"> ₹" + data[i].NetAmount + "</span>  </div></div> <!--div class=\"edit-remove\"></div--></li></ol> ";
+       // $("#block-inner").append(res);
+        $(".price-total").before(res);
+    }
+    /*
     for (var i = 0; i < data.length; i++) {
         var res = "<ol id=\"minicart-sidebar\" class=\"mini-products-list\">" +
              "<li class=\"item last odd\">" +
@@ -130,7 +170,7 @@ function generateHiddenCart(data) {
 
         $(".block-inner").append(res);
     }
-     
+    */
 }
 
 
