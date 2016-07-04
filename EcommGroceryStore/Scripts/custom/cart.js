@@ -105,12 +105,19 @@ function AddUpdateCartLabel() {
             url: APIRoute,
             type: 'GET',
             contentType: "application/json",
-            data: { id:CartId},
+            data: { id: CartId },
             success: function (data, textStatus, xhr) {
                 //console.log(data);
                 $('.item-cart').text(data.objvmCartDetailSummary.TotalAmount + '(' + data.objvmCartDetailSummary.TotalItems + ')');
                 $("#block-inner > ol").remove();
-                generateHiddenCart(data.objvmCartDetails); 
+                $("#block-inner > div > ol").remove();
+
+                if ($("#checkout_grandtotal").length) {
+                    $("#checkout_grandtotal").text(data.objvmCartDetailSummary.TotalAmount);
+                    $("#checkout_subtotal").text(data.objvmCartDetailSummary.TotalAmount);
+                }
+                generateHiddenCart(data.objvmCartDetails);
+                console.log('from details page webservice call ended ');
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('CartList Could not be retrieved');
@@ -120,6 +127,10 @@ function AddUpdateCartLabel() {
 }
 
 function generateHiddenCart(data) {
+    if ($('#shopping-cart-table').length) {
+        $('#shopping-cart-table > tbody').remove()
+        $('#shopping-cart-table').append("<tbody></tbody>");
+    }
     for (var i = 0; i < data.length; i++) {
         var res = "<ol id=\"minicart-sidebar\" class=\"mini-products-list\">" +
     "<li class=\"item last odd\">" +
@@ -134,45 +145,44 @@ function generateHiddenCart(data) {
 				"<div class=\"rating-container\">" +
 			    "<p class=\"no-rating\"><a title=\"Write Your Review\" href=\"Review/" + data[i].productDetail.ProductName + "\" >Write Your Review</a></p></div>  " +
        " <p class=\"product-name\">" +
-			 "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"ProductDetail/" + data[i].productDetail.ProductName + "\"> "+ data[i].productDetail.ProductName +" </a> <span class=\"qty-number\">" + data[i].Quantity + "</span></p>  </div> " +
+			 "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"ProductDetail/" + data[i].productDetail.ProductName + "\">" + data[i].productDetail.ProductName + " </a> <span class=\"qty-number\">" + data[i].Quantity + "</span></p>  </div> " +
 
 	"<div class=\"product-details-bottom\"> <span class=\"price\"> ₹" + data[i].NetAmount + "</span>  </div></div> <!--div class=\"edit-remove\"></div--></li></ol> ";
-       // $("#block-inner").append(res);
+        //$("#block-inner").append(res);
         $(".price-total").before(res);
+       
+        if ($('#shopping-cart-table').length) {
+            var res1 = "<tr class=\"first last odd\">" +
+                        "<td style=\"display:none;\">" + +data[i].productDetail.ProductId + "</td>" +
+                        "<td class=\"a-center\"><a href=\"\" title=\"" + data[i].productDetail.ImageURL + "\" class=\"product-image\">" +
+                         "<img height=\"85px\" width=\"85px\" src=\"\\" + data[i].productDetail.ImageURL + "\" alt=\"Coconut water\"></a></td>" +
+                         "<td class=\"a-center\">" +
+                         "<h2 class=\"product-name\">" +
+                         "<a href=\"\">" + data[i].productDetail.ProductName + "</a>" +
+                         "</h2>" +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<a href=\"\" title=\"Edit item parameters\">Edit</a>" +
+                         "</td> " +
+                         "<td class=\"a-center\">" +
+                         "<span class=\"cart-price\">" +
+                         "    <span class=\"price\">₹" + data[i].productDetail.PricePerUnit + "</span>" +
+                         "</span> " +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<input name=\"" + data[i].productDetail.ProductName + "\" value=\"" + data[i].Quantity + "\" size=\"4\" title=\"Qty\" class=\"input-text qty a-center\" maxlength=\"12\">" +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<span class=\"cart-price\"> " +
+                         "    <span class=\"price\">₹" + data[i].Amount + "</span>" +
+                         "</span>" +
+                         "</td>" +
+                         "<td class=\"a-center last\"><a href=\"\" title=\"Remove item\" id=\"\\del_"+ data[i].CartDetailId + '_'+ data[i].ProductId +"\" class=\"icon-remove btn-remove btn-remove2\"></a></td>" +
+                         "</tr>";
+            $('#shopping-cart-table > tbody').append(res1);
+        }
     }
-    /*
-    for (var i = 0; i < data.length; i++) {
-        var res = "<ol id=\"minicart-sidebar\" class=\"mini-products-list\">" +
-             "<li class=\"item last odd\">" +
-             "<a href=\"\" title=\"" + data[i].productDetail.ProductName + "\" class=\"product-image\">" +
-             "<img src=\"/" + data[i].productDetail.ImageURL + "\" alt=\"" + data[i].productDetail.ProductName + "\"></a>" +
-                "<div class=\"detail-item\">" +
-                    "<div class=\"product-details\">" +
-                        "<a href=\"" + data[i].productDetail.ProductName + "\" title=\"Remove This Item\" onclick=\"return confirm('Are you sure you would like to remove this item from the shopping cart?');\" class=\"btn-remove\"><span></span></a>" +
-                          "<a href=\"" + data[i].productDetail.ProductName + "\" title=\"Edit item\" class=\"btn-edit\"><span></span></a>" +
-
-                        "<div class=\"rating-container\">" +
-                            "<p class=\"no-rating\"><a title=\"Write Your Review\" href=\"" + data[i].productDetail.ProductName + ">Write Your Review</a></p>" +
-                        "</div>" +
-                        "<p class=\"product-name\">" +
-                            "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"" + data[i].productDetail.ProductName + "\">" + data[i].productDetail.ProductName + "</a>" +
-                            "<span class=\"qty-number\">" + data[i].Quantity + "</span>" +
-                        "</p> " +
-                    "</div>" +
-
-                    "<div class=\"product-details-bottom\">" +
-                        "<span class=\"price\">" + data[i].NetAmount + "</span>" +
-
-                    "</div>" +
-                "</div>" +
-            "</li>" +
-        "</ol>";
-
-        $(".block-inner").append(res);
-    }
-    */
 }
-
 
 /*
 <ol id="minicart-sidebar" class="mini-products-list">  

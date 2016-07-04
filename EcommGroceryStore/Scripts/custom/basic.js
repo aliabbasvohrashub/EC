@@ -2,8 +2,7 @@
 document.getElementById('ip').value = myip;
 
 
-if (document.getElementById('cartid').value == '')
-{
+if (document.getElementById('cartid').value == '') {
     var cartid = getCookie("cartid");
     if (cartid == "") {
         var cart = new Object();
@@ -26,8 +25,8 @@ if (document.getElementById('cartid').value == '')
             }
         });
     } else {
-        var cartid = getCookie("cartid"); 
-        document.getElementById('cartid').value = cartid;  
+        var cartid = getCookie("cartid");
+        document.getElementById('cartid').value = cartid;
     }
 }
 
@@ -54,19 +53,19 @@ function getCookie(cname) {
 }
 
 function checkCookie() {
-    var cartid = getCookie("cartid"); 
+    var cartid = getCookie("cartid");
     if (cartid == "") {
         alert('i am called again');
-    setCookie("cartid", document.getElementById('cartid').value, 30);
-    } 
+        setCookie("cartid", document.getElementById('cartid').value, 30);
+    }
 }
 
 
 if (document.getElementById('cartid').value != '') {
     var cartid = getCookie("cartid");
-    if (cartid != "") {   
+    if (cartid != "") {
         AddUpdateCartLabel();
-    } 
+    }
 }
 $(".search-header.mini-cart-header").click(function () {
     if ($(".block-content").css('display') == 'none') {
@@ -90,13 +89,14 @@ function AddUpdateCartLabel() {
                 //console.log(data);
                 $('.item-cart').text(data.objvmCartDetailSummary.TotalAmount + '(' + data.objvmCartDetailSummary.TotalItems + ')');
                 $("#block-inner > ol").remove();
+                $("#block-inner > div > ol").remove();
 
                 if ($("#checkout_grandtotal").length) {
                     $("#checkout_grandtotal").text(data.objvmCartDetailSummary.TotalAmount);
                     $("#checkout_subtotal").text(data.objvmCartDetailSummary.TotalAmount);
                 }
                 generateHiddenCart(data.objvmCartDetails);
-                console.log('from details page webservice call ended ' );
+                console.log('from details page webservice call ended ');
             },
             error: function (xhr, textStatus, errorThrown) {
                 console.log('CartList Could not be retrieved');
@@ -106,27 +106,29 @@ function AddUpdateCartLabel() {
 }
 
 function generateHiddenCart(data) {
-
+    if ($('#shopping-cart-table').length) {
+        $('#shopping-cart-table > tbody').remove()
+        $('#shopping-cart-table').append("<tbody></tbody>");
+    }
     for (var i = 0; i < data.length; i++) {
         var res = "<ol id=\"minicart-sidebar\" class=\"mini-products-list\">" +
     "<li class=\"item last odd\">" +
             "<a href=\"" + data[i].productDetail.ProductName + "\" title=\"" + data[i].productDetail.ProductName + "\" class=\"product-image\">" +
-                  "<img src=\"/" + data[i].productDetail.ImageURL + "\" alt=\"" + data[i].productDetail.ProductName + "\">"+
-            "</a> "+
-    "<div class=\"detail-item\">"+
+                  "<img src=\"/" + data[i].productDetail.ImageURL + "\" alt=\"" + data[i].productDetail.ProductName + "\">" +
+            "</a> " +
+    "<div class=\"detail-item\">" +
      "<div class=\"product-details\">" +
     	"<a href=\"" + data[i].productDetail.ProductName + "\"  title=\"Remove This Item\" onclick=\"return confirm('Are you sure you would like to remove this item from the shopping cart?');\" class=\"btn-remove\"><span></span> </a>     " +
-              
-        "<a href=\"Edit/" + data[i].productDetail.ProductName + "\"  title=\"Edit item\" class=\"btn-edit\"><span></span></a> "+
-				"<div class=\"rating-container\">"+
-			    "<p class=\"no-rating\"><a title=\"Write Your Review\" href=\"Review/" + data[i].productDetail.ProductName + "\" >Write Your Review</a></p></div>  "+ 
-       " <p class=\"product-name\">"+
-			 "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"ProductDetail/" + data[i].productDetail.ProductName + "\">"+ data[i].productDetail.ProductName +" </a> <span class=\"qty-number\">" + data[i].Quantity + "</span></p>  </div> "+
-        
+
+        "<a href=\"Edit/" + data[i].productDetail.ProductName + "\"  title=\"Edit item\" class=\"btn-edit\"><span></span></a> " +
+				"<div class=\"rating-container\">" +
+			    "<p class=\"no-rating\"><a title=\"Write Your Review\" href=\"Review/" + data[i].productDetail.ProductName + "\" >Write Your Review</a></p></div>  " +
+       " <p class=\"product-name\">" +
+			 "<a title=\"" + data[i].productDetail.ProductName + "\" href=\"ProductDetail/" + data[i].productDetail.ProductName + "\">" + data[i].productDetail.ProductName + " </a> <span class=\"qty-number\">" + data[i].Quantity + "</span></p>  </div> " +
+
 	"<div class=\"product-details-bottom\"> <span class=\"price\"> ₹" + data[i].NetAmount + "</span>  </div></div> <!--div class=\"edit-remove\"></div--></li></ol> ";
         //$("#block-inner").append(res);
-        $(".price-total").before(res); 
-
+        $(".price-total").before(res);
         if ($('#shopping-cart-table').length) {
             var res1 = "<tr class=\"first last odd\">" +
                         "<td style=\"display:none;\">" + +data[i].productDetail.ProductId + "</td>" +
@@ -153,27 +155,83 @@ function generateHiddenCart(data) {
                          "    <span class=\"price\">₹" + data[i].Amount + "</span>" +
                          "</span>" +
                          "</td>" +
-                         "<td class=\"a-center last\"><a href=\"\" title=\"Remove item\" class=\"icon-remove btn-remove btn-remove2\"></a></td>" +
+                         "<td class=\"a-center last\"><a onclick=\"delitem(" + data[i].CartDetailId + "," + data[i].ProductId + ")\" href=\"javascript:void(0)\"  title=\"Remove item\" id=\"del_" + data[i].CartDetailId + '_' + data[i].ProductId + "\" class=\"icon-remove btn-remove btn-remove2\"></a></td>" +
                          "</tr>";
             $('#shopping-cart-table > tbody').append(res1);
         }
     }
 }
-    
+
 function UpdateCart() {
     var listOfObjects = [];
     if (document.getElementById('cartid').value != '') {
-        $("#shopping-cart-table > tbody > tr").each(function () {             
+        $("#shopping-cart-table > tbody > tr").each(function () {
             //console.log($(this).find('td').eq(0).text() + ' ' + $(this).find('td').eq(5).find('input').val());
-            
+
             var product = {
                 CartId: $("#cartid").val(),
                 ProductId: $(this).find('td').eq(0).text(),
                 Quantity: $(this).find('td').eq(5).find('input').val()
             }
-            listOfObjects.push(product);          
+            listOfObjects.push(product);
         });
         AddProductListToCart(listOfObjects);
     }
 }
- 
+
+
+function delitem1(cd, cdd) {
+    console.log(cd, cdd);
+    var APIRoute = "/api/Cart/DeleteItem";
+    $.ajax({
+        url: APIRoute,
+        type: 'POST',
+        contentType: "application/json",
+        data : JSON.stringify({cartDetailId:cd, productId:cdd}),
+        success: function (data, textStatus, xhr) {
+            AddUpdateCartLabel();
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log('There was an error deleting the cart');
+        }
+    });
+}
+
+function delitem2(cd, cdd) {
+    console.log(cd, cdd);
+    var APIRoute = "/api/Cart/DeleteItem";
+    $.ajax({
+        url: APIRoute,
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify(cd),
+        success: function (data, textStatus, xhr) {
+            AddUpdateCartLabel();
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log('There was an error deleting the cart ' + xhr.responseText);
+        }
+    });
+}
+
+function delitem(cd, cdd) {
+    var result = confirm("Want to delete?");
+    if (result) {
+
+        console.log(cd, cdd);
+        var APIRoute = "/api/Cart/DeleteItem?cartDetailId=" + cd + "&productId=" + cdd;
+        $.ajax({
+            url: APIRoute,
+            type: "DELETE",
+            contentType: "application/json; charset=utf-8",
+            //data: JSON.stringify(cd),
+            success: function (data, textStatus, xhr) {
+                AddUpdateCartLabel();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('There was an error deleting the cart ' + xhr.responseText);
+            }
+        });
+    }
+}

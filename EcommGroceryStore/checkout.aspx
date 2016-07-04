@@ -34,62 +34,14 @@
                                         </thead>
                                         <tfoot>
                                             <tr class="first last">
-                                                <td colspan="50" class="a-right last">
-                                                    <button type="button" title="Continue Shopping" class="button btn-continue" onclick="setLocation('http://www.onlinesabjiwala.com/fruits-vegetables/fruits/coconut-water.html')"><span><span>Continue Shopping</span></span></button>
+                                                <td colspan="50" class="a-right last"> 
+                                                    <button type="button" id="ContinueShopping" title="Continue Shopping" class="button btn-continue"><span><span>Continue Shopping</span></span></button>
                                                     <button type="button" name="update_cart_action" id="update_cart_action" value="update_qty" title="Update Shopping Cart" class="button btn-update"><span><span>Update Shopping Cart</span></span></button>
-                                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span></button>
-                                                    <!--[if lt IE 8]>
-                            <input type="hidden" id="update_cart_action_container" />
-                            <script type="text/javascript">
-                            //<![CDATA[
-                                Event.observe(window, 'load', function()
-                                {
-                                    // Internet Explorer (lt 8) does not support value attribute in button elements
-                                    $emptyCartButton = $('empty_cart_button');
-                                    $cartActionContainer = $('update_cart_action_container');
-                                    if ($emptyCartButton && $cartActionContainer) {
-                                        Event.observe($emptyCartButton, 'click', function()
-                                        {
-                                            $emptyCartButton.setAttribute('name', 'update_cart_action_temp');
-                                            $cartActionContainer.setAttribute('name', 'update_cart_action');
-                                            $cartActionContainer.setValue('empty_cart');
-                                        });
-                                    }
-
-                                });
-                            //]]>
-                            </script>
-                            <![endif]-->
+                                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Shopping Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Shopping Cart</span></span></button>                                                   
                                                 </td>
                                             </tr>
                                         </tfoot>
-                                        <tbody>
-                                            <%--<tr class="first last odd">
-                                                <td class="a-center"><a href="http://www.onlinesabjiwala.com/coconut-water.html" title="Coconut water" class="product-image">
-                                                    <img src="http://www.onlinesabjiwala.com/media/catalog/product/cache/1/thumbnail/84x/9df78eab33525d08d6e5fb8d27136e95/g/r/green_coconut.jpg" alt="Coconut water"></a></td>
-                                                <td class="a-center">
-                                                    <h2 class="product-name">
-                                                        <a href="http://www.onlinesabjiwala.com/coconut-water.html">Coconut water</a>
-                                                    </h2>
-                                                </td>
-                                                <td class="a-center">
-                                                    <a href="http://www.onlinesabjiwala.com/checkout/cart/configure/id/32168/" title="Edit item parameters">Edit</a>
-                                                </td> 
-                                                <td class="a-center">
-                                                    <span class="cart-price">
-                                                        <span class="price">₹45.00</span>
-                                                    </span> 
-                                                </td>
-                                                <td class="a-center">
-                                                    <input name="cart[32168][qty]" value="1" size="4" title="Qty" class="input-text qty a-center" maxlength="12">
-                                                </td>
-                                                <td class="a-center">
-                                                    <span class="cart-price"> 
-                                                        <span class="price">₹45.00</span>
-                                                    </span>
-                                                </td>
-                                                <td class="a-center last"><a href="http://www.onlinesabjiwala.com/checkout/cart/delete/id/32168/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2NoZWNrb3V0L2NhcnQv/" title="Remove item" class="icon-remove btn-remove btn-remove2"></a></td>
-                                            </tr>--%>
+                                        <tbody> 
                                         </tbody>
                                     </table>
                                     <script type="text/javascript">decorateTable('shopping-cart-table')</script>
@@ -189,6 +141,14 @@
     <script type="text/javascript">
               $("#update_cart_action").click(function () { 
                   UpdateCart();
+              });         
+
+              $("#ContinueShopping").click(function () { 
+                  window.location.replace("/indexchild");
+              });
+
+              $("#empty_cart_button").click(function () {
+
               }); 
     </script>
     
