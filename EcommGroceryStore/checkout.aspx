@@ -148,7 +148,7 @@
               });
 
               $("#empty_cart_button").click(function () {
-
+                  EmptyCart();
               }); 
     </script>
     

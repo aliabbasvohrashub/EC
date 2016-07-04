@@ -33,6 +33,7 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
     <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>    
     <link href="/../media/css/style.css" rel="stylesheet" />
+    <script src="/../Scripts/owl.carousel.min.js"></script>
     <style type="text/css">
         body { 
             font-size: 12px;

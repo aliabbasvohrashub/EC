@@ -312,6 +312,23 @@ namespace EcommGroceryStore.Controllers
 
             return Ok(cartDetail);
         }
+
+        [ResponseType(typeof(CartDetail))]
+        public IHttpActionResult DeleteEverything(int cartId)
+        {
+            List<CartDetail> cartDetail = db.CartDetail.Where(x => x.CartId == cartId).ToList();
+            if (cartDetail == null)
+            {
+                return NotFound();
+            }
+
+            for (int i = 0; i < cartDetail.Count(); i++)
+            {
+                db.CartDetail.Remove(cartDetail[i]);
+                db.SaveChanges();                
+            }  
+            return Ok(cartDetail);
+        }
          
         protected override void Dispose(bool disposing)
         {

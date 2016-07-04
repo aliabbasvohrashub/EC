@@ -84,11 +84,7 @@
 
                                     <div id="sm_basic_products_1462422055796027053" class="block-content">
                                         <div class="slider-left-product basic-product owl-carousel owl-theme" style="opacity: 1; display: block;">
-                                            <!-- Begin bs-items     -->
-                                            <!-- Begin bs-item-cf -->
-                                            <div class="owl-wrapper-outer">
-                                                <div class="owl-wrapper" style="width: 1392px; left: 0px; display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
-                                                    <div class="owl-item" style="width: 232px;">
+                                             
                                                         <div class="item-left-products item">
                                                             <div class="bs-item cf">
                                                                 <!-- Begin bs-item-inner -->
@@ -269,8 +265,7 @@
                                                             </div>
                                                             <!-- End bs-item-cf -->
                                                         </div>
-                                                    </div>
-                                                    <div class="owl-item" style="width: 232px;">
+                                                     
                                                         <div class="item-left-products item">
                                                             <div class="bs-item cf">
                                                                 <!-- Begin bs-item-inner -->
@@ -502,8 +497,7 @@
                                                             </div>
                                                             <!-- End bs-item-cf -->
                                                         </div>
-                                                    </div>
-                                                    <div class="owl-item" style="width: 232px;">
+                                                     
                                                         <div class="item-left-products item">
                                                             <div class="bs-item cf">
                                                                 <!-- Begin bs-item-inner -->
@@ -725,46 +719,37 @@
                                                             </div>
                                                             <!-- End bs-item-cf -->
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Begin bs-item-cf -->
-
-                                            <!-- Begin bs-item-cf -->
-
-
-                                            <!-- End bs-items -->
+                                                    
+                                            
                                         </div>
                                     </div>
                                     <!-- End Sm-basic-products -->
 
                                     <script>
-                                        //jQuery(document).ready(function ($) {
-                                        //    var owl_left = $(".basic-product");
-                                        //    owl_left.owlCarousel({
-                                        //        itemsCustom: [
-                                        //        [0, 1],
-                                        //        [480, 1],
-                                        //        [768, 2],
-                                        //        [992, 1],
-                                        //        [1200, 1]
-                                        //        ],
+                                        $(document).ready(function ($) {
+                                            var owl_left = $(".basic-product");
+                                            owl_left.owlCarousel({
+                                                itemsCustom: [
+                                                [0, 1],
+                                                [480, 1],
+                                                [768, 2],
+                                                [992, 1],
+                                                [1200, 1]
+                                                ],
 
-                                        //        slideSpeed: 300,
-                                        //        stopOnHover: true,
-                                        //        paginationSpeed: 400,
-                                        //        autoPlay: false,
-                                        //        pagination: false,
-                                        //    });
-
-
-                                        //    $(".nav-left-product .next-bs").click(function () {
-                                        //        owl_left.trigger('owl.next');
-                                        //    })
-                                        //    $(".nav-left-product .prev-bs").click(function () {
-                                        //        owl_left.trigger('owl.prev');
-                                        //    })
-                                        //});
+                                                slideSpeed: 300,
+                                                stopOnHover: true,
+                                                paginationSpeed: 400,
+                                                autoPlay: false,
+                                                pagination: false,
+                                            }); 
+                                            $(".nav-left-product .next-bs").click(function () { 
+                                                owl_left.trigger('owl.next');
+                                            })
+                                            $(".nav-left-product .prev-bs").click(function () {
+                                                owl_left.trigger('owl.prev');
+                                            })
+                                        });
                                     </script>
 
                                 </div>

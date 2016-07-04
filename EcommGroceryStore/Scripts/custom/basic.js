@@ -178,48 +178,10 @@ function UpdateCart() {
         AddProductListToCart(listOfObjects);
     }
 }
-
-
-function delitem1(cd, cdd) {
-    console.log(cd, cdd);
-    var APIRoute = "/api/Cart/DeleteItem";
-    $.ajax({
-        url: APIRoute,
-        type: 'POST',
-        contentType: "application/json",
-        data : JSON.stringify({cartDetailId:cd, productId:cdd}),
-        success: function (data, textStatus, xhr) {
-            AddUpdateCartLabel();
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log('There was an error deleting the cart');
-        }
-    });
-}
-
-function delitem2(cd, cdd) {
-    console.log(cd, cdd);
-    var APIRoute = "/api/Cart/DeleteItem";
-    $.ajax({
-        url: APIRoute,
-        type: "DELETE",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(cd),
-        success: function (data, textStatus, xhr) {
-            AddUpdateCartLabel();
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            console.log('There was an error deleting the cart ' + xhr.responseText);
-        }
-    });
-}
-
+  
 function delitem(cd, cdd) {
     var result = confirm("Want to delete?");
-    if (result) {
-
-        console.log(cd, cdd);
+    if (result) { 
         var APIRoute = "/api/Cart/DeleteItem?cartDetailId=" + cd + "&productId=" + cdd;
         $.ajax({
             url: APIRoute,
@@ -233,5 +195,26 @@ function delitem(cd, cdd) {
                 console.log('There was an error deleting the cart ' + xhr.responseText);
             }
         });
+    }
+}
+
+function EmptyCart(cd) {
+    var result = confirm("Want to delete?");
+    if (result) {
+        if (document.getElementById('cartid').value != '') {
+            var APIRoute = "/api/Cart/DeleteEverything?cartId=" + document.getElementById('cartid').value;
+            $.ajax({
+                url: APIRoute,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                //data: JSON.stringify(cd),
+                success: function (data, textStatus, xhr) {
+                    AddUpdateCartLabel();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('There was an error deleting the cart ' + xhr.responseText);
+                }
+            });
+        }
     }
 }

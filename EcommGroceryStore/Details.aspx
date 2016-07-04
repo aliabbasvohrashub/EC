@@ -13,12 +13,12 @@
                 $("#pageloaddiv").css('display', 'none');
             });
             $(document).ajaxError(function (event, xhr, options, exc) {
-                console.log("An error occurred!");
+                //console.log("An error occurred!");
             });
             getProductDetail(querystring);
             $.when(getProductDetail(querystring)).done(function (newdata) {
 
-                console.log('from details page' + newdata[0].PricePerUnit + '  ' + newdata[0].ProductName);
+                //console.log('from details page' + newdata[0].PricePerUnit + '  ' + newdata[0].ProductName);
 
                 //console.log(data);
                 $("#ProductId").text(newdata[0].ProductId);
@@ -35,7 +35,7 @@
                     var cart = new Object();
                     cart.IpAddress = $("#ip").val();
                     cart.IsActive = true;
-                    alert('generate cart called ');
+                    //alert('generate cart called ');
                     generateCart(cart);
                 }
                 else {
@@ -44,7 +44,7 @@
                         ProductId: $("#ProductId").text(),                        
                         Quantity: $("#qty").val() 
                     }
-                    alert('AddProductToCart called ' + product);
+                    //alert('AddProductToCart called ' + product);
                     AddProductToCart(product);
                 }
             });
@@ -93,27 +93,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-                                                       <%-- <script type="text/javascript">
-                                                            function init() {
-
-                                                                device = jQuery.fn.detectDevice();
-                                                                number_visible = 4;
-
-                                                                jQuery(".jCarouselLite").jCarouselLite({
-                                                                    btnNext: ".more-views .next",
-                                                                    btnPrev: ".more-views .prev",
-                                                                    visible: number_visible,
-                                                                    start: 0,
-                                                                    circular: true,
-                                                                    speed: 300,
-                                                                    vertical: true,
-                                                                });
-                                                            }
-                                                            init();
-                                                        </script>--%>
-
+                                                         
                                                         <script type="text/javascript">
 
                                                             jQuery(document).ready(function ($) {
@@ -138,25 +118,7 @@
                                                                             $(this).removeClass("fancybox-button");
                                                                         }
                                                                     });
-                                                                });
-
-                                                                //$(".fancybox-button").fancybox({
-                                                                //    prevEffect: 'none',
-                                                                //    nextEffect: 'none',
-                                                                //    closeBtn: true,
-                                                                //    closeClick: true,
-                                                                //    nextClick: true,
-                                                                //    mouseWheel: false,
-                                                                //    helpers: {
-                                                                //        title: true,
-                                                                //        buttons: {}
-                                                                //    },
-                                                                //    afterLoad: function () {
-                                                                //        this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
-                                                                //    }
-                                                                //});
-
-
+                                                                });  
 
                                                                 $('.jCarouselLite ul li a').each(function () {
                                                                     if ($(this).hasClass('actived')) {
@@ -276,262 +238,7 @@
                                                         <div class="add-to-cart product-addcart">
                                                             <button type="button" title="Add to Cart" id="AddToCart"  class="button btn-cart btn-cart-single"><span><span>Add to Cart</span></span></button>
                                                         </div>  
-                                                        <script>
-                                                            /*   jQuery(document).ready(function ($) {
-                                                                   manage_stock = 1;
-                           
-                                                                   // validate configurable 
-                                                                   $('.configurable-product').bind("change", function () {
-                                                                       id = this.value;
-                                                                       value = $('#minQty_' + id).val();
-                                                                       $('#min_qty_stock').val(value);
-                                                                       value = $('#maxQty_' + id).val();
-                                                                       $('#max_qty_stock').val(value);
-                                                                       value = $('#qty_stock_' + id).val();
-                                                                       $('#qty_stock').val(value);
-                                                                       manage_stock = $('#manage_stock_' + id).val();
-                                                                   });
-                           
-                                                                   //validate configurable(swatch color) 
-                                                                   $('.configurable-swatch-list li').each(function () {
-                                                                       $this = $(this);
-                                                                       $('a', $this).bind("click", function () {
-                                                                           $this = $(this);
-                                                                           id = $this.parent().attr('data-value');
-                                                                           value = $('#minQty_' + id).val();
-                                                                           $('#min_qty_stock').val(value);
-                                                                           value = $('#maxQty_' + id).val();
-                                                                           $('#max_qty_stock').val(value);
-                                                                           value = $('#qty_stock_' + id).val();
-                                                                           $('#qty_stock').val(value);
-                                                                           manage_stock = $('#manage_stock_' + id).val();
-                                                                       });
-                                                                   });
-                           
-                                                                   // validate simple product
-                                                                   $('.btn-cart-single').bind("click", function () {
-                                                                       re = 1;
-                                                                       proId = $("#proId").val();
-                                                                       curQty = $('#qty').val();
-                                                                       minQty = $('#min_qty_stock').val();
-                                                                       maxQty = $('#max_qty_stock').val();
-                                                                       qtyStock = $('#qty_stock').val();
-                                                                       qtyStock_1 = $('#qty_stock').val();
-                           
-                                                                       if (manage_stock == 0) {
-                                                                           qtyStock = maxQty + 1;
-                                                                       }
-                                                                       if (minQty == '' && maxQty == '' && qtyStock == '') {
-                                                                           alert('Please, select item');
-                                                                           return false;
-                                                                       }
-                                                                       if (eval(maxQty - qtyStock) < 0) {
-                                                                           temp = maxQty;
-                                                                       } else {
-                                                                           temp = qtyStock;
-                                                                       }
-                                                                       if (eval(temp - curQty) < 0) {
-                                                                           re = 0;
-                                                                           if (manage_stock == 0) {
-                                                                               alert('Please, enter quantity  Min:' + minQty + ' and  Max:' + maxQty);
-                                                                               return false;
-                                                                           }
-                                                                           alert('Please, enter quantity  Min:' + minQty + ' and Max:' + maxQty + ' (Inventory:' + qtyStock_1 + ')');
-                                                                           return false;
-                                                                       }
-                                                                       if (eval(curQty - minQty) < 0) {
-                                                                           re = 0;
-                                                                           if (manage_stock == 0) {
-                                                                               alert('Please, enter quantity Min:' + minQty + ' and Max:' + maxQty);
-                                                                               return false;
-                                                                           }
-                                                                           alert('Please, enter quantity Min:' + minQty + ' and Max:' + maxQty + ' (Inventory:' + qtyStock_1 + ')');
-                                                                           return false;
-                                                                       }
-                                                                       if ($.session.get("session" + proId) != null && manage_stock == 1) {
-                                                                           cartQty = $.session.get("session" + proId);
-                                                                           if (eval(maxQty - qtyStock) <= 0) {
-                                                                               temp = eval(maxQty - cartQty);
-                                                                           } else {
-                                                                               temp = eval(qtyStock - cartQty);
-                                                                           }
-                                                                           temp1 = eval(temp - curQty);
-                                                                           if (temp1 < 0) {
-                                                                               re = 0;
-                                                                               alert("Please, enter quantity Min:" + minQty + ' and Max:' + maxQty + ' (Inventory:' + qtyStock_1 + ')');
-                                                                               return false;
-                                                                           }
-                                                                       }
-                                                                       //end check qty of product
-                                                                       if (re == 1) {
-                                                                           productAddToCartForm.submit(this)
-                                                                           $.session.set("session" + proId, curQty);
-                                                                       }
-                           
-                                                                   });
-                                                               });
-                           
-                           
-                                                               jQuery(document).ready(function ($) {
-                                                                   if ($('.item-selected').length > 0) {
-                                                                       $('.btn-bundle').bind("click", function () {
-                                                                           var n_bundle = $('.bundle-select').length;
-                                                                           for (var i = 1; i <= n_bundle; i++) {
-                                                                               var ele_bundle = "#bundle-option-" + i;
-                                                                               if ($(ele_bundle).val() == "") {
-                                                                                   alert("Please, select item");
-                                                                                   return false;
-                                                                               }
-                                                                           }
-                           
-                                                                           re = 1;
-                                                                           re1 = 0;
-                                                                           $('.item-selected').each(function (index) {
-                                                                               v = $(this).val();
-                                                                               if (v != '') {
-                                                                                   re1 = 1;
-                           
-                                                                                   qty_default = $("#qty_default" + v).val();
-                                                                                   //if type select or radio
-                                                                                   id = this.id;
-                                                                                   str = id.substring(0, 20);
-                           
-                                                                                   if (str == "item-selected-select") {
-                                                                                       option_id = id.substring(21);
-                                                                                       qty_default_id = "#bundle-option-" + option_id + "-qty-input";
-                                                                                       qty_default = $(qty_default_id).val();
-                                                                                   } else if (str == "item-selected-radio-") {
-                                                                                       option_id = id.substring(20);
-                                                                                       qty_default_id = "#bundle-option-" + option_id + "-qty-input";
-                                                                                       qty_default = $(qty_default_id).val();
-                                                                                   }
-                                                                                   // end.
-                           
-                                                                                   cusQty = $('#qty').val();
-                           
-                                                                                   curQty = cusQty * qty_default;
-                                                                                   minQty = $('#minQty_' + v).val();
-                                                                                   maxQty = $('#maxQty_' + v).val();
-                                                                                   qtyStock = $('#qtyStock_' + v).val();
-                                                                                   qtyStock_1 = $('#qtyStock_' + v).val();
-                                                                                   proName = $('#proName' + v).val();
-                                                                                   managestock = $('#managestock_' + v).val();
-                           
-                                                                                   if (managestock == 0) {
-                                                                                       qtyStock = maxQty + 1;
-                                                                                   }
-                                                                                   if (eval(maxQty - qtyStock) < 0) {
-                                                                                       temp = maxQty;
-                                                                                   } else {
-                                                                                       temp = qtyStock;
-                                                                                   }
-                                                                                   if (eval(temp - curQty) < 0) {
-                                                                                       if (managestock == 0) {
-                                                                                           alert('Please, enter "' + proName + '" quantity Min:' + minQty + ' and Max:' + maxQty);
-                                                                                           re = 0;
-                                                                                           return false;
-                                                                                       }
-                                                                                       alert('Please, enter "' + proName + '" quantity Min:' + minQty + ' and Max:' + maxQty + ' (Inventory: ' + qtyStock_1 + ')');
-                                                                                       re = 0;
-                                                                                       return false;
-                                                                                   }
-                                                                                   if (eval(curQty - minQty) < 0) {
-                                                                                       if (managestock == 0) {
-                                                                                           alert('Please, enter "' + proName + '" quantity Min:' + minQty + ' and Max:' + maxQty);
-                                                                                           re = 0;
-                                                                                           return false;
-                                                                                       }
-                                                                                       alert('Please, enter "' + proName + '" quantity Min:' + minQty + ' and Max:' + maxQty + ' (Inventory: ' + qtyStock_1 + ')');
-                                                                                       re = 0;
-                                                                                       return false;
-                                                                                   }
-                                                                                   if ($.session.get("session" + v) != null && managestock == 1) {
-                                                                                       cartQty = $.session.get("session" + v);
-                                                                                       if (eval(maxQty - qtyStock) <= 0) {
-                                                                                           temp = eval(maxQty - cartQty);
-                                                                                       } else {
-                                                                                           temp = eval(qtyStock - cartQty);
-                                                                                       }
-                                                                                       temp1 = eval(temp - curQty);
-                                                                                       if (temp1 < 0) {
-                                                                                           re = 0;
-                                                                                           alert('Please, enter "' + proName + '" quantity Min:' + minQty + ' and Max:' + maxQty + ' (Inventory: ' + qtyStock_1 + ')');
-                                                                                           return false;
-                                                                                       }
-                                                                                   }
-                                                                               }
-                           
-                                                                           });
-                                                                           if (re1 == 0) {
-                                                                               re = 0;
-                                                                               alert("Please, choose item(s)");
-                                                                               return false;
-                                                                           }
-                                                                           if (re == 1) {
-                                                                               $('.item-selected').each(function (index) {
-                                                                                   v = $(this).val();
-                                                                                   cusQty = $('#qty').val();
-                                                                                   qty_default = $('#qty_default' + v).val();
-                                                                                   curQty = cusQty * qty_default;
-                                                                                   $.session.set("session" + v, curQty);
-                                                                               });
-                                                                               productAddToCartForm.submit(this);
-                                                                           }
-                           
-                                                                       });
-                                                                   }
-                                                                   $('.bundle-select').each(function (index) {
-                                                                       $(this).bind("change", function () {
-                                                                           v = this.value;
-                                                                           id = $(this).attr('id');
-                                                                           option_id = id.substring(14);
-                                                                           $("#item-selected-select-" + option_id).val(v);
-                                                                       });
-                                                                   });
-                                                                   $('.bundle-checkbox').each(function (index) {
-                                                                       $(this).bind("click", function () {
-                                                                           var isChecked = $(this).is(':checked');
-                                                                           v1 = this.value;
-                                                                           if (isChecked) {
-                                                                               $("#item-selected-checkbox-" + v1).val(v1);
-                                                                           } else {
-                                                                               $("#item-selected-checkbox-" + v1).val('');
-                                                                           }
-                                                                       });
-                                                                   });
-                                                                   $('.bundle-radio').each(function (index) {
-                                                                       $(this).bind("click", function () {
-                                                                           var isChecked = $(this).is(':checked');
-                                                                           v1 = this.value;
-                                                                           id = this.id;
-                                                                           if (isChecked) {
-                           
-                                                                               res = id.split('-');
-                                                                               $("#item-selected-radio-" + res[2]).val(v1);
-                           
-                                                                           }
-                                                                       });
-                                                                   });
-                                                                   $('.bundle-multi').each(function (index) {
-                                                                       $(this).bind("change", function () {
-                                                                           s = $("#" + this.id + " option").length;
-                                                                           for (var i = 0; i < s; i++) {
-                                                                               v1 = $("#" + this.id + " option")[i].selected;
-                                                                               if (v1) {
-                                                                                   v = $("#" + this.id + " option")[i].value;
-                                                                                   $('#item-selected-multi' + v).val(v);
-                                                                               } else {
-                                                                                   v = $("#" + this.id + " option")[i].value;
-                                                                                   $('#item-selected-multi' + v).val('');
-                                                                               }
-                                                                           }
-                           
-                                                                       });
-                                                                   });
-                           
-                                                               });*/
-                                                        </script> 
-                                                        <div class="product-add-box">
+                                                         <div class="product-add-box">
                                                             <ul class="add-to-links">
                                                                 <li class="wishlist"><a href="http://www.onlinesabjiwala.com/wishlist/index/add/product/29/form_key/dVq8b97n8WRfZrE2/" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist" title="Add to Wishlist">Add to Wishlist</a></li>
                                                                 <li class="compare"><a href="http://www.onlinesabjiwala.com/catalog/product_compare/add/product/29/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2FwcGxlLWluZGlhbi5odG1sP1NJRD01ZWFiNzA0ZjIzOThjNjllNDhjMDgwYjAyYWYyMmVkNw,,/form_key/dVq8b97n8WRfZrE2/" class="link-compare" title="Add to Compare">Add to Compare</a></li>
