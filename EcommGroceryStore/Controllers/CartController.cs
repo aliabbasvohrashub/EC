@@ -31,17 +31,13 @@ namespace EcommGroceryStore.Controllers
             if (cart == null)
             {
                 return NotFound();
-            }
-
+            } 
             return Ok(cart);
         }
-
-
+         
         [ResponseType(typeof(vmCartDetailsAll))]
         public IHttpActionResult GetCartDetail(int id)
-        {
-
-
+        { 
             List<vmCartDetail> vmCartdetails = db.CartDetail.Where(x => x.CartId == id).Select(x => new vmCartDetail
             {
                 CartDetailId = x.CartDetailId,
@@ -76,19 +72,15 @@ namespace EcommGroceryStore.Controllers
 
             vmCartDetailsummary.TotalAmount =  tmpvalue;
             vmCartDetailsummary.TotalItems = vmCartdetails.Count();
-
              
-
             //List<CartDetail> cartDetailList = db.CartDetail.Where(x => x.CartId == id).ToList();
             if (vmCartdetails== null)
             {
                 return NotFound();
-            }
-
+            } 
             vmCartDetailsAll objvmCartDetailsAll = new vmCartDetailsAll();
             objvmCartDetailsAll.objvmCartDetails = vmCartdetails;
-            objvmCartDetailsAll.objvmCartDetailSummary = vmCartDetailsummary;
-
+            objvmCartDetailsAll.objvmCartDetailSummary = vmCartDetailsummary; 
             return Ok(objvmCartDetailsAll);
         }
           
@@ -203,8 +195,7 @@ namespace EcommGroceryStore.Controllers
         public IHttpActionResult PostListCartDetail(List<CartDetail> cartdetail)
         {
             for (int i = 0; i < cartdetail.Count(); i++)
-            {
-                 
+            { 
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);//"error";//
@@ -212,26 +203,18 @@ namespace EcommGroceryStore.Controllers
 
                 var productId = cartdetail[i].ProductId;
                 ProductDetails pd = db.ProductDetails.Where(x => x.ProductId == productId).Single();
-
-
+                 
                 var cartId = cartdetail[i].CartId;
                 CartDetail cd = db.CartDetail.Where(x => x.ProductId == productId && x.CartId == cartId).FirstOrDefault();
                 var quantity = cartdetail[i].Quantity;
                 var discount = cartdetail[i].Discount;
 
-                //cartdetail[i].Amount = Convert.ToDecimal(pd.PricePerUnit) * quantity;
-                //cartdetail[i].NetAmount = (Convert.ToDecimal(pd.PricePerUnit) * quantity) - (discount.HasValue ? discount : 0);
-
-                //cartdetail[i].Timestamp = System.DateTime.Now;
-
                 cd.Quantity = cartdetail[i].Quantity;
                 cd.Amount = Convert.ToDecimal(pd.PricePerUnit) * quantity;
                 cd.NetAmount = (Convert.ToDecimal(pd.PricePerUnit) * quantity) - (discount.HasValue ? discount : 0);
-
                 cd.Timestamp = System.DateTime.Now;
 
                 db.Entry(cd).State = EntityState.Modified;
-               // db.Entry(cartdetail).State = EntityState.Detached;
 
                 try
                 {
@@ -240,27 +223,8 @@ namespace EcommGroceryStore.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     throw;
-                }
-                //bool count = db.CartDetail.Where(x => x.ProductId == productId && x.CartId == cartId).Any();
-                //if (count)
-                //{
-                //    var quantitysupplied = cd.Quantity.HasValue ? cd.Quantity : 0;
-                //    cartdetail[i].CartDetailId = cd.CartDetailId;
-                //    cartdetail[i].Quantity = (quantity.HasValue ? quantity : 0) + Convert.ToInt16(quantitysupplied);
-                //    db.Entry(cd).State = EntityState.Detached;
-                //    db.Entry(cartdetail[i]).State = EntityState.Modified;
-                //}
-                //else
-                //{
-
-                //    db.CartDetail.Add(cartdetail[i]);
-                //    db.SaveChanges();
-                //}
-                //var totalamount = db.CartDetail.Where(x => x.CartDetailId == cartdetail[i].CartDetailId).Sum(x => x.NetAmount);
+                } 
             }
-             
-
-          
             return CreatedAtRoute("CartApi", new { id =  0 }, cartdetail);
         }
 
@@ -272,13 +236,8 @@ namespace EcommGroceryStore.Controllers
         [ResponseType(typeof(string))]
         [HttpPost]
         public IHttpActionResult GetNewPostMethod(string cart)
-        {
-            //db.Cart.Add(cart);
-            //db.SaveChanges();
-            //  return cart.CartId.ToString();
-            return CreatedAtRoute("CartApi", new { id = 1 }, cart);
-            //return CreatedAtRoute("ActionApi", new { id = cart.CartId }, cart);
-
+        { 
+            return CreatedAtRoute("CartApi", new { id = 1 }, cart);  
         }
 
         // DELETE api/Cart/5
@@ -289,15 +248,11 @@ namespace EcommGroceryStore.Controllers
             if (cart == null)
             {
                 return NotFound();
-            }
-
+            } 
             db.Cart.Remove(cart);
-            db.SaveChanges();
-
+            db.SaveChanges(); 
             return Ok(cart);
-        }
-
-
+        } 
         [ResponseType(typeof(CartDetail))]
         public IHttpActionResult DeleteItem(int cartDetailId, int productId)
         {
@@ -308,8 +263,7 @@ namespace EcommGroceryStore.Controllers
             }
 
             db.CartDetail.Remove(cartDetail);
-            db.SaveChanges();
-
+            db.SaveChanges(); 
             return Ok(cartDetail);
         }
 

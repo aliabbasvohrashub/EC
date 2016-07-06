@@ -1,10 +1,4 @@
 ﻿ 
-//alert('this should work');
-
-
-//(function () {
-//alert('this shoudl also work');
-
 function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
 
     var val = "<div class=\"item col-lg-3 col-md-4 col-sm-4 respl-item\">"
@@ -113,3 +107,4 @@ function getProductDetail(querystring) {
    });
 }
 
+ 

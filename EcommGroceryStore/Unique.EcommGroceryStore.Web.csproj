@@ -1144,6 +1144,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\basic.js" />
     <Content Include="Scripts\custom\cart.js" />
+    <Content Include="Scripts\custom\homepageproducts.js" />
     <Content Include="Scripts\custom\listfruits.js" />
     <Content Include="Scripts\custom\listmostsold.js" />
     <Content Include="Scripts\custom\listveg.js" />

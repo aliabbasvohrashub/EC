@@ -497,13 +497,8 @@
                                         <ul>
                                             <li><a class="icon-facebook show_facebook" title="Facebook" href="https://www.facebook.com/onlinesabjiwala" target="_blank" data-icon="f"><span>Facebook</span></a></li>
                                             <li><a class="icon-twitter show_twitter" title="Twitter" href="https://twitter.com/onlinesabjiwala" target="_blank" data-icon="l"><span>Twitter</span></a></li>
-
-
-
-
                                         </ul>
                                     </div>
-
                                 </div>
                                 <div class="col-lg-9 col-md-9">
                                     <div class="block block-subscribe-footer">
@@ -511,7 +506,6 @@
                                             <h2>SIGN UP FOR OUR NEWSLETTER </h2>
                                             <p>Become A Smart Shopper Dont Miss Out Onlinesabjiwala Offers &amp; Deals</p>
                                         </div>
-
                                         <div class="block-content">
                                             <div class="input-box">
                                                 <input type="text" name="email" id="newsletter" title="Sign up for our newsletter" class="input-text required-entry validate-email" value="Enter your email..." onblur="if(this.value=='') this.value='Enter your email...';" onfocus="if(this.value=='Enter your email...') this.value='';">
@@ -603,20 +597,44 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-
+                </div>  
             </div>
-            <!-- END: footer -->
-
-
-
-
+            <!-- END: footer -->  
         </div>
     </form>
     <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
 </body>
     <script src="/../Scripts/custom/basic.js"></script>
-<!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
+    <script src="/../Scripts/custom/homepageproducts.js"></script>
+
+<script>
+    $(document).ready(function ($) {
+        getcarouselproducts();
+        $.when(getcarouselproducts()).done(function (data) {
+            getHomepageproductsAndGenerateHtml(data);
+            var owl_left = $(".basic-product");
+            owl_left.owlCarousel({
+                itemsCustom: [
+                [0, 1],
+                [480, 1],
+                [768, 2],
+                [992, 1],
+                [1200, 1]
+                ],
+
+                slideSpeed: 300,
+                stopOnHover: true,
+                paginationSpeed: 400,
+                autoPlay: false,
+                pagination: false,
+            });
+            $(".nav-left-product .next-bs").click(function () {
+                owl_left.trigger('owl.next');
+            });
+            $(".nav-left-product .prev-bs").click(function () {
+                owl_left.trigger('owl.prev');
+            });
+        }); 
+    });
+    </script>
 </html>
