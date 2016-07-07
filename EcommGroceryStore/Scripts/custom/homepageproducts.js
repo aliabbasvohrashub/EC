@@ -37,14 +37,14 @@ function generateMarkup(productName, imageURL, description, quantity, pricePerUn
 			    + "    <div class=\"bs-item-inner\">"
                 + ""
 				+ "        <div class=\"bs-image\">"
-				+ "	        <a href=\"" + productName + "\" title=\"" + productName + "\">"
+				+ "	        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
 				+ "		        <img src=\"\\" + imageURL + "\" title=\"Coconut water\" alt=\"" + productName + "\">"
 				+ "	        </a>"
 				+ "        </div>"  
 				+ "        <!-- Begin bs-content -->"
 				+ "        <div class=\"bs-content\">"
 				+ "	        <div class=\"bs-title\">"
-				+ "		        <a href=\"" + productName + "\" title=\"" + productName + "\">" + productName + "</a>"
+				+ "		        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">" + productName + "</a>"
 				+ "	        </div>"
 				+ "	        <div class=\"bs-price\">"
 				+ "		        <div class=\"sale-price\">"
@@ -71,7 +71,7 @@ function generateMarkup(productName, imageURL, description, quantity, pricePerUn
 
 //first step call the webservice and get data
 function getcarouselcat_29products() { 
-    return $.getJSON("/api/ProductDetails/getProductList",
+    return $.getJSON("/api/ProductDetails/getVegOnlyList",
        function (data) {
        });
 }
@@ -94,7 +94,7 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
                + "     <div class=\"w-image-box\">"
                + "         <span class=\"hover-background\"></span>"
                + "         <div class=\"item-image\">"
-               + "             <a href=\"" + productName + "\" class=\"product-image rspl-image\"> "
+               + "             <a href=\"\\Details\\" + productName + "\" class=\"product-image rspl-image\"> "
                + "                 <img src=\"\\" + imageURL + "\" alt=\"" + productName + "\" />"
                + "             </a>"
                + "         </div> "
@@ -104,7 +104,7 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
                + "     </div> "
                + "     <div class=\"item-info\"> "
                + "         <div class=\"item-title\">"
-               + "             <a href=\"" + productName + "\" title=\"" + productName + "\">"
+               + "             <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
                + "               " + productName + ""
                + "             </a>"
                + "         </div> "
@@ -118,7 +118,7 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
                + "             </div>"
                + "         </div> "
                + "     </div> "
-               + "     <a class=\"product-image\" style=\"display:none;\" href=\"" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
+               + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
                + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
                + "         Add to Cart"
                + "     </button> "
@@ -136,7 +136,7 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
 
 //first step call the webservice and get data
 function getcarouselcat_30products() {
-    return $.getJSON("/api/ProductDetails/getProductList",
+    return $.getJSON("/api/ProductDetails/getVegOnlyList",
        function (data) {
        });
 }
@@ -159,7 +159,7 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
                + "     <div class=\"w-image-box\">"
                + "         <span class=\"hover-background\"></span>"
                + "         <div class=\"item-image\">"
-               + "             <a href=\"" + productName + "\" class=\"product-image rspl-image\"> "
+               + "             <a href=\"\\Details\\" + productName + "\" class=\"product-image rspl-image\"> "
                + "                 <img src=\"\\" + imageURL + "\" alt=\"" + productName + "\" />"
                + "             </a>"
                + "         </div> "
@@ -169,7 +169,7 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
                + "     </div> "
                + "     <div class=\"item-info\"> "
                + "         <div class=\"item-title\">"
-               + "             <a href=\"" + productName + "\" title=\"" + productName + "\">"
+               + "             <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
                + "               " + productName + ""
                + "             </a>"
                + "         </div> "
@@ -183,7 +183,7 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
                + "             </div>"
                + "         </div> "
                + "     </div> "
-               + "     <a class=\"product-image\" style=\"display:none;\" href=\"" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
+               + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
                + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
                + "         Add to Cart"
                + "     </button> "
@@ -200,7 +200,7 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
 
 //first step call the webservice and get data
 function getcarouselcat_8products() {
-    return $.getJSON("/api/ProductDetails/getProductList",
+    return $.getJSON("/api/ProductDetails/getFruitsOnlyList",
        function (data) {
        });
 }
@@ -223,7 +223,7 @@ function generatecat_8Markup(productName, imageURL, description, quantity, price
                + "     <div class=\"w-image-box\">"
                + "         <span class=\"hover-background\"></span>"
                + "         <div class=\"item-image\">"
-               + "             <a href=\"" + productName + "\" class=\"product-image rspl-image\"> "
+               + "             <a href=\"\\Details\\" + productName + "\" class=\"product-image rspl-image\"> "
                + "                 <img src=\"\\" + imageURL + "\" alt=\"" + productName + "\" />"
                + "             </a>"
                + "         </div> "
@@ -233,7 +233,7 @@ function generatecat_8Markup(productName, imageURL, description, quantity, price
                + "     </div> "
                + "     <div class=\"item-info\"> "
                + "         <div class=\"item-title\">"
-               + "             <a href=\"" + productName + "\" title=\"" + productName + "\">"
+               + "             <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
                + "               " + productName + ""
                + "             </a>"
                + "         </div> "
@@ -247,7 +247,7 @@ function generatecat_8Markup(productName, imageURL, description, quantity, price
                + "             </div>"
                + "         </div> "
                + "     </div> "
-               + "     <a class=\"product-image\" style=\"display:none;\" href=\"" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
+               + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
                + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
                + "         Add to Cart"
                + "     </button> "
