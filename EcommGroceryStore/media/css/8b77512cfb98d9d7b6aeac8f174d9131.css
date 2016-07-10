@@ -9416,7 +9416,7 @@ input.quantity-minus {
   cursor: -webkit-grab;
   cursor: -o-grab;
   cursor: -ms-grab;
-  cursor: grab;
+  /*cursor: grab;*/
 }
 .sm_imageslider.owl-rtl {
   direction: rtl;

@@ -33,7 +33,7 @@
                   + "       </div>"
                   + "    </div>"
                   + "   </div> "
-                  + "   <button data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" type=\"button\" class=\"btn-pd btn-cart\" onclick=\"setLocation('fruits/awala.html')\">"
+                  + "   <button data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" type=\"button\" class=\"btn-pd btn-cart\" onclick=\"location.href=\"" + productName + "\">"
                   + "       <span>"
                   + "           <span>Add to Cart</span>"
                   + "       </span>"

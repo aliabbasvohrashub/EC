@@ -2,7 +2,7 @@
 document.getElementById('ip').value = myip;
 
 
-if (document.getElementById('cartid').value == '') {
+if (document.getElementById('cartid').value === '') {
     var cartid = getCookie("cartid");
     if (cartid == "") {
         var cart = new Object();
@@ -42,10 +42,10 @@ function getCookie(cname) {
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -54,21 +54,21 @@ function getCookie(cname) {
 
 function checkCookie() {
     var cartid = getCookie("cartid");
-    if (cartid == "") {
+    if (cartid === "") {
         alert('i am called again');
         setCookie("cartid", document.getElementById('cartid').value, 30);
     }
 }
 
 
-if (document.getElementById('cartid').value != '') {
+if (document.getElementById('cartid').value !== '') {
     var cartid = getCookie("cartid");
     if (cartid != "") {
         AddUpdateCartLabel();
     }
 }
 $(".search-header.mini-cart-header").click(function () {
-    if ($(".block-content").css('display') == 'none') {
+    if ($(".block-content").css('display') === 'none') {
         $(".block-content").css('display', '');
     } else {
         $(".block-content").css('display', 'none');
@@ -77,7 +77,7 @@ $(".search-header.mini-cart-header").click(function () {
 
 
 function AddUpdateCartLabel() {
-    if (document.getElementById('cartid').value != '') {
+    if (document.getElementById('cartid').value !== '') {
         var CartId = document.getElementById('cartid').value;
         var APIRoute = "/api/Cart/GetCartDetail";
         $.ajax({
@@ -164,7 +164,7 @@ function generateHiddenCart(data) {
 
 function UpdateCart() {
     var listOfObjects = [];
-    if (document.getElementById('cartid').value != '') {
+    if (document.getElementById('cartid').value !== '') {
         $("#shopping-cart-table > tbody > tr").each(function () {
             //console.log($(this).find('td').eq(0).text() + ' ' + $(this).find('td').eq(5).find('input').val());
 
@@ -201,7 +201,7 @@ function delitem(cd, cdd) {
 function EmptyCart(cd) {
     var result = confirm("Want to delete?");
     if (result) {
-        if (document.getElementById('cartid').value != '') {
+        if (document.getElementById('cartid').value !== '') {
             var APIRoute = "/api/Cart/DeleteEverything?cartId=" + document.getElementById('cartid').value;
             $.ajax({
                 url: APIRoute,

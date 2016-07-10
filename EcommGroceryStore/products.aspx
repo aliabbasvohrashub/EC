@@ -234,7 +234,7 @@
                                                                             <div id="targetdiv" class="select-inner dropdown">
                                                                                 <div class="overwrite-limiter"></div>
                                                                                 <span class="btn-toolbar" data-toggle="dropdown"></span>
-                                                                                <ul id="limiter" class="dropdown-menu" ">
+                                                                                <ul id="limiter" class="dropdown-menu">
                                                                                     <li><a href="#">8</a></li>
                                                                                     <li><a href="#">16</a></li>
                                                                                     <li><a href="#">32</a></li>
