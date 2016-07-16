@@ -55,7 +55,7 @@
         jQuery.getJSON("api/ProductDetails/getVegList",
             function (data) {
                 jQuery.each(data, function (key, val) {
-                    var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+                    var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
                     //                    alert(val2);
                    // console.log(val2);
                     //<div class="products-grid row">

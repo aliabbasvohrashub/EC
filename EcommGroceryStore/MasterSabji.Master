@@ -24,10 +24,11 @@
 
     <link rel="stylesheet" type="text/css" href="/../skin/jquery.noty.css" />
     <link rel="stylesheet" type="text/css" href="/../skin/noty_theme_default.css" />
-    <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>--%>
+    <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
+    <script type="text/javascript" src="/../media/js/4eef62d1ebc59917ea4b08aad3bbc0f4.js"></script>--%>
+    
     <script type="text/javascript" src="/../Scripts/jquery.noty.js"></script>
-    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
-    <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" /> 
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 

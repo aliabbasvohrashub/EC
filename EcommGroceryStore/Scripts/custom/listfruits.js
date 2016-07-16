@@ -1,5 +1,5 @@
 ﻿ 
-function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
+function fruitBox(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"item col-lg-3 col-md-4 col-sm-4 respl-item\">"
               + "     <div class=\"item-inner\">"
@@ -23,7 +23,7 @@ function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
               + "    <div class=\"item-price\"> "
               + "        <div class=\"price-box\">"
               + "            <span class=\"regular-price\"> "
-              + "               <span class=\"price\">₹" + pricePerUnit + "</span>/" + pricePerUnit + " gm"
+              + "               <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
               + "            </span> "
               + "       </div>"
               + "    </div>"
@@ -47,7 +47,7 @@ function fruitBox(productName, imageURL, description, quantity, pricePerUnit) {
 
 }
 
-function ContentBox(productName, imageURL, description, quantity, pricePerUnit) {
+function ContentBox(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"bs-content\">"
         + "<a href=\"" + productName + ".html\" title=\"" + description + "\">"
@@ -58,7 +58,7 @@ function ContentBox(productName, imageURL, description, quantity, pricePerUnit) 
         + "<div class=\"sale-price\">"
         + "<div class=\"price-box\">"
         + "<span class=\"regular-price\">"
-        + "<span class=\"price\">" + pricePerUnit + "</span>/1 Pc"
+        + "<span class=\"price\">" + pricePerUnit + "</span>" + unit + " gm"
         + "</span>"
         + "</div>"
         + "</div>"
@@ -78,7 +78,7 @@ function LoopAndGenerate(data, querystring) {
     var totalrecords = 0;
     jQuery("div.products-grid.row").empty();
     jQuery.each(data, function (key, val) {
-        var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = fruitBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         totalrecords++;
         jQuery("div.products-grid.row").append(val2);
     });

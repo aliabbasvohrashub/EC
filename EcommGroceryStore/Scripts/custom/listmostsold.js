@@ -9,7 +9,7 @@
         return val;
     }
 
-    function ContentBox(productName, imageURL, description, quantity, pricePerUnit) {
+    function ContentBox(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
         var val = "<div class=\"bs-content\">"
             + "<a href=\"" + productName + ".html\" title=\"" + description + "\">"
@@ -20,7 +20,7 @@
             + "<div class=\"sale-price\">"
             + "<div class=\"price-box\">"
             + "<span class=\"regular-price\">"
-            + "<span class=\"price\">" + pricePerUnit + "</span>/1 Pc"
+            + "<span class=\"price\">" + pricePerUnit + "</span> / " + unit + " gm"
             + "</span>"
             + "</div>"
             + "</div>"
@@ -41,7 +41,7 @@
             function (data) {
                 jQuery.each(data, function (key, val) {
                     var val1 = ImageBox(val.ProductName, val.ImageURL, val.Description);
-                    var val2 = ContentBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+                    var val2 = ContentBox(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit );
                     if (key === 0) {
                         jQuery();
                         jQuery("div.slider-left-product.basic-product").append("<div class=\"item-left-products item\">");

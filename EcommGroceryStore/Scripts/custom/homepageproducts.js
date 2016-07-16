@@ -12,7 +12,7 @@ function getHomepageproductsAndGenerateHtml(data) {
     var totaloutput = "";
     $.each(data, function (key, val) {
         
-        var val2 = generateMarkup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generateMarkup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         totalrecords++;
         totaloutput += val2;
         //console.log(totalrecords + ' ' + (totalrecords % 4));
@@ -30,7 +30,7 @@ function getHomepageproductsAndGenerateHtml(data) {
 }
 
 // use this function to generate the markup
-function generateMarkup(productName, imageURL, description, quantity, pricePerUnit) {
+function generateMarkup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "   <div class=\"bs-item cf\">"
         + "    <!-- Begin bs-item-inner -->"
@@ -50,7 +50,7 @@ function generateMarkup(productName, imageURL, description, quantity, pricePerUn
         + "		        <div class=\"sale-price\">"
         + "			        <div class=\"price-box\">"
         + "				        <span class=\"regular-price\">"
-        + "					        <span class=\"price\">₹" + pricePerUnit + "</span>/1 Pc</span>"
+        + "					        <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm</span>"
         + "			        </div>"
         + "		        </div>"
         + "	        </div>"
@@ -77,14 +77,14 @@ function getcarouselcat_29products() {
 
 function getHomepagecat_29productsAndGenerateHtml(data) {
    
-    $.each(data, function (key, val) { 
-        var val2 = generatecat_29Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);  
+    $.each(data, function (key, val) {
+        var val2 = generatecat_29Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);  
         $("div.ltabs-items-container.slider-cat-29").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_29Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_29Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val =  "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -109,7 +109,7 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"
@@ -141,13 +141,13 @@ function getcarouselcat_30products() {
 function getHomepagecat_30productsAndGenerateHtml(data) {
 
     $.each(data, function (key, val) {
-        var val2 = generatecat_30Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generatecat_30Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         $("div.ltabs-items-container.slider-cat-30").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_30Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_30Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -172,7 +172,7 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"
@@ -203,13 +203,13 @@ function getcarouselcat_8products() {
 function getHomepagecat_8productsAndGenerateHtml(data) {
 
     $.each(data, function (key, val) {
-        var val2 = generatecat_8Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generatecat_8Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         $("div.ltabs-items-container.slider-cat-8").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_8Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_8Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -234,7 +234,7 @@ function generatecat_8Markup(productName, imageURL, description, quantity, price
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"

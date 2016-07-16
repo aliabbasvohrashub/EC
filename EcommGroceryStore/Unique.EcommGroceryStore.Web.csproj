@@ -204,6 +204,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\minus.png" />
     <Content Include="Images\plus.png" />
+    <Content Include="media\js\jquery.accordion.js" />
     <Content Include="products.aspx" />
     <Content Include="indexchild.aspx" />
     <Content Include="media\captcha\base\9f33330d1f8b301b6118eec308d88e67.png" />
