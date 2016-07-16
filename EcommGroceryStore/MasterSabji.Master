@@ -132,8 +132,8 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 col-md-5 sl-header-text">
-                                    <div class="label-offer-slider">Just for You</div>
-                                    <div class="offer-wrapper">
+                                    <div class="label-offer-slider hidden">Just for You</div>
+                                    <div class="offer-wrapper hidden">
                                         <div class="offer-header">
                                             <ul id="offer-slider" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
                                                 <div class="owl-wrapper-outer">
@@ -180,8 +180,8 @@
                                     <div class="block-action-header top-link-account login-link">
                                         <ul>
                                             <li>
-                                                <a class="login-btn" data-toggle="modal" data-target="#modal-login" title="Login">Login</a>
-                                                <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <a class="login-btn" data-toggle="modal" href="Account/Login.aspx"  title="Login">Login</a>
+                                                <%--<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog block-popup-login">
                                                         <a href="javascript:void(0)" title="Close" class="close close-login" data-dismiss="modal">Close</a>
                                                         <div class="tt_popup_login"><strong>Sign in Or Register</strong></div>
@@ -216,7 +216,7 @@
                                                             <div style="clear: both;"></div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>--%>
                                             </li>
                                         </ul>
                                     </div>
@@ -244,7 +244,7 @@
                                         <div class="block-action-header top-link-account login-link login-mobile-btn">
                                             <ul>
                                                 <li>
-                                                    <a class="login-btn" href="customer/account/login/index.html" title="Login">&nbsp;</a>
+                                                    <a class="login-btn" href="/Account/Login.aspx" title="Login">&nbsp;</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -260,14 +260,14 @@
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4 logo-wrapper">
                                     <h1>
-                                        <a title="Onlinesabjiwala.com" href="index.html">
+                                        <a title="Onlinesabjiwala.com" href="/indexchild.aspx">
                                             <img src="/../skin/frontend/onlinesabjiwala/default/images/red/onlinesabjiwalalogo.png" alt="Onlinesabjiwala.com">
                                         </a>
                                     </h1>
                                 </div>
 
                                 <div class="col-lg-6 col-md-5 col-sm-4 search-pro">
-                                    <div id="sm_serachbox_pro15439196551463397099" class="sm-serachbox-pro">
+                                    <div id="sm_serachbox_pro15439196551463397099" class="sm-serachbox-pro hidden">
 
                                         <div class="sm-searbox-content">
 
@@ -327,15 +327,15 @@
                                                     <div class="res-wrapnav">
                                                         <ul class="level0">
                                                             <li class="level1 nav-1-1 first">
-                                                                <a href="fruits-vegetables/fruits.html">
+                                                                <a href="products.aspx/fruits">
                                                                     <span>Fruits</span>
                                                                 </a>
                                                             </li>
                                                             <li class="level1 nav-1-2 last parent" onmouseover="toggleMenu(this,1)" onmouseout="toggleMenu(this,0)">
-                                                                <a href="fruits-vegetables/vegetables.html">
+                                                                <a href="products.aspx/vegetables">
                                                                     <span>Vegetables</span>
                                                                 </a>
-                                                                <ul class="level1">
+                                                                <ul class="level1 hidden">
                                                                     <li class="level2 nav-1-2-1 first">
                                                                         <a href="fruits-vegetables/vegetables/seasonal-vegetables.html">
                                                                             <span>Seasonal Vegetables</span>
@@ -376,26 +376,26 @@
                                                 </a>
                                                 <ul class="sm-megamenu-hover sm_megamenu_menu sm_megamenu_menu_black" data-jsapi="on">
                                                     <li class="rw-url home-item-parent other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
-                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="index.html" id="sm_megamenu_3">
+                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx"  id="sm_megamenu_3">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
                                                                 <span class="sm_megamenu_title">Home</span> 
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
-                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="fruits-vegetables/fruits.html" id="sm_megamenu_5">
+                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/products.aspx/fruits" id="sm_megamenu_5">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
                                                                 <span class="sm_megamenu_title">Fruits</span> 
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="electronic-item-parent other-toggle   sm_megamenu_lv1 sm_megamenu_drop parent   ">
-                                                        <a class="sm_megamenu_head sm_megamenu_drop " href="fruits-vegetables/vegetables.html" id="sm_megamenu_6">
+                                                        <a class="sm_megamenu_head sm_megamenu_drop " href="/products.aspx/vegetables" id="sm_megamenu_6">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
                                                                 <span class="sm_megamenu_title">Vegetables</span> 
                                                             </span>
                                                         </a>
-                                                        <div class="sm-megamenu-child sm_megamenu_dropdown_3columns  ">
+                                                        <div class="sm-megamenu-child sm_megamenu_dropdown_3columns hidden">
                                                             <div class="sm_megamenu_col_3 sm_megamenu_firstcolumn  sm_megamenu_id6   electronic-item">
                                                                 <div class="sm_megamenu_col_2 sm_megamenu_firstcolumn  sm_megamenu_id7   ">
                                                                     <div class="sm_megamenu_head_item ">
