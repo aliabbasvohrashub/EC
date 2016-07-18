@@ -123,7 +123,7 @@
                                                 <div class="toolbar">
                                                     <div class="toolbar-inner">
                                                         <div class="sorter">
-                                                            <div class="view-mode-wrap">
+                                                            <div class="view-mode-wrap" style="display:none;">
                                                                 <p class="view-mode">
                                                                     <strong title="Grid" class="grid">Grid</strong>&nbsp;
                                                                                             <a href="fruitsa927.html?mode=list" title="List" class="list">List</a>&nbsp;
@@ -197,7 +197,7 @@
                                                     <div class="toolbar">
                                                         <div class="toolbar-inner">
                                                             <div class="sorter">
-                                                                <div class="view-mode-wrap">
+                                                                <div class="view-mode-wrap" style="display:none;">
                                                                     <p class="view-mode">
                                                                         <strong title="Grid" class="grid">Grid</strong>&nbsp;
                                                                         <a href="fruitsa927.html?mode=list" title="List" class="list">List</a>&nbsp;
