@@ -26,17 +26,17 @@
     <link rel="stylesheet" type="text/css" href="/../skin/noty_theme_default.css" />
     <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
     <script type="text/javascript" src="/../media/js/4eef62d1ebc59917ea4b08aad3bbc0f4.js"></script>--%>
-    
+
     <script type="text/javascript" src="/../Scripts/jquery.noty.js"></script>
-    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" /> 
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
-    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
     <link href="/../media/css/style.css" rel="stylesheet" />
     <script src="/../Scripts/owl.carousel.min.js"></script>
     <style type="text/css">
-        body { 
+        body {
             font-size: 12px;
         }
 
@@ -79,8 +79,8 @@
             display: none;
         }
 
-        #pageloaddiv {   
-            opacity:0.2;
+        #pageloaddiv {
+            opacity: 0.2;
             position: fixed;
             left: 0px;
             top: 0px;
@@ -88,14 +88,14 @@
             height: 100%;
             z-index: 1000;
             background: url('/../skin/frontend/base/default/images/loader-responsive.gif') no-repeat center center;
-            display:none;
+            display: none;
         }
-</style>
-     
+    </style>
+
 </head>
 
 <body id="bd" class="cmspage1 onlinesabjiwala    cms-index-index cms-home">
-    <div id="pageloaddiv"></div>  
+    <div id="pageloaddiv"></div>
     <input type="hidden" id="ip" value="" />
     <input type="hidden" id="cartid" value="" />
     <form runat="server">
@@ -164,6 +164,8 @@
                                             <li class="first last"><a href="checkout/index.html" title="Checkout" class="top-link-checkout">Checkout</a></li>
                                         </ul>
                                     </div>
+                                    <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                       {%>
                                     <div class="block-action-header top-link-account my-account-link">
                                         <ul>
                                             <li>
@@ -176,53 +178,25 @@
                                             </li>
                                         </ul>
                                     </div>
-
+                                    <% } %>
                                     <div class="block-action-header top-link-account login-link">
                                         <ul>
                                             <li>
-                                                <a class="login-btn" data-toggle="modal" href="Account/Login.aspx"  title="Login">Login</a>
-                                                <%--<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog block-popup-login">
-                                                        <a href="javascript:void(0)" title="Close" class="close close-login" data-dismiss="modal">Close</a>
-                                                        <div class="tt_popup_login"><strong>Sign in Or Register</strong></div>
-                                                        <input name="form_key" type="hidden" value="10mZJsjNieAFmLSZ">
-                                                        <div class="block-content">
-                                                            <div class="col-reg registered-account">
-                                                                <div class="email-input">
-                                                                    <input title="User Name" type="text" name="login[username]" id="mini-login" class="input-text" value="User name" onfocus="if(this.value != '') {this.value = '';}" onblur="if (this.value == '') {this.value = 'User name';}">
-                                                                </div>
-                                                                <div class="pass-input">
-                                                                    <input title="Password" type="password" name="login[password]" id="mini-password" class="input-text" value="........." onfocus="if(this.value != '') {this.value = '';}" onblur="if (this.value == '') {this.value = '.........';}">
-                                                                </div>
-                                                                <div class="ft-link-p">
-                                                                    <a title="Forgot your password?" href="customer/account/forgotpassword/index.html" class="f-left">Forgot your password?</a>
-                                                                </div>
-                                                                <div class="actions">
-                                                                    <div class="submit-login">
-                                                                        <input title="Login" type="submit" class="button btn-submit-login" name="submit" value="LOGIN">
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="col-reg login-customer">
-                                                                <h2>NEW TO ONLINESABJIWALA?</h2>
-                                                                <p class="note-reg">Registration is free and easy!</p>
-                                                                <ul class="list-log">
-                                                                    <li>Faster checkout</li>
-                                                                    <li>Save multiple shipping addresses</li>
-                                                                    <li>View and track orders and more</li>
-                                                                </ul>
-                                                                <a class="btn-reg-popup" title="Register" href="customer/account/create/index.html">Create an account</a>
-                                                            </div>
-                                                            <div style="clear: both;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>--%>
+                                                <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                   {%>
+                                                <asp:LinkButton class="logout-btn" Text="Log Out" ID="lnkLogOut" OnClick="lnkLogOut_Click" runat="server" />
+                                                <% }
+                                                   else
+                                                   {%>
+                                                <a class="login-btn" data-toggle="modal" href="Account/Login.aspx" title="Login">Login</a>
+                                                <% } %>                                                
                                             </li>
                                         </ul>
                                     </div>
 
                                     <div class="action-mobile">
-
+                                        <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                           {%>
                                         <div class="block-action-header top-link-account my-account-link account-mobile-btn">
                                             <ul>
                                                 <li>
@@ -240,11 +214,18 @@
                                                 </ul>
                                             </div>
                                         </div>
-
+                                        <% } %>
                                         <div class="block-action-header top-link-account login-link login-mobile-btn">
                                             <ul>
                                                 <li>
+                                                    <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                       {%>
+                                                    <asp:LinkButton class="logout-btn" OnClick="lnkLogOut_Click" runat="server" />
+                                                    <% }
+                                                       else
+                                                       {%>
                                                     <a class="login-btn" href="/Account/Login.aspx" title="Login">&nbsp;</a>
+                                                    <% } %>    
                                                 </li>
                                             </ul>
                                         </div>
@@ -275,7 +256,7 @@
                                                 <div class="cat-wrapper">
                                                     <div class="selector" id="uniform-cat" style="width: 134px;">
                                                         <span style="width: 124px; -webkit-user-select: none;">All Categories</span><select id="cat" name="cat" class="jqtransformdone">
-                                                            <option value="">All Categories</option> 
+                                                            <option value="">All Categories</option>
                                                             <option value="29">- Fruits &amp; Vegetables</option>
                                                             <option value="8">- - Fruits</option>
                                                             <option value="22">- - - Seasonal Fruits</option>
@@ -283,7 +264,7 @@
                                                             <option value="30">- - Vegetables</option>
                                                             <option value="31">- - - Seasonal Vegetables</option>
                                                             <option value="32">- - - Green Leafy Vegetables </option>
-                                                            <option value="33">- - - Exotic Vegetables</option> 
+                                                            <option value="33">- - - Exotic Vegetables</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -359,13 +340,13 @@
                                             </ul>
 
                                         </div>
-                                        <a class="btn-search-mobile icon-search" href="javascript:void(0)" title="Search"></a> 
+                                        <a class="btn-search-mobile icon-search" href="javascript:void(0)" title="Search"></a>
                                     </div>
-                                    <div class="yt-menu"> 
+                                    <div class="yt-menu">
 
-                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">--> 
+                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">-->
 
-                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">--> 
+                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">-->
 
                                         <div class="css_effect sm_megamenu_wrapper_horizontal_menu sambar" id="sm_megamenu_menu572ac9f87dbc9" data-sam="7163002341462422008">
                                             <div class="sambar-inner">
@@ -376,23 +357,23 @@
                                                 </a>
                                                 <ul class="sm-megamenu-hover sm_megamenu_menu sm_megamenu_menu_black" data-jsapi="on">
                                                     <li class="rw-url home-item-parent other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
-                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx"  id="sm_megamenu_3">
+                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx" id="sm_megamenu_3">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Home</span> 
+                                                                <span class="sm_megamenu_title">Home</span>
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
                                                         <a class="sm_megamenu_head sm_megamenu_nodrop " href="/products.aspx/fruits" id="sm_megamenu_5">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Fruits</span> 
+                                                                <span class="sm_megamenu_title">Fruits</span>
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="electronic-item-parent other-toggle   sm_megamenu_lv1 sm_megamenu_drop parent   ">
                                                         <a class="sm_megamenu_head sm_megamenu_drop " href="/products.aspx/vegetables" id="sm_megamenu_6">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Vegetables</span> 
+                                                                <span class="sm_megamenu_title">Vegetables</span>
                                                             </span>
                                                         </a>
                                                         <div class="sm-megamenu-child sm_megamenu_dropdown_3columns hidden">
@@ -418,8 +399,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <!--End Module-->  
-                                         
+                                        <!--End Module-->
+
                                         <div class="search-header mini-cart-header">
                                             <div class="block mini-cartpro sm-cartpro">
                                                 <div class="block-title">
@@ -435,7 +416,7 @@
 
                                                 <div class="block-content" style="overflow: hidden; display: none;">
                                                     <div class="block-inner" id="block-inner">
-                                                      <!--  <form action="http://www.onlinesabjiwala.com/checkout/cart/updatePost/" method="post" id="minicart-form_uq576b903d1459b">
+                                                        <!--  <form action="http://www.onlinesabjiwala.com/checkout/cart/updatePost/" method="post" id="minicart-form_uq576b903d1459b">
                                                             <input id="hdnformkey" type="hidden" name="form_key" value="2ERBcuLqJF1Ri1mx"> 
                                                         </form>-->
 
@@ -459,8 +440,8 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-                <a id="yt-totop" href="#" title="Go to Top" style="display: none;"></a>  
+                </div>
+                <a id="yt-totop" href="#" title="Go to Top" style="display: none;"></a>
             </div>
             <!-- END: Header -->
 
@@ -598,15 +579,15 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
-            <!-- END: footer -->  
+            <!-- END: footer -->
         </div>
     </form>
     <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
 </body>
-    <script src="/../Scripts/custom/basic.js"></script>
-    <script src="/../Scripts/custom/homepageproducts.js"></script>
+<script src="/../Scripts/custom/basic.js"></script>
+<script src="/../Scripts/custom/homepageproducts.js"></script>
 
 <script>
     $(document).ready(function ($) {
@@ -635,7 +616,7 @@
             $(".nav-left-product .prev-bs").click(function () {
                 owl_left.trigger('owl.prev');
             });
-        }); 
+        });
     });
-    </script>
+</script>
 </html>
