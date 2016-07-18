@@ -24,10 +24,11 @@
 
     <link rel="stylesheet" type="text/css" href="/../skin/jquery.noty.css" />
     <link rel="stylesheet" type="text/css" href="/../skin/noty_theme_default.css" />
-    <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>--%>
+    <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
+    <script type="text/javascript" src="/../media/js/4eef62d1ebc59917ea4b08aad3bbc0f4.js"></script>--%>
+    
     <script type="text/javascript" src="/../Scripts/jquery.noty.js"></script>
-    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
-    <link rel="author" href="https://plus.google.com/u/0/+onlinesabjiwala" />
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" /> 
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
@@ -158,9 +159,12 @@
 
                                 <div class="col-lg-6 col-md-7 top-links-action">
 
-                                    <div class="block-action-header top-link-account checkout-link">
+                                    <div class="block-action-header top-link-account checkout-link">                                         
                                         <ul class="links">
-                                            <li class="first last"><a href="checkout/index.html" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                            <li class="first last">                                                 
+                                            <%--    <a href="#" id="linkCheckOut" onclick="btnCheckOut_Click" runat="server" title="Checkout" class="top-link-checkout">Checkout</a><asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
+                                                <asp:LinkButton ID="LinkButton1" OnClick="btnCheckOut_Click" class="top-link-checkout" runat="server">Checkout</asp:LinkButton>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="block-action-header top-link-account my-account-link">
@@ -445,9 +449,11 @@
                                                             <button class="button btn-gotocart" type="button" title="Go to cart" onclick="location.href='http://localhost:59492/checkout/cart/'">
                                                                 <span><span>Go to cart</span></span>
                                                             </button>
-                                                            <button class="button" type="button" title="Checkout" onclick="setLocation('http://www.onlinesabjiwala.com/checkout/onepage/')">
+
+                                                            <asp:Button ID="btnCheckOutdropdown" OnClick="btnCheckOut_Click" Text="CheckOut" class="button" runat="server"></asp:Button>
+                                                            <%--<button class="button" type="button" title="Checkout" onclick="setLocation('http://www.onlinesabjiwala.com/checkout/onepage/')">
                                                                 <span><span>Checkout</span></span>
-                                                            </button>
+                                                            </button>--%>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -634,7 +640,23 @@
             $(".nav-left-product .prev-bs").click(function () {
                 owl_left.trigger('owl.prev');
             });
-        }); 
+        });
+
+
+        $("#linkCheckOut").click(function () {
+            console.log('click fired');
+            $.ajax({
+                type: "GET",
+                url: "/products.aspx/CheckUser",
+                data: "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (username) {
+                    console.log(username);
+                }
+            });
+        });
+
     });
     </script>
 </html>

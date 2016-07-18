@@ -12,13 +12,13 @@ function getHomepageproductsAndGenerateHtml(data) {
     var totaloutput = "";
     $.each(data, function (key, val) {
         
-        var val2 = generateMarkup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generateMarkup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         totalrecords++;
         totaloutput += val2;
         //console.log(totalrecords + ' ' + (totalrecords % 4));
         //console.log(totaloutput);
         
-        if (totalrecords % 4 == 0 && totalrecords != 0) {
+        if (totalrecords % 4 === 0 && totalrecords !== 0) {
             //console.log(totalrecords + ' ' + (totalrecords % 4));
             totaloutput = "<div class=\"item-left-products item\">" + totaloutput + "</div>";
             $("div.slider-left-product.basic-product.owl-carousel.owl-theme").append(totaloutput);
@@ -30,41 +30,38 @@ function getHomepageproductsAndGenerateHtml(data) {
 }
 
 // use this function to generate the markup
-function generateMarkup(productName, imageURL, description, quantity, pricePerUnit) {
+function generateMarkup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
-    var val =     "   <div class=\"bs-item cf\">"
-			    + "    <!-- Begin bs-item-inner -->"
-			    + "    <div class=\"bs-item-inner\">"
-                + ""
-				+ "        <div class=\"bs-image\">"
-				+ "	        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
-				+ "		        <img src=\"\\" + imageURL + "\" title=\"Coconut water\" alt=\"" + productName + "\">"
-				+ "	        </a>"
-				+ "        </div>"  
-				+ "        <!-- Begin bs-content -->"
-				+ "        <div class=\"bs-content\">"
-				+ "	        <div class=\"bs-title\">"
-				+ "		        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">" + productName + "</a>"
-				+ "	        </div>"
-				+ "	        <div class=\"bs-price\">"
-				+ "		        <div class=\"sale-price\">"
-				+ "			        <div class=\"price-box\">"
-				+ "				        <span class=\"regular-price\">"
-				+ "					        <span class=\"price\">₹" + pricePerUnit + "</span>/1 Pc</span>"
-				+ "			        </div>"
-				+ "		        </div>"
-				+ "	        </div>"
-				+ "	        <div class=\"bs-btn-addtocart\">"
-				+ "		        <button type=\"button\" title=\"Add to Cart\" class=\"button btn-cart\""
-                + "            onclick=\"setLocation('http://www.onlinesabjiwala.com/checkout/cart/add/uenc/aHR0cDovL3d3dy5vbmxpbmVzYWJqaXdhbGEuY29tL2ZydWl0cy12ZWdldGFibGVzL2ZpbHRlci9jYXQvMzAuaHRtbD9hbXAlM0JsaW1pdD0xNiZkaXI9ZGVzYyZvcmRlcj1uYW1lJnA9Mg,,/product/68/form_key/10mZJsjNieAFmLSZ/')\">"
-                + "            <span><span>Add to Cart</span></span>"
-                + "        </button>"
-                + "        </div>"
-                + "        </div>"
-                + "        <!-- End bs-content -->"
-                + "        </div>"
-                + "        <!-- End bs-item-inner -->"
-                + "     </div>"
+    var val = "   <div class=\"bs-item cf\">"
+        + "    <!-- Begin bs-item-inner -->"
+        + "    <div class=\"bs-item-inner\">"
+        + ""
+        + "        <div class=\"bs-image\">"
+        + "	        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">"
+        + "		        <img src=\"\\" + imageURL + "\" title=\"Coconut water\" alt=\"" + productName + "\">"
+        + "	        </a>"
+        + "        </div>"
+        + "        <!-- Begin bs-content -->"
+        + "        <div class=\"bs-content\">"
+        + "	        <div class=\"bs-title\">"
+        + "		        <a href=\"\\Details\\" + productName + "\" title=\"" + productName + "\">" + productName + "</a>"
+        + "	        </div>"
+        + "	        <div class=\"bs-price\">"
+        + "		        <div class=\"sale-price\">"
+        + "			        <div class=\"price-box\">"
+        + "				        <span class=\"regular-price\">"
+        + "					        <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm</span>"
+        + "			        </div>"
+        + "		        </div>"
+        + "	        </div>"
+        + "	        <div class=\"bs-btn-addtocart\">"
+        + "             <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" href=\"\\Details\\" + productName + "\" class=\"btn-pd btn-cart\">Add to Cart</a> "
+        + "        </div>"
+        + "        </div>"
+        + "        <!-- End bs-content -->"
+        + "        </div>"
+        + "        <!-- End bs-item-inner -->"
+        + "     </div>";
 
     return val; 
 }
@@ -80,14 +77,14 @@ function getcarouselcat_29products() {
 
 function getHomepagecat_29productsAndGenerateHtml(data) {
    
-    $.each(data, function (key, val) { 
-        var val2 = generatecat_29Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);  
+    $.each(data, function (key, val) {
+        var val2 = generatecat_29Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);  
         $("div.ltabs-items-container.slider-cat-29").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_29Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_29Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val =  "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -112,17 +109,15 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"
                + "         </div> "
                + "     </div> "
                + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
-               + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
-               + "         Add to Cart"
-               + "     </button> "
-               + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Wishlist\" href=\"wishlist/index/add/product/29/form_key/P8pJx2VEoRAa8IH3/index.html\" class=\"btn-pd item-wishlist\">Add to Wishlist</a> "
+               + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" href=\"\\Details\\" + productName + "\" class=\"btn-pd btn-cart\">Add to Cart</a> "
+               + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Wishlist\" href=\"\\Details\\" + productName + "\" class=\"btn-pd item-wishlist\">Add to Wishlist</a> "
                + " </div>"
                + " </div>"
                + " </div>";
@@ -146,13 +141,13 @@ function getcarouselcat_30products() {
 function getHomepagecat_30productsAndGenerateHtml(data) {
 
     $.each(data, function (key, val) {
-        var val2 = generatecat_30Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generatecat_30Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         $("div.ltabs-items-container.slider-cat-30").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_30Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_30Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -177,16 +172,14 @@ function generatecat_30Markup(productName, imageURL, description, quantity, pric
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"
                + "         </div> "
                + "     </div> "
                + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
-               + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
-               + "         Add to Cart"
-               + "     </button> "
+               + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" href=\"\\Details\\" + productName + "\" class=\"btn-pd btn-cart\">Add to Cart</a> "
                + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Wishlist\" href=\"wishlist/index/add/product/29/form_key/P8pJx2VEoRAa8IH3/index.html\" class=\"btn-pd item-wishlist\">Add to Wishlist</a> "
                + " </div>"
                + " </div>"
@@ -210,13 +203,13 @@ function getcarouselcat_8products() {
 function getHomepagecat_8productsAndGenerateHtml(data) {
 
     $.each(data, function (key, val) {
-        var val2 = generatecat_8Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit);
+        var val2 = generatecat_8Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
         $("div.ltabs-items-container.slider-cat-8").append(val2);
     });
 }
 
 // use this function to generate the markup
-function generatecat_8Markup(productName, imageURL, description, quantity, pricePerUnit) {
+function generatecat_8Markup(productName, imageURL, description, quantity, pricePerUnit, unit) {
 
     var val = "<div class=\"item item-supercat respl-item\">"
                + "<div class=\"item-inner\">"
@@ -241,16 +234,14 @@ function generatecat_8Markup(productName, imageURL, description, quantity, price
                + "             <div class=\"sale-price\"> "
                + "                 <div class=\"price-box\">"
                + "                     <span class=\"regular-price\"> "
-               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/1 Kg"
+               + "                         <span class=\"price\">₹" + pricePerUnit + "</span>/" + unit + " gm"
                + "                     </span> "
                + "                 </div>"
                + "             </div>"
                + "         </div> "
                + "     </div> "
                + "     <a class=\"product-image\" style=\"display:none;\" href=\"\\Details\\" + productName + "\"> </a><!--LINK FOR QUICKVIEW-->  "
-               + "     <button class=\"btn-pd btn-cart\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" onclick=\"setLocation('" + productName + "')\">"
-               + "         Add to Cart"
-               + "     </button> "
+               + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Cart\" href=\"\\Details\\" + productName + "\" class=\"btn-pd btn-cart\">Add to Cart</a> "
                + "     <a data-toggle=\"tooltip\" data-placement=\"left\" title=\"Add to Wishlist\" href=\"wishlist/index/add/product/29/form_key/P8pJx2VEoRAa8IH3/index.html\" class=\"btn-pd item-wishlist\">Add to Wishlist</a> "
                + " </div>"
                + " </div>"

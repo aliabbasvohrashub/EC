@@ -13,6 +13,20 @@ namespace EcommGroceryStore
     {  
         protected void Page_Load(object sender, EventArgs e)
         { 
+        }
+
+        protected void btnCheckOut_Click(object sender, EventArgs e)
+        {
+
+            if(System.Environment.UserName != "" && System.Environment.UserName != null)
+            //if (HttpContext.Current.User.Identity.Name != null && HttpContext.Current.User.Identity.Name != "")
+            { 
+                Response.Redirect("~/Checkout");
+            }
+            else {
+
+                Response.Redirect("~/Account/Login");
+            }
         } 
     }
      
