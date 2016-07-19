@@ -13,15 +13,6 @@ namespace EcommGroceryStore {
     public partial class MasterSabji {
         
         /// <summary>
-        /// lnkLogOut control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
-        
-        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace EcommGroceryStore {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        
+        /// <summary>
+        /// lnkLogOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
         
         /// <summary>
         /// btnCheckOutdropdown control.

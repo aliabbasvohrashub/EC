@@ -253,6 +253,27 @@ namespace EcommGroceryStore.Controllers
         }
 
 
+        [ResponseType(typeof(TransactionDetails))]
+        public IHttpActionResult AddOrder(int CartId, string userName){
+
+           // CartDetail cartDetail = dbContext.CartDetail.Single(x => x.CartId == CartId); 
+            TransactionDetails transactionDetails = new TransactionDetails(); 
+            transactionDetails.CartId = CartId;
+            transactionDetails.UserId = dbContext.Users.Single(x => x.UserName == userName).UserId;
+            transactionDetails.IsConfirm = false;
+            transactionDetails.TransactionDate = DateTime.Now;
+            dbContext.TransactionDetails.Add(transactionDetails);
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            { 
+            }
+
+            return Ok(transactionDetails);
+        }
+
 
         // POST api/ProductDetails
         [ResponseType(typeof(ProductDetails))]

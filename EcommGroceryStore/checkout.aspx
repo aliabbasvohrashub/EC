@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="checkout.aspx.cs" Inherits="EcommGroceryStore.checkout" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSabji.Master" AutoEventWireup="true" CodeBehind="checkout.aspx.cs" Inherits="EcommGroceryStore.checkout" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server"> 
     <div class="yt-main-inner yt-content-inner">
         <div class="container">
@@ -110,11 +110,13 @@
                                                     </tbody>
                                                 </table>
                                                 <ul class="checkout-types">
-                                                    <li>
-                                                        <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout btn-checkout no-checkout" 
-                                                            disabled="disabled" onclick="window.location='http://www.onlinesabjiwala.com/checkout/onepage/';">
-                                                            <span><span>Proceed to Checkout</span></span>
-                                                        </button>
+                                                    <li> 
+                                                        <asp:Button  OnClick="btnCheckOut_Click" runat="server" id="btncheckout" Text="Confirm Order" />
+                                                        <asp:LinkButton class="button btn-proceed-checkout btn-checkout no-checkout"  OnClick="btnCheckOut_Click" ID="lnkCheckOut" runat="server" >Confirm Order</asp:LinkButton>
+                                                        <%--<button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout btn-checkout no-checkout" 
+                                                             onclick="window.location='http://www.onlinesabjiwala.com/checkout/onepage/';">
+                                                            <span><span>Confirm Order</span></span>
+                                                        </button--%>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -151,5 +153,9 @@
                   EmptyCart();
               }); 
     </script>
-    
+    <style type="text/css">
+        .btn-checkout {
+            padding:8px;
+        }
+    </style>    
 </asp:Content>
