@@ -80,7 +80,7 @@
         }
 
         #pageloaddiv {   
-            opacity:0.2;
+            opacity: 0.2;
             position: fixed;
             left: 0px;
             top: 0px;
@@ -88,7 +88,7 @@
             height: 100%;
             z-index: 1000;
             background: url('/../skin/frontend/base/default/images/loader-responsive.gif') no-repeat center center;
-            display:none;
+            display: none;
         }
 </style>
      
@@ -161,9 +161,14 @@
 
                                     <div class="block-action-header top-link-account checkout-link">
                                         <ul class="links">
-                                            <li class="first last"><a href="checkout/index.html" title="Checkout" class="top-link-checkout">Checkout</a></li>
+                                            <li class="first last">                                                 
+                                            <%--    <a href="#" id="linkCheckOut" onclick="btnCheckOut_Click" runat="server" title="Checkout" class="top-link-checkout">Checkout</a><asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
+                                                <asp:LinkButton ID="LinkButton1" OnClick="btnCheckOut_Click" class="top-link-checkout" runat="server">Checkout</asp:LinkButton>
+                                            </li>
                                         </ul>
                                     </div>
+                                    <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                       {%>
                                     <div class="block-action-header top-link-account my-account-link">
                                         <ul>
                                             <li>
@@ -176,53 +181,25 @@
                                             </li>
                                         </ul>
                                     </div>
-
+                                    <% } %>
                                     <div class="block-action-header top-link-account login-link">
                                         <ul>
                                             <li>
-                                                <a class="login-btn" data-toggle="modal" href="Account/Login.aspx"  title="Login">Login</a>
-                                                <%--<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog block-popup-login">
-                                                        <a href="javascript:void(0)" title="Close" class="close close-login" data-dismiss="modal">Close</a>
-                                                        <div class="tt_popup_login"><strong>Sign in Or Register</strong></div>
-                                                        <input name="form_key" type="hidden" value="10mZJsjNieAFmLSZ">
-                                                        <div class="block-content">
-                                                            <div class="col-reg registered-account">
-                                                                <div class="email-input">
-                                                                    <input title="User Name" type="text" name="login[username]" id="mini-login" class="input-text" value="User name" onfocus="if(this.value != '') {this.value = '';}" onblur="if (this.value == '') {this.value = 'User name';}">
-                                                                </div>
-                                                                <div class="pass-input">
-                                                                    <input title="Password" type="password" name="login[password]" id="mini-password" class="input-text" value="........." onfocus="if(this.value != '') {this.value = '';}" onblur="if (this.value == '') {this.value = '.........';}">
-                                                                </div>
-                                                                <div class="ft-link-p">
-                                                                    <a title="Forgot your password?" href="customer/account/forgotpassword/index.html" class="f-left">Forgot your password?</a>
-                                                                </div>
-                                                                <div class="actions">
-                                                                    <div class="submit-login">
-                                                                        <input title="Login" type="submit" class="button btn-submit-login" name="submit" value="LOGIN">
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="col-reg login-customer">
-                                                                <h2>NEW TO ONLINESABJIWALA?</h2>
-                                                                <p class="note-reg">Registration is free and easy!</p>
-                                                                <ul class="list-log">
-                                                                    <li>Faster checkout</li>
-                                                                    <li>Save multiple shipping addresses</li>
-                                                                    <li>View and track orders and more</li>
-                                                                </ul>
-                                                                <a class="btn-reg-popup" title="Register" href="customer/account/create/index.html">Create an account</a>
-                                                            </div>
-                                                            <div style="clear: both;"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>--%>
+                                                <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                   {%>
+                                                <asp:LinkButton class="logout-btn" Text="Log Out" ID="lnkLogOut" OnClick="lnkLogOut_Click" runat="server" />
+                                                <% }
+                                                   else
+                                                   {%>
+                                                <a class="login-btn" data-toggle="modal" href="Account/Login.aspx" title="Login">Login</a>
+                                                <% } %>                                                
                                             </li>
                                         </ul>
                                     </div>
 
                                     <div class="action-mobile">
-
+                                        <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                           {%>
                                         <div class="block-action-header top-link-account my-account-link account-mobile-btn">
                                             <ul>
                                                 <li>
@@ -240,11 +217,18 @@
                                                 </ul>
                                             </div>
                                         </div>
-
+                                        <% } %>
                                         <div class="block-action-header top-link-account login-link login-mobile-btn">
                                             <ul>
                                                 <li>
+                                                    <% if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                       {%>
+                                                    <asp:LinkButton class="logout-btn" OnClick="lnkLogOut_Click" runat="server" />
+                                                    <% }
+                                                       else
+                                                       {%>
                                                     <a class="login-btn" href="/Account/Login.aspx" title="Login">&nbsp;</a>
+                                                    <% } %>    
                                                 </li>
                                             </ul>
                                         </div>
@@ -376,7 +360,7 @@
                                                 </a>
                                                 <ul class="sm-megamenu-hover sm_megamenu_menu sm_megamenu_menu_black" data-jsapi="on">
                                                     <li class="rw-url home-item-parent other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
-                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx"  id="sm_megamenu_3">
+                                                        <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx" id="sm_megamenu_3">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
                                                                 <span class="sm_megamenu_title">Home</span> 
                                                             </span>
@@ -446,9 +430,11 @@
                                                             <button class="button btn-gotocart" type="button" title="Go to cart" onclick="location.href='http://localhost:59492/checkout/cart/'">
                                                                 <span><span>Go to cart</span></span>
                                                             </button>
-                                                            <button class="button" type="button" title="Checkout" onclick="setLocation('http://www.onlinesabjiwala.com/checkout/onepage/')">
+
+                                                            <asp:Button ID="btnCheckOutdropdown" OnClick="btnCheckOut_Click" Text="CheckOut" class="button" runat="server"></asp:Button>
+                                                            <%--<button class="button" type="button" title="Checkout" onclick="setLocation('http://www.onlinesabjiwala.com/checkout/onepage/')">
                                                                 <span><span>Checkout</span></span>
-                                                            </button>
+                                                            </button>--%>
                                                         </div>
                                                     </div>
                                                 </div>
