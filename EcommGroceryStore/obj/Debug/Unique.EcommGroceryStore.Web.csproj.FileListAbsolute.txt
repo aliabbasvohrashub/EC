@@ -253,7 +253,6 @@ C:\LocalBranchJune6\EcommGroceryStore\bin\Excel.pdb
 C:\LocalBranchJune6\EcommGroceryStore\obj\Debug\Unique.EcommGroceryStore.Web.csprojResolveAssemblyReference.cache
 C:\LocalBranchJune6\EcommGroceryStore\obj\Debug\EcommGroceryStore.dll
 C:\LocalBranchJune6\EcommGroceryStore\obj\Debug\EcommGroceryStore.pdb
-F:\EC\EcommGroceryStore\obj\Debug\EcommGroceryStore.pdb
 F:\EC\EcommGroceryStore\bin\EcommGroceryStore.dll.config
 F:\EC\EcommGroceryStore\bin\EcommGroceryStore.dll
 F:\EC\EcommGroceryStore\bin\EcommGroceryStore.pdb
@@ -318,3 +317,4 @@ F:\EC\EcommGroceryStore\bin\Microsoft.Owin.Security.OAuth.xml
 F:\EC\EcommGroceryStore\bin\Excel.pdb
 F:\EC\EcommGroceryStore\obj\Debug\Unique.EcommGroceryStore.Web.csprojResolveAssemblyReference.cache
 F:\EC\EcommGroceryStore\obj\Debug\EcommGroceryStore.dll
+F:\EC\EcommGroceryStore\obj\Debug\EcommGroceryStore.pdb
