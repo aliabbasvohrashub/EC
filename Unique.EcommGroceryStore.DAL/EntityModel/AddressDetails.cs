@@ -25,6 +25,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public string Pincode { get; set; }
         public int AddressTypeId { get; set; }
         public string OtherAddress { get; set; }
+        public bool IsDefault { get; set; }
     
         public virtual AreaMaster AreaMaster { get; set; }
         public virtual CityMaster CityMaster { get; set; }

@@ -23,7 +23,13 @@ namespace Unique.EcommGroceryStore.Core.Repository
 
         public AddressDetails Delete(int id)
         {
-            throw new NotImplementedException();
+            var address = Get(id);
+            if (address != null)
+            {
+                dataContext.AddressDetails.Remove(address);
+                Update();
+            }
+            return address;
         }
 
         public AddressDetails Add(AddressDetails model)
@@ -40,7 +46,7 @@ namespace Unique.EcommGroceryStore.Core.Repository
 
         public AddressDetails Get(int id)
         {
-            throw new NotImplementedException();
+            return dataContext.AddressDetails.Where(r => r.AddressId == id).FirstOrDefault();
         }
 
         public IEnumerable<AddressDetails> GetList(int id)
@@ -59,6 +65,21 @@ namespace Unique.EcommGroceryStore.Core.Repository
             {
                 dataContext.Dispose();
                 dataContext = null;
+            }
+        }
+
+        public bool GetAddressAlreadyExistsOrNot(int userId, int type)
+        {
+            return dataContext.AddressDetails.Where(r => r.AddressTypeId == type && r.UserId == userId).Any();
+        }
+
+        public void MakeOtherfalse(int userId)
+        {
+            using (EcommGroceryDataContext db = new EcommGroceryDataContext())
+            {
+                var some = db.AddressDetails.Where(r => r.UserId == userId).ToList();
+                some.ForEach(a => a.IsDefault = false);
+                db.SaveChanges();
             }
         }
     }
