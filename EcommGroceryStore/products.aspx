@@ -123,7 +123,7 @@
                                                 <div class="toolbar">
                                                     <div class="toolbar-inner">
                                                         <div class="sorter">
-                                                            <div class="view-mode-wrap" style="display:none;">
+                                                            <div style="display: none;" class="view-mode-wrap">
                                                                 <p class="view-mode">
                                                                     <strong title="Grid" class="grid">Grid</strong>&nbsp;
                                                                                             <a href="fruitsa927.html?mode=list" title="List" class="list">List</a>&nbsp;
@@ -197,7 +197,7 @@
                                                     <div class="toolbar">
                                                         <div class="toolbar-inner">
                                                             <div class="sorter">
-                                                                <div class="view-mode-wrap" style="display:none;">
+                                                                <div style="display: none;" class="view-mode-wrap">
                                                                     <p class="view-mode">
                                                                         <strong title="Grid" class="grid">Grid</strong>&nbsp;
                                                                         <a href="fruitsa927.html?mode=list" title="List" class="list">List</a>&nbsp;
@@ -234,7 +234,7 @@
                                                                             <div id="targetdiv" class="select-inner dropdown">
                                                                                 <div class="overwrite-limiter"></div>
                                                                                 <span class="btn-toolbar" data-toggle="dropdown"></span>
-                                                                                <ul id="limiter" class="dropdown-menu" ">
+                                                                                <ul id="limiter" class="dropdown-menu">
                                                                                     <li><a href="#">8</a></li>
                                                                                     <li><a href="#">16</a></li>
                                                                                     <li><a href="#">32</a></li>

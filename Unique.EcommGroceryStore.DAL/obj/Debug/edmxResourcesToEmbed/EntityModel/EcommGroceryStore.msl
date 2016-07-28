@@ -4,6 +4,7 @@
     <EntitySetMapping Name="AddressDetails">
       <EntityTypeMapping TypeName="EcommGroceryOnlineModel.AddressDetails">
         <MappingFragment StoreEntitySet="AddressDetails">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
           <ScalarProperty Name="AddressId" ColumnName="AddressId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="Address" ColumnName="Address" />

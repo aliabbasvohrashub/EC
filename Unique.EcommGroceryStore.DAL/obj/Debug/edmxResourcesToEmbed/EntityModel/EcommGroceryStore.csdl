@@ -19,6 +19,7 @@
     <NavigationProperty Name="CityMaster" Relationship="Self.FK_AddressDetails_CityMaster" FromRole="AddressDetails" ToRole="CityMaster" />
     <NavigationProperty Name="CountryMaster" Relationship="Self.FK_AddressDetails_CountryMaster" FromRole="AddressDetails" ToRole="CountryMaster" />
     <NavigationProperty Name="Users" Relationship="Self.FK_AddressDetails_Users" FromRole="AddressDetails" ToRole="Users" />
+    <Property Name="IsDefault" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="AreaMaster">
     <Key>
@@ -456,7 +457,7 @@
     </FunctionImport>
     <FunctionImport Name="Sp_GetTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetTransactionList_Result)">
       <Parameter Name="CartId" Mode="In" Type="Int32" />
-      <Parameter Name="Op" Mode="In" Type="Int32" />
+      <Parameter Name="Search" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
       <Parameter Name="currentIndex" Mode="In" Type="Int32" />

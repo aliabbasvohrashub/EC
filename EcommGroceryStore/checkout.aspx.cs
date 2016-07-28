@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using EcommGroceryStore.Controllers;
-
 
 namespace EcommGroceryStore
 {
@@ -14,19 +12,6 @@ namespace EcommGroceryStore
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void btnCheckOut_Click(object sender, EventArgs e) {
-            if (Request.Cookies["cartid"] != null)
-            {
-                if (HttpContext.Current.User.Identity.Name != "" && HttpContext.Current.User.Identity.Name != null)
-                {
-                    var value = Request.Cookies["cartid"].Value;
-                    ProductDetailsController prd = new ProductDetailsController();
-                    prd.AddOrder(Convert.ToInt16(value), HttpContext.Current.User.Identity.Name); 
-                    Response.Cookies["cartid"].Expires = DateTime.Now.AddDays(-1);     
-                }
-            }
         }
     }
 }
