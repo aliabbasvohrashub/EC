@@ -7,45 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EcommGroceryStore {
+namespace EcommGroceryStore.Apps.User {
     
     
-    public partial class MasterSabji {
+    public partial class AddressBookList {
         
         /// <summary>
-        /// LinkButton1 control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// lnkLogOut control.
+        /// SuccessMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
+        protected global::System.Web.UI.WebControls.Literal SuccessMessage;
         
         /// <summary>
-        /// btnCheckOutdropdown control.
+        /// rptAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCheckOutdropdown;
+        protected global::System.Web.UI.WebControls.Repeater rptAddress;
         
         /// <summary>
-        /// MainContent control.
+        /// LogIn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.HtmlControls.HtmlButton LogIn;
     }
 }

@@ -187,6 +187,9 @@
     <Content Include="Apps\Admin\ManageSubCategory.aspx" />
     <Content Include="Apps\Admin\ManageTransaction.aspx" />
     <Content Include="Apps\Admin\ManageUser.aspx" />
+    <Content Include="Apps\User\AddAddress.aspx" />
+    <Content Include="Apps\User\AddressBookList.aspx" />
+    <Content Include="Apps\User\ResetPassword.aspx" />
     <Content Include="checkout.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -1483,6 +1486,27 @@
     </Compile>
     <Compile Include="Apps\Admin\ManageUser.aspx.designer.cs">
       <DependentUpon>ManageUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\User\AddAddress.aspx.cs">
+      <DependentUpon>AddAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\User\AddAddress.aspx.designer.cs">
+      <DependentUpon>AddAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\User\AddressBookList.aspx.cs">
+      <DependentUpon>AddressBookList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\User\AddressBookList.aspx.designer.cs">
+      <DependentUpon>AddressBookList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Apps\User\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Apps\User\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

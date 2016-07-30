@@ -71,7 +71,9 @@ namespace EcommGroceryStore.Account
                                 newAddress.AddressTypeId = (int)addressType;
                                 if (rbtOffice.Checked || rbtOther.Checked)
                                     newAddress.OtherAddress = txtOther.Value.Trim();
-
+                                else
+                                    newAddress.OtherAddress = "NA";
+                                newAddress.IsDefault = true;
                                 using (AddressRepository addressRepository = new AddressRepository())
                                     addressRepository.Add(newAddress);
                             }

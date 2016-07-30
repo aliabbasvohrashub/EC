@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EcommGroceryOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EcommGroceryOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressDetails">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -20,6 +20,7 @@
           <Property Name="Pincode" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="AddressTypeId" Type="int" Nullable="false" />
           <Property Name="OtherAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AreaMaster">
           <Key>
@@ -356,7 +357,7 @@
         </Function>
         <Function Name="Sp_GetTransactionList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CartId" Type="int" Mode="In" />
-          <Parameter Name="Op" Type="int" Mode="In" />
+          <Parameter Name="Search" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_GetUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="currentIndex" Type="int" Mode="In" />
@@ -460,8 +461,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EcommGroceryOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -484,6 +484,7 @@
           <NavigationProperty Name="CityMaster" Relationship="Self.FK_AddressDetails_CityMaster" FromRole="AddressDetails" ToRole="CityMaster" />
           <NavigationProperty Name="CountryMaster" Relationship="Self.FK_AddressDetails_CountryMaster" FromRole="AddressDetails" ToRole="CountryMaster" />
           <NavigationProperty Name="Users" Relationship="Self.FK_AddressDetails_Users" FromRole="AddressDetails" ToRole="Users" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="AreaMaster">
           <Key>
@@ -921,7 +922,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_GetTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetTransactionList_Result)">
             <Parameter Name="CartId" Mode="In" Type="Int32" />
-            <Parameter Name="Op" Mode="In" Type="Int32" />
+            <Parameter Name="Search" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
             <Parameter Name="currentIndex" Mode="In" Type="Int32" />
@@ -1030,6 +1031,7 @@
           <EntitySetMapping Name="AddressDetails">
             <EntityTypeMapping TypeName="EcommGroceryOnlineModel.AddressDetails">
               <MappingFragment StoreEntitySet="AddressDetails">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

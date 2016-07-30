@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="fieldset col-lg-6 col-md-6">
+                    <div class="fieldset col-lg-6 col-md-6 hidden">
                         <h2 class="legend">Follow Up
                             <asp:CheckBox Text="" ID="chkFollowUp" runat="server" onClick="ShowHideDiv('divFllowUp')" /></h2>
                         <div id="divFllowUp" style="display: none">
