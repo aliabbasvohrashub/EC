@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Unique.EcommGroceryStore.DAL.EntityModel;
 using EcommGroceryStore.ViewModels;
-
+ 
 namespace EcommGroceryStore.Controllers
 {
     public class CartController : ApiController
@@ -37,53 +37,50 @@ namespace EcommGroceryStore.Controllers
          
         [ResponseType(typeof(vmCartDetailsAll))]
         public IHttpActionResult GetCartDetail(int id)
-        { 
-            List<vmCartDetail> vmCartdetails = db.CartDetail.Where(x => x.CartId == id).Select(x => new vmCartDetail
-            {
-                CartDetailId = x.CartDetailId,
-                CartId = x.CartId,
-                ProductId = x.ProductId,
-                Amount = x.Amount,
-                Discount = x.Discount,
-                NetAmount = x.NetAmount,
-                Timestamp = x.Timestamp,
-                IsActive = x.IsActive,
-                Quantity = x.Quantity,
-                PricePerUnit = x.PricePerUnit,
-                Unit = x.Unit,
-                productDetail = db.ProductDetails.Where(xx => xx.ProductId == x.ProductId).Select(y => new vmProductDetails
-                {
-                    ProductId = y.ProductId,
-                    ProductName = y.ProductName, 
-                    SubCategoryName = y.SubCategoryMaster.Name,
-                    Quantity = y.Quantity,
-                    Description = y.Description,
-                    ImageURL = y.ImageURL,
-                    PricePerUnit = y.PricePerUnit,
-                    Unit = y.Unit,
-                    Status = y.Status 
-                }).FirstOrDefault()
-            }).ToList();
-             
+        {
+            vmCartDetailsAll objvmCartDetailsAll =  DoCartDetailsGetProcess(id);
+            return Ok(objvmCartDetailsAll);
+        }
+
+        private vmCartDetailsAll DoCartDetailsGetProcess(int id)
+        {
+            List<vmCartDetail> vmCartdetails = CartRepository.GetCartDetailsList(id);
             vmCartDetailSummary vmCartDetailsummary = new vmCartDetailSummary();
             decimal tmpvalue;
             decimal? result = decimal.TryParse((string)vmCartdetails.Sum(x => x.NetAmount).ToString(), out tmpvalue) ?
                               tmpvalue : (decimal?)null;
 
-            vmCartDetailsummary.TotalAmount =  tmpvalue;
+            vmCartDetailsummary.TotalAmount = tmpvalue;
             vmCartDetailsummary.TotalItems = vmCartdetails.Count();
-             
-            //List<CartDetail> cartDetailList = db.CartDetail.Where(x => x.CartId == id).ToList();
-            if (vmCartdetails== null)
-            {
-                return NotFound();
-            } 
+
             vmCartDetailsAll objvmCartDetailsAll = new vmCartDetailsAll();
             objvmCartDetailsAll.objvmCartDetails = vmCartdetails;
-            objvmCartDetailsAll.objvmCartDetailSummary = vmCartDetailsummary; 
+            objvmCartDetailsAll.objvmCartDetailSummary = vmCartDetailsummary;
+            return objvmCartDetailsAll;  
+        }
+
+        public IHttpActionResult GetMyHistoryResult(int userid)
+        {
+            var transactionList = db.TransactionDetails.Where(x => x.UserId == userid)
+                .Select(
+                    x => new
+                    {
+                        tid = x.TransactionId  ,
+                        cartid = x.CartId
+                    })
+                .ToList();
+
+            List<vmCartDetailsAll> objvmCartDetailsAll = new List<vmCartDetailsAll>();
+
+            for (int i = 0; i < transactionList.Count(); i++)
+            {
+                //GetCartDetail(transactionList[i].cartid);
+                objvmCartDetailsAll.Add(DoCartDetailsGetProcess(transactionList[i].cartid)); 
+            } 
+            
             return Ok(objvmCartDetailsAll);
         }
-          
+
         // PUT api/Cart/5
         public IHttpActionResult PutCart(int id, Cart cart)
         {
