@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Antlr.Runtime;
 using Unique.EcommGroceryStore.DAL.EntityModel;
 using EcommGroceryStore.ViewModels;
 using Unique.EcommGroceryStore.Core.Utility;
@@ -42,7 +43,6 @@ namespace EcommGroceryStore.Controllers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                /// MainCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
                 SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
                 Quantity = x.Quantity,
                 Description = x.Description,
@@ -60,7 +60,6 @@ namespace EcommGroceryStore.Controllers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                /// MainCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
                 SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
                 Quantity = x.Quantity,
                 Description = x.Description,
@@ -77,7 +76,6 @@ namespace EcommGroceryStore.Controllers
             {
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
-                /// MainCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.MainCategoryMaster.Name).FirstOrDefault(),
                 SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
                 Quantity = x.Quantity,
                 Description = x.Description,
@@ -252,6 +250,27 @@ namespace EcommGroceryStore.Controllers
             //}
         }
 
+        [ResponseType(typeof(TransactionDetails))]
+        public IHttpActionResult AddOrder(int CartId, string userName)
+        {
+
+            // CartDetail cartDetail = dbContext.CartDetail.Single(x => x.CartId == CartId); 
+            TransactionDetails transactionDetails = new TransactionDetails();
+            transactionDetails.CartId = CartId;
+            transactionDetails.UserId = dbContext.Users.Single(x => x.UserName == userName).UserId;
+            transactionDetails.IsConfirm = false;
+            transactionDetails.TransactionDate = DateTime.Now;
+            dbContext.TransactionDetails.Add(transactionDetails);
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return Ok(transactionDetails);
+        }
 
 
         // POST api/ProductDetails
@@ -326,10 +345,9 @@ namespace EcommGroceryStore.Controllers
 
             return Ok(productdetails);
             //}
-        }
+        }  
 
 
-         
         //[ResponseType(typeof(Cart))]
         //public IHttpActionResult PostCart(Cart cart)
         //{

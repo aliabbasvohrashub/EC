@@ -218,4 +218,94 @@ function EmptyCart(cd) {
         }
     }
 }
- 
+
+
+if (document.getElementById('historyContrainer').value !== '') {
+    var userid = 2;
+
+    var APIRoute = '/api/Cart/GetMyHistoryResult';
+    $.ajax({
+        url: APIRoute,
+        type: 'GET',
+        contentType: "application/json",
+        data: { userid: userid },
+        success: function(data, textStatus, xhr) { 
+            var result = '';
+            var summaryrow = '';
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < data[i].objvmCartDetails.length; j++) {
+                    result = result + GenerateMyOrdersTable(data[i].objvmCartDetails[j]); 
+                }
+                result = historyTableHeaderAndFooter() + result + GetSummaryRow(data[i].objvmCartDetailSummary) + "</tbody></table>";
+                $('#historyContrainer').append(result);
+                result = '';
+            }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log('CartList Could not be retrieved');
+        }
+    });
+}
+
+function GenerateMyOrdersTable(data) {
+    var res1 = "<tr class=\"first last odd\">" +
+                        "<td style=\"display:none;\">" + +data.productDetail.ProductId + "</td>" +
+                        "<td class=\"a-center\"><a href=\"\" title=\"" + data.productDetail.ImageURL + "\" class=\"product-image\">" +
+                         "<img height=\"85px\" width=\"85px\" src=\"\\" + data.productDetail.ImageURL + "\" alt=\"Coconut water\"></a></td>" +
+                         "<td class=\"a-center\">" +
+                         "<h2 class=\"product-name\">" +
+                         "<a href=\"\">" + data.productDetail.ProductName + "</a>" +
+                         "</h2>" +
+                         "</td>" + 
+                         "<td class=\"a-center\">" +
+                         "<span class=\"cart-price\">" +
+                         "    <span class=\"price\">₹" + data.productDetail.PricePerUnit + "</span>" +
+                         "</span> " +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<input name=\"" + data.productDetail.ProductName + "\" value=\"" + data.Quantity + "\" size=\"4\" title=\"Qty\" class=\"input-text qty a-center\" maxlength=\"12\">" +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<span class=\"cart-price\"> " +
+                         "    <span class=\"price\">₹" + data.Amount + "</span>" +
+                         "</span>" +
+                         "</td>" +
+                         "</tr>"; 
+    return res1;
+}
+
+
+function GetSummaryRow(data) {
+    var summaryrow = "<tr class=\"first last odd\">" +
+                        "<td colspan=\"3\"></td>" +
+                         "<td class=\"a-center\">" +
+                         "<input name=\"" + data.TotalItems + "\" value=\"" + data.TotalItems + "\" size=\"4\" title=\"Qty\" class=\"input-text qty a-center\" maxlength=\"12\">" +
+                         "</td>" +
+                         "<td class=\"a-center\">" +
+                         "<span class=\"cart-price\"> " +
+                         "    <span class=\"price\">₹" + data.TotalAmount + "</span>" +
+                         "</span>" +
+                         "</td>" +
+                         "</tr>";
+    return summaryrow;
+}
+
+function historyTableHeaderAndFooter() {
+    var tableheader = "<table class=\"data-table cart-table\">\
+        <thead>\
+            <tr class=\"first last\">\
+                <th rowspan=\"1\">&nbsp;</th>\
+                <th rowspan=\"1\"><span class=\"nobr\">Product Name</span></th>\
+                <th class=\"a-center\" colspan=\"1\"><span class=\"nobr\">Unit Price</span></th>\
+                <th rowspan=\"1\" class=\"a-center\">Qty</th>\
+                <th class=\"a-center\" colspan=\"1\">Subtotal</th>\
+            </tr>\
+        </thead > " +
+        "<tfoot>\
+            <tr class=\"first last\">" +
+        "<td colspan=\"50\" class=\"a-right last\"></td>\
+            </tr>\
+        </tfoot>\
+        <tbody>";
+    return tableheader;
+}
