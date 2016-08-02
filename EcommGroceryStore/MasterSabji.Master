@@ -174,7 +174,7 @@
                                             <li>
                                                 <a class="account-toplink dropdown-ict" title="My Account" href="customer/account/index.html">My Account</a>
                                                 <ul class="dropdown-link-account">
-                                                    <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
+                                                    <li><a title="My Orders" href="/Apps/User/MyOrders.aspx">My Orders</a></li>
                                                     <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
                                                     <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
                                                 </ul>
