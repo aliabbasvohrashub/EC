@@ -138,11 +138,11 @@ function getcarouselcat_30products(mainCategoryName) {
 
 //use the data to generate mark up 
 
-function getHomepagecat_30productsAndGenerateHtml(data) {
+function getHomepagecat_30productsAndGenerateHtml(data, divtag) {
 
     $.each(data, function (key, val) {
         var val2 = generatecat_30Markup(val.ProductName, val.ImageURL, val.Description, val.Quantity, val.PricePerUnit, val.Unit);
-        $("div.ltabs-items-container.slider-cat-30").append(val2);
+        $(divtag).append(val2);
     });
 }
 
