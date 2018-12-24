@@ -622,34 +622,15 @@
                                 </div>
                             </div>--%>
 
+                             
 
-
-
-                            <div id="sm_listing_tabs_16786026171462422076" class="super-category-block first-load">
+                            <%--<div id="sm_listing_tabs_167860261714624220761" class="super-category-block first-load">
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="Vegetables" href="products/vegetables"><span>Vegetables</span></a>
-                                    </h2>
-
-                                    <div style="display: none;" class="category-wrap-cat">
-                                        <ul class="cat-list">
-
-                                            <li class="item">
-                                                <a href="fruits-vegetables/vegetables/seasonal-vegetables.html">Seasonal Vegetables									</a>
-                                            </li>
-                                            <li class="item">
-                                                <a href="fruits-vegetables/vegetables/green-leafy-vegetables.html">Green Leafy Vegetables 									</a>
-                                            </li>
-                                            <li class="item">
-                                                <a href="fruits-vegetables/vegetables/exotic-vegetables.html">Exotic Vegetables									</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-
-
+                                        <a title="Vegetables" href="products/vegetables"><span>Pan Asian</span></a>
+                                    </h2> 
+                                </div> 
 
                                 <div class="supercat-des">
                                 </div>
@@ -669,8 +650,68 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products();
-                                                $.when(getcarouselcat_30products()).done(function (data) {
+                                                getcarouselcat_30products('Pan Asian');
+                                                $.when(getcarouselcat_30products('Pan Asian')).done(function (data) {
+                                                    getHomepagecat_30productsAndGenerateHtml(data);
+                                                    var owl_cat_30 = $(".slider-cat-30");
+                                                    owl_cat_30.owlCarousel({
+                                                        itemsCustom: [
+                                                        [0, 1],
+                                                        [480, 2],
+                                                        [768, 3],
+                                                        [992, 3],
+                                                        [1200, 4]
+                                                        ],
+                                                        navigation: false, // Show next and prev buttons
+                                                        slideSpeed: 800,
+                                                        stopOnHover: true,
+                                                        paginationSpeed: 400,
+                                                        autoPlay: true,
+                                                        pagination: false,
+                                                    });
+
+                                                    $(".next-super-cat-30").click(function () {
+                                                        owl_cat_30.trigger('owl.next');
+                                                    });
+                                                    $(".prev-super-cat-30").click(function () {
+                                                        owl_cat_30.trigger('owl.prev');
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+
+                                </div>
+                            </div>--%>
+                            
+                            <div id="sm_listing_tabs_16786026171462422076" class="super-category-block first-load">
+
+                                <div class="block-title-default">
+                                    <h2>
+                                        <a title="Vegetables" href="products/vegetables"><span>Pan Indian</span></a>
+                                    </h2> 
+                                </div> 
+
+                                <div class="supercat-des">
+                                </div>
+
+                                <div class="super-cat-wrapper">
+                                    <div class="customNavigation custom-nav-default">
+                                        <a title="Previous" class="button-default prev-cat prev-super-cat-30 icon-angle-left"></a>
+                                        <a title="Next" class="button-default next-cat next-super-cat-30 icon-angle-right"></a>
+                                    </div>
+
+                                    <div class="overflow-owl-slider">
+                                        <div class="border-cat">
+                                            <div class="rw-margin">
+                                                <div class="ltabs-items-container slider-cat-30">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $(document).ready(function ($) {
+                                                getcarouselcat_30products('Pan Indian');
+                                                $.when(getcarouselcat_30products('Pan Indian')).done(function (data) {
                                                     getHomepagecat_30productsAndGenerateHtml(data);
                                                     var owl_cat_30 = $(".slider-cat-30");
                                                     owl_cat_30.owlCarousel({

@@ -130,8 +130,8 @@ function generatecat_29Markup(productName, imageURL, description, quantity, pric
 
 
 //first step call the webservice and get data
-function getcarouselcat_30products() {
-    return $.getJSON("/api/ProductDetails/getVegOnlyList",
+function getcarouselcat_30products(mainCategoryName) {
+    return $.getJSON("/api/ProductDetails/GetAllItemsFromMainCategory", { mainCategoryName: mainCategoryName },
        function (data) {
        });
 }
