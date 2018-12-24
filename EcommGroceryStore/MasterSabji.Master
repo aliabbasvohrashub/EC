@@ -26,17 +26,17 @@
     <link rel="stylesheet" type="text/css" href="/../skin/noty_theme_default.css" />
     <%--<script type="text/javascript" src="/../media/js/3da1e7ad4d4e3dc631ed7ca8c1000c85.js"></script>
     <script type="text/javascript" src="/../media/js/4eef62d1ebc59917ea4b08aad3bbc0f4.js"></script>--%>
-    
+
     <script type="text/javascript" src="/../Scripts/jquery.noty.js"></script>
-    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" /> 
+    <link rel="stylesheet" href="/../skin/frontend/onlinesabjiwala/default/css/theme-red.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton" media="all" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">     
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
-    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
     <link href="/../media/css/style.css" rel="stylesheet" />
     <script src="/../Scripts/owl.carousel.min.js"></script>
     <style type="text/css">
-        body { 
+        body {
             font-size: 12px;
         }
 
@@ -79,7 +79,7 @@
             display: none;
         }
 
-        #pageloaddiv {   
+        #pageloaddiv {
             opacity: 0.2;
             position: fixed;
             left: 0px;
@@ -90,12 +90,12 @@
             background: url('/../skin/frontend/base/default/images/loader-responsive.gif') no-repeat center center;
             display: none;
         }
-</style>
-     
+    </style>
+
 </head>
 
 <body id="bd" class="cmspage1 onlinesabjiwala    cms-index-index cms-home">
-    <div id="pageloaddiv"></div>  
+    <div id="pageloaddiv"></div>
     <input type="hidden" id="ip" value="" />
     <input type="hidden" id="cartid" value="" />
     <form runat="server">
@@ -161,22 +161,22 @@
 
                                     <div class="block-action-header top-link-account checkout-link">
                                         <ul class="links">
-                                            <li class="first last">                                                 
-                                            <%--    <a href="#" id="linkCheckOut" onclick="btnCheckOut_Click" runat="server" title="Checkout" class="top-link-checkout">Checkout</a><asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
+                                            <li class="first last">
+                                                <%--    <a href="#" id="linkCheckOut" onclick="btnCheckOut_Click" runat="server" title="Checkout" class="top-link-checkout">Checkout</a><asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>--%>
                                                 <asp:LinkButton ID="LinkButton1" OnClick="btnCheckOut_Click" class="top-link-checkout" runat="server">Checkout</asp:LinkButton>
                                             </li>
                                         </ul>
                                     </div>
                                     <% if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                       {%>
+                                        {%>
                                     <div class="block-action-header top-link-account my-account-link">
                                         <ul>
                                             <li>
                                                 <a class="account-toplink dropdown-ict" title="My Account" href="customer/account/index.html">My Account</a>
                                                 <ul class="dropdown-link-account">
-                                                    <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
-                                                    <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
-                                                    <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
+                                                    <li><a title="My Orders" href="/Account/MyOrders.aspx">My Orders</a></li>
+                                                    <li><a title="Account Information" href="/Account/MyOrders.aspx">Account Information</a></li>
+                                                    <li><a title="Address Book" href="/Account/MyOrders.aspx">Address Book</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -186,11 +186,11 @@
                                         <ul>
                                             <li>
                                                 <% if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                                   {%>
+                                                    {%>
                                                 <asp:LinkButton class="logout-btn" Text="Log Out" ID="lnkLogOut" OnClick="lnkLogOut_Click" runat="server" />
                                                 <% }
-                                                   else
-                                                   {%>
+                                                    else
+                                                    {%>
                                                 <a class="login-btn" data-toggle="modal" href="Account/Login.aspx" title="Login">Login</a>
                                                 <% } %>                                                
                                             </li>
@@ -199,7 +199,7 @@
 
                                     <div class="action-mobile">
                                         <% if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                           {%>
+                                            {%>
                                         <div class="block-action-header top-link-account my-account-link account-mobile-btn">
                                             <ul>
                                                 <li>
@@ -211,9 +211,9 @@
                                                     <li class="first last"><a href="checkout/index.html" title="Checkout" class="top-link-checkout">Checkout</a></li>
                                                 </ul>
                                                 <ul class="dropdown-link-account">
-                                                    <li><a title="My Orders" href="sales/order/history/index.html">My Orders</a></li>
-                                                    <li><a title="Account Information" href="customer/account/edit/index.html">Account Information</a></li>
-                                                    <li><a title="Address Book" href="customer/address/index.html">Address Book</a></li>
+                                                    <li><a title="My Orders" href="/Account/MyOrders.aspx">My Orders</a></li>
+                                                    <li><a title="Account Information" href="/Account/MyOrders.aspx">Account Information</a></li>
+                                                    <li><a title="Address Book" href="/Account/MyOrders.aspx">Address Book</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -222,11 +222,11 @@
                                             <ul>
                                                 <li>
                                                     <% if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                                       {%>
+                                                        {%>
                                                     <asp:LinkButton class="logout-btn" OnClick="lnkLogOut_Click" runat="server" />
                                                     <% }
-                                                       else
-                                                       {%>
+                                                        else
+                                                        {%>
                                                     <a class="login-btn" href="/Account/Login.aspx" title="Login">&nbsp;</a>
                                                     <% } %>    
                                                 </li>
@@ -258,8 +258,9 @@
                                             <div class="form-search">
                                                 <div class="cat-wrapper">
                                                     <div class="selector" id="uniform-cat" style="width: 134px;">
-                                                        <span style="width: 124px; -webkit-user-select: none;">All Categories</span><select id="cat" name="cat" class="jqtransformdone">
-                                                            <option value="">All Categories</option> 
+                                                        <span style="width: 124px; -webkit-user-select: none;">All Categories</span>
+                                                        <select id="cat" name="cat" class="jqtransformdone">
+                                                            <option value="">All Categories</option>
                                                             <option value="29">- Fruits &amp; Vegetables</option>
                                                             <option value="8">- - Fruits</option>
                                                             <option value="22">- - - Seasonal Fruits</option>
@@ -267,7 +268,7 @@
                                                             <option value="30">- - Vegetables</option>
                                                             <option value="31">- - - Seasonal Vegetables</option>
                                                             <option value="32">- - - Green Leafy Vegetables </option>
-                                                            <option value="33">- - - Exotic Vegetables</option> 
+                                                            <option value="33">- - - Exotic Vegetables</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -343,13 +344,13 @@
                                             </ul>
 
                                         </div>
-                                        <a class="btn-search-mobile icon-search" href="javascript:void(0)" title="Search"></a> 
+                                        <a class="btn-search-mobile icon-search" href="javascript:void(0)" title="Search"></a>
                                     </div>
-                                    <div class="yt-menu"> 
+                                    <div class="yt-menu">
 
-                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">--> 
+                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">-->
 
-                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">--> 
+                                        <!--<link media="all" href="" type="text/css" rel="stylesheet">-->
 
                                         <div class="css_effect sm_megamenu_wrapper_horizontal_menu sambar" id="sm_megamenu_menu572ac9f87dbc9" data-sam="7163002341462422008">
                                             <div class="sambar-inner">
@@ -362,21 +363,21 @@
                                                     <li class="rw-url home-item-parent other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
                                                         <a class="sm_megamenu_head sm_megamenu_nodrop " href="/indexchild.aspx" id="sm_megamenu_3">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Home</span> 
+                                                                <span class="sm_megamenu_title">Home</span>
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="other-toggle sm_megamenu_lv1 sm_megamenu_nodrop   ">
                                                         <a class="sm_megamenu_head sm_megamenu_nodrop " href="/products.aspx/fruits" id="sm_megamenu_5">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Fruits</span> 
+                                                                <span class="sm_megamenu_title">Fruits</span>
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="electronic-item-parent other-toggle   sm_megamenu_lv1 sm_megamenu_drop parent   ">
                                                         <a class="sm_megamenu_head sm_megamenu_drop " href="/products.aspx/vegetables" id="sm_megamenu_6">
                                                             <span class="sm_megamenu_icon sm_megamenu_nodesc">
-                                                                <span class="sm_megamenu_title">Vegetables</span> 
+                                                                <span class="sm_megamenu_title">Vegetables</span>
                                                             </span>
                                                         </a>
                                                         <div class="sm-megamenu-child sm_megamenu_dropdown_3columns hidden">
@@ -402,8 +403,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <!--End Module-->  
-                                         
+                                        <!--End Module-->
+
                                         <div class="search-header mini-cart-header">
                                             <div class="block mini-cartpro sm-cartpro">
                                                 <div class="block-title">
@@ -419,7 +420,7 @@
 
                                                 <div class="block-content" style="overflow: hidden; display: none;">
                                                     <div class="block-inner" id="block-inner">
-                                                      <!--  <form action="http://www.onlinesabjiwala.com/checkout/cart/updatePost/" method="post" id="minicart-form_uq576b903d1459b">
+                                                        <!--  <form action="http://www.onlinesabjiwala.com/checkout/cart/updatePost/" method="post" id="minicart-form_uq576b903d1459b">
                                                             <input id="hdnformkey" type="hidden" name="form_key" value="2ERBcuLqJF1Ri1mx"> 
                                                         </form>-->
 
@@ -445,8 +446,8 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-                <a id="yt-totop" href="#" title="Go to Top" style="display: none;"></a>  
+                </div>
+                <a id="yt-totop" href="#" title="Go to Top" style="display: none;"></a>
             </div>
             <!-- END: Header -->
 
@@ -584,15 +585,15 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
-            <!-- END: footer -->  
+            <!-- END: footer -->
         </div>
     </form>
     <!-- Mirrored from www.onlinesabjiwala.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 May 2016 11:14:09 GMT -->
 </body>
-    <script src="/../Scripts/custom/basic.js"></script>
-    <script src="/../Scripts/custom/homepageproducts.js"></script>
+<script src="/../Scripts/custom/basic.js"></script>
+<script src="/../Scripts/custom/homepageproducts.js"></script>
 
 <script>
     $(document).ready(function ($) {
@@ -621,7 +622,7 @@
             $(".nav-left-product .prev-bs").click(function () {
                 owl_left.trigger('owl.prev');
             });
-        }); 
+        });
     });
-    </script>
+</script>
 </html>
