@@ -32,7 +32,9 @@
 
                                     <div class="block-title-default">
                                         <h2>
-                                            <a title="Vegetables" href="products/vegetables"><span>Pan Asian</span></a>
+                                            <a title="Vegetables" href="products/vegetables">
+                                                <span id="spantitle">Pan Asian</span>
+                                            </a>
                                         </h2>
                                     </div>
 
@@ -55,11 +57,11 @@
                                             <script>
                                                 $(document).ready(function ($) {
                                                     var querystring = (window.location.href).substring((window.location.href).lastIndexOf('/') + 1, (window.location.href).length);
-
-                                                    var res = querystring.split("-");
+                                                     
+                                                    var res = querystring.split("#");
                                                     var maincat = res[0];
-                                                    var subcat = res[1];
-
+                                                    $("#spantitle").text(unescape(maincat));
+                                                    var subcat = res[1]; 
 
                                                     GetAllItemsFromMainCategoryAndSubCategory(maincat, subcat);
                                                     $.when(GetAllItemsFromMainCategoryAndSubCategory(maincat, subcat)).done(function (data) {

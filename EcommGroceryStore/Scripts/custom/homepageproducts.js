@@ -165,7 +165,7 @@ function generatesubCategoryMarkup(productName, imageURL, MainCategoryName) {
        + "     <div class=\"w-image-box\">"
        + "         <span class=\"hover-background\"></span>"
        + "         <div class=\"item-image\">"
-       + "             <a href=\"\\List\\" + MainCategoryName + "-" + productName + "\" class=\"product-image rspl-image\"> "
+       + "             <a href=\"\\List\\" + MainCategoryName + "#" + productName + "\" class=\"product-image rspl-image\"> "
        + "                 <img src=\"\\" + imageURL + "\" alt=\"" + productName + "\" />"
        + "             </a>"
        + "         </div> "
