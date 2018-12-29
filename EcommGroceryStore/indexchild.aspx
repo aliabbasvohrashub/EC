@@ -652,8 +652,7 @@
                                             $(document).ready(function ($) {
                                                 getcarouselsubcategory('Pan Asian');
                                                 $.when(getcarouselsubcategory('Pan Asian')).done(function (data) {
-                                                    if (data.length > 0) {
-                                                        console.log('pan asian data length > 0');
+                                                    if (data.length > 0) { 
                                                         getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel1");
                                                         var owl_cat_30 = $(".carousel1");
                                                         owl_cat_30.owlCarousel({
@@ -720,11 +719,10 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products('Pan Indian');
-                                                $.when(getcarouselcat_30products('Pan Indian')).done(function (data) {
-                                                    if (data.length > 0) {
-                                                        console.log('Pan Indian data length > 0');
-                                                        getHomepagecat_30productsAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel2");
+                                                getcarouselsubcategory('Pan Indian');
+                                                $.when(getcarouselsubcategory('Pan Indian')).done(function (data) {
+                                                    if (data.length > 0) { 
+                                                        getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel2");
                                                         var owl_cat_30 = $(".carousel2");
                                                         owl_cat_30.owlCarousel({
                                                             itemsCustom: [
@@ -790,10 +788,10 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products('Continental');
-                                                $.when(getcarouselcat_30products('Continental')).done(function (data) {
+                                                getcarouselsubcategory('Continental');
+                                                $.when(getcarouselsubcategory('Continental')).done(function (data) {
                                                     if (data.length > 0) { 
-                                                        getHomepagecat_30productsAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel3");
+                                                        getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel3");
                                                         var owl_cat_30 = $(".carousel3");
                                                         owl_cat_30.owlCarousel({
                                                             itemsCustom: [
@@ -859,10 +857,10 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products('South Indian');
-                                                $.when(getcarouselcat_30products('South Indian')).done(function (data) {
+                                                getcarouselsubcategory('South Indian');
+                                                $.when(getcarouselsubcategory('South Indian')).done(function (data) {
                                                     if (data.length > 0) { 
-                                                        getHomepagecat_30productsAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel4");
+                                                        getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel4");
                                                         var owl_cat_30 = $(".carousel4");
                                                         owl_cat_30.owlCarousel({
                                                             itemsCustom: [
@@ -928,10 +926,10 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products('Desserts');
-                                                $.when(getcarouselcat_30products('Desserts')).done(function (data) {
+                                                getcarouselsubcategory('Desserts');
+                                                $.when(getcarouselsubcategory('Desserts')).done(function (data) {
                                                     if (data.length > 0) { 
-                                                        getHomepagecat_30productsAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel5");
+                                                        getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel5");
                                                         var owl_cat_30 = $(".carousel5");
                                                         owl_cat_30.owlCarousel({
                                                             itemsCustom: [
