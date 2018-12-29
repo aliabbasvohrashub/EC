@@ -18,7 +18,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
     public partial class EcommGroceryDataContext : DbContext
     {
         public EcommGroceryDataContext()
-            : base("name=EcommGroceryDataContext")
+            : base("name=ECommGroceryDataContext")
         {
         }
     
@@ -39,6 +39,7 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public virtual DbSet<ProductDetails> ProductDetails { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
+        public virtual DbSet<SubSubCategoryMaster> SubSubCategoryMaster { get; set; }
         public virtual DbSet<TransactionDetails> TransactionDetails { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     
@@ -71,17 +72,17 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetProductDetailsList_Result>("Sp_GetProductDetailsList", currentIndexParameter, pageSizeParameter, orderByClauseParameter, searchParameter, mainCategoryIdParameter, subCategoryIdParameter, totalRecords);
         }
     
-        public virtual ObjectResult<Sp_GetTransactionList_Result> Sp_GetTransactionList(Nullable<int> cartId, Nullable<int> search)
+        public virtual ObjectResult<Sp_GetTransactionList_Result> Sp_GetTransactionList(Nullable<int> cartId, Nullable<int> op)
         {
             var cartIdParameter = cartId.HasValue ?
                 new ObjectParameter("CartId", cartId) :
                 new ObjectParameter("CartId", typeof(int));
     
-            var searchParameter = search.HasValue ?
-                new ObjectParameter("Search", search) :
-                new ObjectParameter("Search", typeof(int));
+            var opParameter = op.HasValue ?
+                new ObjectParameter("Op", op) :
+                new ObjectParameter("Op", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetTransactionList_Result>("Sp_GetTransactionList", cartIdParameter, searchParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetTransactionList_Result>("Sp_GetTransactionList", cartIdParameter, opParameter);
         }
     
         public virtual ObjectResult<Sp_GetUserList_Result> Sp_GetUserList(Nullable<int> currentIndex, Nullable<int> pageSize, string orderByClause, string search, ObjectParameter totalRecords)

@@ -94,7 +94,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Unique.EcommGroceryStore.DAL\Unique.EcommGroceryStore.DAL.csproj">
       <Project>{41a60988-5680-4dfb-91bd-43acffa3271f}</Project>

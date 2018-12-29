@@ -650,11 +650,11 @@
                                         </div>
                                         <script>
                                             $(document).ready(function ($) {
-                                                getcarouselcat_30products('Pan Asian');
-                                                $.when(getcarouselcat_30products('Pan Asian')).done(function (data) {
+                                                getcarouselsubcategory('Pan Asian');
+                                                $.when(getcarouselsubcategory('Pan Asian')).done(function (data) {
                                                     if (data.length > 0) {
                                                         console.log('pan asian data length > 0');
-                                                        getHomepagecat_30productsAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel1");
+                                                        getHomepagesubCategoryAndGenerateHtml(data, "div.ltabs-items-container.slider-cat-30.carousel1");
                                                         var owl_cat_30 = $(".carousel1");
                                                         owl_cat_30.owlCarousel({
                                                             itemsCustom: [
@@ -698,7 +698,7 @@
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="Vegetables" href="products/vegetables"><span>Pan Indian</span></a>
+                                        <a title="Vegetables" href="products/Pan Indian"><span>Pan Indian</span></a>
                                     </h2> 
                                 </div> 
 
@@ -970,75 +970,7 @@
 
                                 </div>
                             </div>
-
-                            <div id="sm_listing_tabs_21028495471462422076" class="super-category-block first-load">
-                                <div class="block-title-default">
-                                    <h2>
-                                        <a title="Fruits" href="products/fruits"><span>Fruits</span></a>
-                                    </h2>
-                                    <div style="display: none;" class="category-wrap-cat">
-                                        <ul class="cat-list">
-                                            <li class="item">
-                                                <a href="fruits-vegetables/fruits/seasonal-fruits.html">Seasonal Fruits									</a>
-                                            </li>
-                                            <li class="item">
-                                                <a href="fruits-vegetables/fruits/imported-fruits.html">Imported Fruits									</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="supercat-des">
-                                </div>
-
-                                <div class="super-cat-wrapper">
-                                    <div class="customNavigation custom-nav-default">
-                                        <a title="Previous" class="button-default prev-cat prev-super-cat-8 icon-angle-left"></a>
-                                        <a title="Next" class="button-default next-cat next-super-cat-8 icon-angle-right"></a>
-                                    </div>
-
-                                    <div class="overflow-owl-slider">
-                                        <div class="border-cat">
-                                            <div class="rw-margin">
-                                                <div class="ltabs-items-container slider-cat-8">
-                                                </div>
-                                            </div>
-
-                                            <script>
-                                                $(document).ready(function ($) {
-                                                    getcarouselcat_8products();
-                                                    $.when(getcarouselcat_8products()).done(function (data) {
-                                                        getHomepagecat_8productsAndGenerateHtml(data);
-                                                        var owl_cat_8 = $(".slider-cat-8");
-                                                        owl_cat_8.owlCarousel({
-                                                            itemsCustom: [
-                                                            [0, 1],
-                                                            [480, 2],
-                                                            [768, 3],
-                                                            [992, 3],
-                                                            [1200, 4]
-                                                            ],
-                                                            navigation: false, // Show next and prev buttons
-                                                            slideSpeed: 800,
-                                                            stopOnHover: true,
-                                                            paginationSpeed: 400,
-                                                            autoPlay: true,
-                                                            pagination: false,
-                                                        });
-
-                                                        $(".next-super-cat-8").click(function () {
-                                                            owl_cat_8.trigger('owl.next');
-                                                        });
-                                                        $(".prev-super-cat-8").click(function () {
-                                                            owl_cat_8.trigger('owl.prev');
-                                                        });
-                                                    });
-                                                });
-                                            </script>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>  
+                             
                         </div>
                     </div>
 

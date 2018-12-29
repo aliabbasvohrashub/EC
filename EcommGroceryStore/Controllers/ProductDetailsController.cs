@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Antlr.Runtime;
@@ -72,11 +74,54 @@ namespace EcommGroceryStore.Controllers
                 });
         }
 
+        public IQueryable<vmSubCategoryDetails> GetAllSubCategory(string mainCategoryName)
+        {
+            var results =
+                dbContext.SubCategoryMaster
+                .Where(x => x.MainCategoryMaster.Name == mainCategoryName)
+                .Select(x => new vmSubCategoryDetails
+                {
+                    MainCategoryId = x.MainCategoryId,
+                    MainCategoryName = x.MainCategoryMaster.Name,
+                    Name = x.Name,
+                    SubCategoryId = x.SubCategoryId,
+                    ImageURL = x.ImageURL
+                });
+
+            return results;
+        }
+
+
         public IQueryable<vmProductDetails> GetAllItemsFromMainCategory(string mainCategoryName)
         {
             var results =
                 dbContext.ProductDetails
                 .Where(x => x.SubCategoryMaster.MainCategoryMaster.Name == mainCategoryName)
+                .Select(x => new vmProductDetails
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    SubCategoryName = dbContext.ProductDetails.Where(xx => xx.SubCategoryId == x.SubCategoryId).Select(y => y.SubCategoryMaster.Name).FirstOrDefault(),
+                    Quantity = x.Quantity,
+                    Description = x.Description,
+                    ImageURL = x.ImageURL,
+                    PricePerUnit = x.PricePerUnit,
+                    Unit = x.Unit,
+                    Status = x.Status
+                });
+
+            return results;
+        }
+
+        public IQueryable<vmProductDetails> GetAllItemsFromMainCategoryAndSubCategory(string mainCategoryName, string subCategoryName)
+        {
+
+            mainCategoryName = HttpUtility.UrlDecode(mainCategoryName, Encoding.UTF8);
+            subCategoryName = HttpUtility.UrlDecode(subCategoryName, Encoding.UTF8);
+            var results =
+                dbContext.ProductDetails
+                .Where(x => x.SubCategoryMaster.MainCategoryMaster.Name == mainCategoryName)
+                .Where(x=>x.SubCategoryMaster.Name == subCategoryName)
                 .Select(x => new vmProductDetails
                 {
                     ProductId = x.ProductId,

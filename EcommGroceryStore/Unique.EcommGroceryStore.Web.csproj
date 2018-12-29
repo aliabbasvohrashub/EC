@@ -208,6 +208,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\minus.png" />
     <Content Include="Images\plus.png" />
+    <Content Include="List.aspx" />
     <Content Include="media\js\jquery.accordion.js" />
     <Content Include="products.aspx" />
     <Content Include="indexchild.aspx" />
@@ -1551,6 +1552,13 @@
     <Compile Include="Details.aspx.designer.cs">
       <DependentUpon>Details.aspx</DependentUpon>
     </Compile>
+    <Compile Include="List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
     <Compile Include="products.aspx.cs">
       <DependentUpon>products.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1600,6 +1608,7 @@
     <Compile Include="ViewModels\vmProductDetailsSummary.cs" />
     <Compile Include="ViewModels\vmProductDetailsWithSummary.cs" />
     <Compile Include="ViewModels\vmProductListMainSubCategories.cs" />
+    <Compile Include="ViewModels\vmSubCategoryDetails.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

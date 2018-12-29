@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EcommGroceryOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EcommGroceryStore.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressDetails">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -128,6 +128,15 @@
           </Key>
           <Property Name="SubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MainCategoryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ImageURL" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="SubSubCategoryMaster">
+          <Key>
+            <PropertyRef Name="SubSubCategoryId" />
+          </Key>
+          <Property Name="SubSubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubCategoryId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="TransactionDetails">
@@ -310,6 +319,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubSubCategoryMaster_SubCategoryMaster">
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="1" />
+          <End Role="SubSubCategoryMaster" Type="Self.SubSubCategoryMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoryMaster">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="SubSubCategoryMaster">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionDetails_Cart">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
@@ -357,7 +378,7 @@
         </Function>
         <Function Name="Sp_GetTransactionList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CartId" Type="int" Mode="In" />
-          <Parameter Name="Search" Type="int" Mode="In" />
+          <Parameter Name="Op" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_GetUserList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="currentIndex" Type="int" Mode="In" />
@@ -385,7 +406,7 @@
           <Parameter Name="Status" Type="int" Mode="InOut" />
           <Parameter Name="Op" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="EcommGroceryOnlineModelStoreContainer">
+        <EntityContainer Name="EcommGroceryStoreStoreContainer">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AreaMaster" EntityType="Self.AreaMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
@@ -398,6 +419,7 @@
           <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubCategoryMaster" EntityType="Self.SubCategoryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubSubCategoryMaster" EntityType="Self.SubSubCategoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AddressDetails_AreaMaster" Association="Self.FK_AddressDetails_AreaMaster">
@@ -448,6 +470,10 @@
             <End Role="MainCategoryMaster" EntitySet="MainCategoryMaster" />
             <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubSubCategoryMaster_SubCategoryMaster" Association="Self.FK_SubSubCategoryMaster_SubCategoryMaster">
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+            <End Role="SubSubCategoryMaster" EntitySet="SubSubCategoryMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransactionDetails_Cart" Association="Self.FK_TransactionDetails_Cart">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="TransactionDetails" EntitySet="TransactionDetails" />
@@ -461,10 +487,11 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EcommGroceryOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EcommGroceryStore" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AddressDetails">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -480,11 +507,11 @@
           <Property Name="Pincode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AddressTypeId" Type="Int32" Nullable="false" />
           <Property Name="OtherAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AreaMaster" Relationship="Self.FK_AddressDetails_AreaMaster" FromRole="AddressDetails" ToRole="AreaMaster" />
           <NavigationProperty Name="CityMaster" Relationship="Self.FK_AddressDetails_CityMaster" FromRole="AddressDetails" ToRole="CityMaster" />
           <NavigationProperty Name="CountryMaster" Relationship="Self.FK_AddressDetails_CountryMaster" FromRole="AddressDetails" ToRole="CountryMaster" />
           <NavigationProperty Name="Users" Relationship="Self.FK_AddressDetails_Users" FromRole="AddressDetails" ToRole="Users" />
-          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="AreaMaster">
           <Key>
@@ -610,8 +637,19 @@
           <Property Name="SubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MainCategoryId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MainCategoryMaster" Relationship="Self.FK_SubCategoryMaster_MainCategoryMaster" FromRole="SubCategoryMaster" ToRole="MainCategoryMaster" />
           <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_SubCategoryMaster" FromRole="SubCategoryMaster" ToRole="ProductDetails" />
+          <NavigationProperty Name="SubSubCategoryMaster" Relationship="Self.FK_SubSubCategoryMaster_SubCategoryMaster" FromRole="SubCategoryMaster" ToRole="SubSubCategoryMaster" />
+        </EntityType>
+        <EntityType Name="SubSubCategoryMaster">
+          <Key>
+            <PropertyRef Name="SubSubCategoryId" />
+          </Key>
+          <Property Name="SubSubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_SubSubCategoryMaster_SubCategoryMaster" FromRole="SubSubCategoryMaster" ToRole="SubCategoryMaster" />
         </EntityType>
         <EntityType Name="TransactionDetails">
           <Key>
@@ -824,6 +862,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubSubCategoryMaster_SubCategoryMaster">
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="1" />
+          <End Role="SubSubCategoryMaster" Type="Self.SubSubCategoryMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoryMaster">
+              <PropertyRef Name="SubCategoryId" />
+            </Principal>
+            <Dependent Role="SubSubCategoryMaster">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransactionDetails_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
@@ -836,7 +886,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EcommGroceryDataContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ECommGroceryDataContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressDetails" EntityType="Self.AddressDetails" />
           <EntitySet Name="AreaMaster" EntityType="Self.AreaMaster" />
           <EntitySet Name="Cart" EntityType="Self.Cart" />
@@ -849,6 +899,7 @@
           <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="SubCategoryMaster" EntityType="Self.SubCategoryMaster" />
+          <EntitySet Name="SubSubCategoryMaster" EntityType="Self.SubSubCategoryMaster" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_AddressDetails_AreaMaster" Association="Self.FK_AddressDetails_AreaMaster">
@@ -907,11 +958,15 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubSubCategoryMaster_SubCategoryMaster" Association="Self.FK_SubSubCategoryMaster_SubCategoryMaster">
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+            <End Role="SubSubCategoryMaster" EntitySet="SubSubCategoryMaster" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransactionDetails_Users" Association="Self.FK_TransactionDetails_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="TransactionDetails" EntitySet="TransactionDetails" />
           </AssociationSet>
-          <FunctionImport Name="Sp_GetProductDetailsList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetProductDetailsList_Result)">
+          <FunctionImport Name="Sp_GetProductDetailsList" ReturnType="Collection(EcommGroceryStore.Sp_GetProductDetailsList_Result)">
             <Parameter Name="currentIndex" Mode="In" Type="Int32" />
             <Parameter Name="pageSize" Mode="In" Type="Int32" />
             <Parameter Name="orderByClause" Mode="In" Type="String" />
@@ -920,18 +975,18 @@
             <Parameter Name="SubCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_GetTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetTransactionList_Result)">
+          <FunctionImport Name="Sp_GetTransactionList" ReturnType="Collection(EcommGroceryStore.Sp_GetTransactionList_Result)">
             <Parameter Name="CartId" Mode="In" Type="Int32" />
-            <Parameter Name="Search" Mode="In" Type="Int32" />
+            <Parameter Name="Op" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserList_Result)">
+          <FunctionImport Name="Sp_GetUserList" ReturnType="Collection(EcommGroceryStore.Sp_GetUserList_Result)">
             <Parameter Name="currentIndex" Mode="In" Type="Int32" />
             <Parameter Name="pageSize" Mode="In" Type="Int32" />
             <Parameter Name="orderByClause" Mode="In" Type="String" />
             <Parameter Name="search" Mode="In" Type="String" />
             <Parameter Name="totalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_GetUserTransactionList" ReturnType="Collection(EcommGroceryOnlineModel.Sp_GetUserTransactionList_Result)">
+          <FunctionImport Name="Sp_GetUserTransactionList" ReturnType="Collection(EcommGroceryStore.Sp_GetUserTransactionList_Result)">
             <Parameter Name="currentIndex" Mode="In" Type="Int32" />
             <Parameter Name="pageSize" Mode="In" Type="Int32" />
             <Parameter Name="orderByClause" Mode="In" Type="String" />
@@ -1027,11 +1082,10 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EcommGroceryOnlineModelStoreContainer" CdmEntityContainer="EcommGroceryDataContext">
+        <EntityContainerMapping StorageEntityContainer="EcommGroceryStoreStoreContainer" CdmEntityContainer="ECommGroceryDataContext">
           <EntitySetMapping Name="AddressDetails">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.AddressDetails">
+            <EntityTypeMapping TypeName="EcommGroceryStore.AddressDetails">
               <MappingFragment StoreEntitySet="AddressDetails">
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -1043,11 +1097,12 @@
                 <ScalarProperty Name="Pincode" ColumnName="Pincode" />
                 <ScalarProperty Name="AddressTypeId" ColumnName="AddressTypeId" />
                 <ScalarProperty Name="OtherAddress" ColumnName="OtherAddress" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AreaMaster">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.AreaMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.AreaMaster">
               <MappingFragment StoreEntitySet="AreaMaster">
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="AreaName" ColumnName="AreaName" />
@@ -1056,7 +1111,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cart">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Cart">
+            <EntityTypeMapping TypeName="EcommGroceryStore.Cart">
               <MappingFragment StoreEntitySet="Cart">
                 <ScalarProperty Name="CartId" ColumnName="CartId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1067,7 +1122,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CartDetail">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.CartDetail">
+            <EntityTypeMapping TypeName="EcommGroceryStore.CartDetail">
               <MappingFragment StoreEntitySet="CartDetail">
                 <ScalarProperty Name="CartDetailId" ColumnName="CartDetailId" />
                 <ScalarProperty Name="CartId" ColumnName="CartId" />
@@ -1084,7 +1139,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CityMaster">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.CityMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.CityMaster">
               <MappingFragment StoreEntitySet="CityMaster">
                 <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
@@ -1093,7 +1148,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CountryMaster">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.CountryMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.CountryMaster">
               <MappingFragment StoreEntitySet="CountryMaster">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -1101,7 +1156,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CouponDetails">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.CouponDetails">
+            <EntityTypeMapping TypeName="EcommGroceryStore.CouponDetails">
               <MappingFragment StoreEntitySet="CouponDetails">
                 <ScalarProperty Name="CouponId" ColumnName="CouponId" />
                 <ScalarProperty Name="CouponCode" ColumnName="CouponCode" />
@@ -1112,7 +1167,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FollowUpDetails">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.FollowUpDetails">
+            <EntityTypeMapping TypeName="EcommGroceryStore.FollowUpDetails">
               <MappingFragment StoreEntitySet="FollowUpDetails">
                 <ScalarProperty Name="FollowUpId" ColumnName="FollowUpId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1122,7 +1177,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MainCategoryMaster">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.MainCategoryMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.MainCategoryMaster">
               <MappingFragment StoreEntitySet="MainCategoryMaster">
                 <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1130,7 +1185,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductDetails">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.ProductDetails">
+            <EntityTypeMapping TypeName="EcommGroceryStore.ProductDetails">
               <MappingFragment StoreEntitySet="ProductDetails">
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1149,7 +1204,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Roles">
+            <EntityTypeMapping TypeName="EcommGroceryStore.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -1157,16 +1212,26 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SubCategoryMaster">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.SubCategoryMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.SubCategoryMaster">
               <MappingFragment StoreEntitySet="SubCategoryMaster">
                 <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
                 <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubSubCategoryMaster">
+            <EntityTypeMapping TypeName="EcommGroceryStore.SubSubCategoryMaster">
+              <MappingFragment StoreEntitySet="SubSubCategoryMaster">
+                <ScalarProperty Name="SubSubCategoryId" ColumnName="SubSubCategoryId" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TransactionDetails">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.TransactionDetails">
+            <EntityTypeMapping TypeName="EcommGroceryStore.TransactionDetails">
               <MappingFragment StoreEntitySet="TransactionDetails">
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1182,7 +1247,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="EcommGroceryOnlineModel.Users">
+            <EntityTypeMapping TypeName="EcommGroceryStore.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -1203,9 +1268,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Sp_GetProductDetailsList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetProductDetailsList">
+          <FunctionImportMapping FunctionImportName="Sp_GetProductDetailsList" FunctionName="EcommGroceryStore.Store.Sp_GetProductDetailsList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetProductDetailsList_Result">
+              <ComplexTypeMapping TypeName="EcommGroceryStore.Sp_GetProductDetailsList_Result">
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
@@ -1222,9 +1287,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_GetTransactionList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetTransactionList">
+          <FunctionImportMapping FunctionImportName="Sp_GetTransactionList" FunctionName="EcommGroceryStore.Store.Sp_GetTransactionList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetTransactionList_Result">
+              <ComplexTypeMapping TypeName="EcommGroceryStore.Sp_GetTransactionList_Result">
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
@@ -1242,9 +1307,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_GetUserList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetUserList">
+          <FunctionImportMapping FunctionImportName="Sp_GetUserList" FunctionName="EcommGroceryStore.Store.Sp_GetUserList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetUserList_Result">
+              <ComplexTypeMapping TypeName="EcommGroceryStore.Sp_GetUserList_Result">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -1261,9 +1326,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_GetUserTransactionList" FunctionName="EcommGroceryOnlineModel.Store.Sp_GetUserTransactionList">
+          <FunctionImportMapping FunctionImportName="Sp_GetUserTransactionList" FunctionName="EcommGroceryStore.Store.Sp_GetUserTransactionList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="EcommGroceryOnlineModel.Sp_GetUserTransactionList_Result">
+              <ComplexTypeMapping TypeName="EcommGroceryStore.Sp_GetUserTransactionList_Result">
                 <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
                 <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
@@ -1290,8 +1355,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteProduct" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteProduct" />
-          <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteUser" FunctionName="EcommGroceryOnlineModel.Store.Sp_UpdateDeleteUser" />
+          <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteProduct" FunctionName="EcommGroceryStore.Store.Sp_UpdateDeleteProduct" />
+          <FunctionImportMapping FunctionImportName="Sp_UpdateDeleteUser" FunctionName="EcommGroceryStore.Store.Sp_UpdateDeleteUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

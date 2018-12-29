@@ -113,6 +113,9 @@
     <Compile Include="EntityModel\SubCategoryMaster.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\SubSubCategoryMaster.cs">
+      <DependentUpon>EcommGroceryStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\TransactionDetails.cs">
       <DependentUpon>EcommGroceryStore.tt</DependentUpon>
     </Compile>
@@ -127,25 +130,26 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EcommGroceryStore.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityModel\EcommGroceryStore.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
-      <LastGenOutput>EcommGroceryStore.Context.cs</LastGenOutput>
-    </None>
     <None Include="EntityModel\EcommGroceryStore.edmx.diagram">
       <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
-    </None>
-    <None Include="EntityModel\EcommGroceryStore.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
-      <LastGenOutput>EcommGroceryStore.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="EntityModel\EcommGroceryStore.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
+      <LastGenOutput>EcommGroceryStore.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityModel\EcommGroceryStore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EcommGroceryStore.edmx</DependentUpon>
+      <LastGenOutput>EcommGroceryStore.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

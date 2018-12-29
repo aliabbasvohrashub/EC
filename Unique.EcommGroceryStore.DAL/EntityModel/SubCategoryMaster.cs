@@ -18,14 +18,18 @@ namespace Unique.EcommGroceryStore.DAL.EntityModel
         public SubCategoryMaster()
         {
             this.ProductDetails = new HashSet<ProductDetails>();
+            this.SubSubCategoryMaster = new HashSet<SubSubCategoryMaster>();
         }
     
         public int SubCategoryId { get; set; }
         public int MainCategoryId { get; set; }
         public string Name { get; set; }
+        public string ImageURL { get; set; }
     
         public virtual MainCategoryMaster MainCategoryMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDetails> ProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubSubCategoryMaster> SubSubCategoryMaster { get; set; }
     }
 }
