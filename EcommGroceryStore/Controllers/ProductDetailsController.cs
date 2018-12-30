@@ -180,13 +180,15 @@ namespace EcommGroceryStore.Controllers
 
 
 
-        public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all, int min, int max, string querystring)
+        public vmProductDetailsWithSummary getFruitsListWithSummary(string sort, int pagesize, int index, bool all, int min, int max, string querystring, bool sortDirection = true)
         {
+            int subCategoryId = 0;
+            int.TryParse(querystring, out subCategoryId);
             vmProductDetailsWithSummary mainquery = new vmProductDetailsWithSummary();
             vmProductDetailsSummary vmsummary = new vmProductDetailsSummary();
             IQueryable<vmProductDetails> query;
             query = (from x in dbContext.ProductDetails
-                     where x.SubCategoryMaster.MainCategoryMaster.Name == querystring &&
+                     where x.SubCategoryId == subCategoryId &&
                      ((min != -1 && max != -1) ? (x.PricePerUnit >= min && x.PricePerUnit <= max) : x.PricePerUnit >= 0)
                      select new vmProductDetails
                      {
@@ -200,11 +202,11 @@ namespace EcommGroceryStore.Controllers
                          Unit = x.Unit,
                          Status = x.Status
                      });
-            query = query.OrderByField(sort, pagesize, index, all, true);
+            query = query.OrderByField(sort, pagesize, index, all, sortDirection);
 
 
             vmsummary.TotalRecords = query.Count();
-            if (query.Count() == 0)
+            if (!query.Any())
             {
                 vmsummary.MaximumPrice = 0;
                 vmsummary.MinimumPrice = 0;

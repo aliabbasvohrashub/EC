@@ -628,7 +628,7 @@
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="Vegetables" href="products/vegetables"><span>Pan Asian</span></a>
+                                        <a title="Vegetables" href="products/Pan Asian"><span>Pan Asian</span></a>
                                     </h2> 
                                 </div> 
 
@@ -766,7 +766,7 @@
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="Continental" href="products/vegetables"><span>Continental</span></a>
+                                        <a title="Continental" href="products/Continental"><span>Continental</span></a>
                                     </h2> 
                                 </div> 
 
@@ -835,7 +835,7 @@
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="South Indian" href="products/vegetables"><span>South Indian</span></a>
+                                        <a title="South Indian" href="products/South Indian"><span>South Indian</span></a>
                                     </h2> 
                                 </div> 
 
@@ -904,7 +904,7 @@
 
                                 <div class="block-title-default">
                                     <h2>
-                                        <a title="Desserts" href="products/vegetables"><span>Desserts</span></a>
+                                        <a title="Desserts" href="products/Desserts"><span>Desserts</span></a>
                                     </h2> 
                                 </div> 
 

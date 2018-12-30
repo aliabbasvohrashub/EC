@@ -126,7 +126,7 @@
                                                             <div style="display: none;" class="view-mode-wrap">
                                                                 <p class="view-mode">
                                                                     <strong title="Grid" class="grid">Grid</strong>&nbsp;
-                                                                                            <a href="fruitsa927.html?mode=list" title="List" class="list">List</a>&nbsp;
+                                                                                            <a href="#?mode=list" title="List" class="list">List</a>&nbsp;
                                                                 </p>
                                                             </div>
 
@@ -150,7 +150,7 @@
                                                                             </ul>
                                                                         </div>
                                                                     </div>
-                                                                    <a class="btn-sortby set-desc arrow-down" href="fruits9945.html?dir=desc&amp;mode=grid&amp;order=price" title="Set Descending Direction">Desc</a>
+                                                                    <button id="sortButton" class="btn-sortby set-desc arrow-down" title="Set Descending Direction">Desc</button>
                                                                 </div>
                                                             </div>
 
@@ -184,6 +184,18 @@
                                                             $("ul#limiter.dropdown-menu li").change(function () {
                                                                 //alert($(this).val());
                                                                 //console.log($(this).val());
+                                                            });
+
+                                                            $("#sortButton").click(function (e) {
+                                                                if ($("#sortButton").attr("class").indexOf("arrow-down") !== -1) {
+                                                                    $("#sortButton").removeClass('set-desc arrow-down');
+                                                                    $("#sortButton").addClass('set-asc arrow-up');
+                                                                } else {
+                                                                    $("#sortButton").removeClass('set-asc arrow-up');
+                                                                    $("#sortButton").addClass('set-desc arrow-down');
+                                                                }
+                                                                callwebservice(false, false);
+                                                                e.preventDefault();
                                                             });
                                                         });
                                                     </script>
@@ -337,7 +349,13 @@
                                                                 else {
                                                                     all = false;
                                                                 }
-
+                                                                var sortDirection;
+                                                                var className = $("#sortButton").attr('class');
+                                                                if (className.indexOf("arrow-down") > 0) {
+                                                                    sortDirection = true; 
+                                                                } else {
+                                                                    sortDirection = false; 
+                                                                }
                                                                 var min = $("#price-filter-min-text").val();
                                                                 var max = $("#price-filter-max-text").val();
 
@@ -348,8 +366,8 @@
                                                                 console.log('index ' + index);
                                                                 console.log('all ' + all);
                                                                
-                                                                getFruits(sort, pagesize, index, all, min, max, querystring);
-                                                                $.when(getFruits(sort, pagesize, index, all, min, max, querystring)).done(function (data) {
+                                                                getProducts(sort, pagesize, index, all, min, max, querystring, sortDirection);
+                                                                $.when(getProducts(sort, pagesize, index, all, min, max, querystring, sortDirection)).done(function (data) {
                                                                    // alert(data.vmProductDetailsSummary.TotalRecords);
                                                                     if (resettotal == true) {
                                                                         $("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
@@ -391,13 +409,20 @@
                                                                     console.log("An error occurred!");
                                                                 });
 
-
+                                                                 
                                                                 //console.log('dom loaded');
                                                                 $(".sort-by-wrap .overwrite-sortby").html($('#sort_by li a.selected').html());
                                                                 $('.category-products #limiter li:first-child a').removeClass('selected');
                                                                 $(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());
-                                                                getFruits('Price', -1, 1, true, min, max, querystring);
-                                                                $.when(getFruits('Price', -1, 1, true, min, max, querystring)).done(function (data) {
+                                                                var sortDirection;
+                                                                var className = $("#sortButton").attr('class');
+                                                                if (className.indexOf("arrow-down") > 0) {
+                                                                    sortDirection = true; 
+                                                                } else {
+                                                                    sortDirection = false;
+                                                                }
+                                                                getProducts('Price', -1, 1, true, min, max, querystring, sortDirection);
+                                                                $.when(getProducts('Price', -1, 1, true, min, max, querystring, sortDirection)).done(function (data) {
                                                                     $("#fruitcount").val(data.vmProductDetailsSummary.TotalRecords);
                                                                     $("#CategoryTitle").text(querystring);
                                                                     LoopAndGenerate(data.vmProductDetails, querystring);
